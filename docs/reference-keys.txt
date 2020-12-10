@@ -5,3 +5,5 @@ channel
 snapshot
 RDF
 power-flow
+directed-graph
+formulation-using-integer-programming

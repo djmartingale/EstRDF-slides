@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 Bus and Edge | Topology Inference for RDF</title>
+  <title>7 Formulation using Integer Programming | Topology Inference for RDF</title>
   <meta name="description" content="Slides for defence of my master thesis." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2 Bus and Edge | Topology Inference for RDF" />
+  <meta property="og:title" content="7 Formulation using Integer Programming | Topology Inference for RDF" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="edxu96/EstRDF-slides" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Bus and Edge | Topology Inference for RDF" />
+  <meta name="twitter:title" content="7 Formulation using Integer Programming | Topology Inference for RDF" />
   
   <meta name="twitter:description" content="Slides for defence of my master thesis." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="two-special-concepts-for-power-flow.html"/>
+<link rel="prev" href="directed-graph.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -109,108 +109,80 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="bus-edge" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> Bus and Edge</h1>
-<p>There are roughly two types of electrical devices in power grids.</p>
-<table class="table table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-type
-</th>
-<th style="text-align:left;">
-definition
-</th>
-<th style="text-align:left;">
-examples
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-delivery element
-</td>
-<td style="text-align:left;">
-transport power from one place to another
-</td>
-<td style="text-align:left;">
-cable, transformer, capacitor
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-conversion element
-</td>
-<td style="text-align:left;">
-convert power from or to another form
-</td>
-<td style="text-align:left;">
-solar panel, battery
-</td>
-</tr>
-</tbody>
-</table>
+<div id="formulation-using-integer-programming" class="section level1" number="7">
+<h1><span class="header-section-number">7</span> Formulation using Integer Programming</h1>
+<p>Symbols and definitions of sets:</p>
+<p><span class="math display">\[
+\begin{array}{cl}
+    \hline
+    \text{symbol} &amp; \text{definition} \\
+    \hline
+    \mathcal{E}
+    &amp; \text{all the potential edges (edges in the complete graph)} \\
+    \mathcal{C}
+    &amp; \text{available measurements of voltages and power injections} \\
+    \mathcal{E}_\text{impossible}
+    &amp; \text{potential edges that are impossible to exist} \\
+    \hline
+\end{array}
+\]</span></p>
+<p>Symbols, definitions, types and sets of variables:</p>
+<p><span class="math display">\[
+\begin{array}{clcc}
+  \hline
+  \text{symbol} &amp; \text{definition}
+  &amp; \text{type} &amp; \text{set} \\
+  \hline
+  x_{i j} &amp; \text{if edge from i to j is in the solution}
+  &amp; \{0, 1\} &amp; \mathcal{E} \\
+  \hline
+\end{array}
+\]</span></p>
+<p>Symbols, definitions, sets of constants:</p>
+<p><span class="math display">\[
+\begin{array}{clc}
+  \hline
+  \text{symbol} &amp; \text{definition}
+  &amp; \text{set} \\
+  \hline
+  d_{i, j} &amp; \text{weight of directed edge from i to j based on distance}
+  &amp; \mathcal{E} \\
+  \hline
+\end{array}
+\]</span></p>
+<p>Two terms in the objective function and three sets of constraints:</p>
+<p><span class="math display">\[
+\begin{aligned}
+  \min_{x_{i j} \forall (i, j) \in \mathcal{E}} \quad
+    &amp; (1 - \alpha) \sum_{(i, j) \in \mathcal{E}} d_{i j} x_{i j}
+    + \alpha \mathcal{H}
+    \left(\{x_{i j} \forall (i, j) \in \mathcal{E} \}, \mathcal{C} \right) \\
+  \text{s.t.} \quad &amp; \sum_{(i, j) \in \delta^{-}(j)} x_{i j} = 1
+    \quad \forall j \in V^{\prime}
+    \quad \text{(a directed forest)} \\
+  &amp; \sum_{(i, j) \in \delta^{-}(S)} x_{i j} \geq 1
+    \quad \forall S \subseteq V^{\prime},|S| \geq 2
+    \quad \text{(a connected graph)} \\
+  &amp; x_{i j} = 0
+    \quad \forall (i, j) \in \mathcal{E}_\text{impossible}
+    \quad \text{(remove impossible potential edges)}
+\end{aligned}
+\]</span></p>
 <ul>
-<li>Ignore conversion elements. Not necessary in power flow calculation.</li>
-<li>Delivery element will be called <strong>edge</strong>.</li>
+<li>A nonlinear function <span class="math inline">\(\mathcal{H}\)</span> to assess candidate topologies.</li>
+<li>A parameter <span class="math inline">\(\alpha\)</span>.</li>
+<li>First two sets of constraints ensure arborescencc.</li>
+<li>Last set of constraints ensure impossible potential edges are removed.</li>
 </ul>
-<p>Another concept, <strong>bus</strong>, represent the place where two different delivery
-elements joint or end of a delivery element, but there is no physical entity
-corresponding to a bus. There are three common types of buses:</p>
-<table class="table table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-type
-</th>
-<th style="text-align:left;">
-know quantities
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-slack bus
-</td>
-<td style="text-align:left;">
-voltage magnitude and phase angle
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-PQ bus
-</td>
-<td style="text-align:left;">
-real power injection and reactive power injection
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-PV bus
-</td>
-<td style="text-align:left;">
-real power injection and voltage magnitude
-</td>
-</tr>
-</tbody>
-</table>
-<p>It is sufficient to model most of RDFs with PQ buses and one kind of edges,
-cables:</p>
-<ul>
-<li>One slack bus in RDF, corresponding to the <strong>root</strong>.</li>
-<li>Root not in any matrix.</li>
-<li>Ignore other delivery elements.</li>
-</ul>
+
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-special-concepts-for-power-flow.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="directed-graph.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -241,7 +213,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/edxu96/EstRDF-slides/edit/master/01-RDF.Rmd",
+"link": "https://github.com/edxu96/EstRDF-slides/edit/master/03-graph.Rmd",
 "text": "Edit"
 },
 "history": {
