@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3 Two Special Concepts for Power Flow | Topology Inference for RDF</title>
+  <title>4 Radial Distribution Feeder | Topology Inference for RDF</title>
   <meta name="description" content="Slides for defence of my master thesis." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3 Two Special Concepts for Power Flow | Topology Inference for RDF" />
+  <meta property="og:title" content="4 Radial Distribution Feeder | Topology Inference for RDF" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="edxu96/EstRDF-slides" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3 Two Special Concepts for Power Flow | Topology Inference for RDF" />
+  <meta name="twitter:title" content="4 Radial Distribution Feeder | Topology Inference for RDF" />
   
   <meta name="twitter:description" content="Slides for defence of my master thesis." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="bus-edge.html"/>
-<link rel="next" href="RDF.html"/>
+<link rel="prev" href="two-special-concepts-for-power-flow.html"/>
+<link rel="next" href="power-flow.html"/>
 <script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -107,30 +107,29 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="two-special-concepts-for-power-flow" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> Two Special Concepts for Power Flow</h1>
-<div id="channel" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> Channel</h2>
-</div>
-<div id="snapshot" class="section level2" number="3.2">
-<h2><span class="header-section-number">3.2</span> Snapshot</h2>
-<p><strong>Snapshot</strong> is a concept to include power injections and voltages at one time
-index</p>
+<div id="RDF" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Radial Distribution Feeder</h1>
+<p><img src="../Pictures/case70true.png" /></p>
 <ul>
-<li>input: real power injections at all channels of PQ buses</li>
-<li>output: voltages, current flow, power flow</li>
+<li>located in Belgium.</li>
+<li>one step-down transformer between bus 1 and bus 2 (not considered)</li>
+<li>bus 1 is omitted</li>
+<li>three-phase four-wire cables</li>
+<li>one phase star connection</li>
+<li>Houses associated with buses 3, 7, 10, 13, 16, 20, 23, 26, 30, 33, 36, 39,
+43, 46, 49, 52, 55, 58, 62, 65, 69 are connected through phase A.</li>
+<li>Houses associated with buses 5, 8, 11, 14, 18, 21, 24, 27, 31, 34, 37, 40,
+44, 47, 50, 53, 56, 59, 63, 66, 70 are connected through phase B.</li>
 </ul>
-<p><strong>Zero‐load snapshot</strong> is the snapshot where power injections at all the
-channels are zero and voltages equalt o rated voltages in corresponding phases.</p>
-</div>
+
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="bus-edge.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="RDF.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="two-special-concepts-for-power-flow.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="power-flow.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
