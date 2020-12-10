@@ -106,17 +106,7 @@
 \hypertarget{introduction}{%
 \chapter{Introduction}\label{introduction}}
 
-This website hosts
-
-\begin{itemize}
-\tightlist
-\item[$\square$]
-  Formulation using Integer Programming
-\item[$\square$]
-  Direct Impedance Method
-\item[$\square$]
-  Fixed Point Method for Power Flow
-\end{itemize}
+This website hosts slides for defence of my master thesis.
 
 \hypertarget{bus-edge}{%
 \chapter{Bus and Edge}\label{bus-edge}}
@@ -179,6 +169,8 @@ cables:
 \hypertarget{two-special-concepts}{%
 \chapter{Two Special Concepts}\label{two-special-concepts}}
 
+Essential for power flow calculation.
+
 \hypertarget{channel}{%
 \section{Channel}\label{channel}}
 
@@ -202,6 +194,22 @@ channels are zero and voltages equalt o rated voltages in corresponding phases.
 \hypertarget{RDF}{%
 \chapter{Radial Distribution Feeder}\label{RDF}}
 
+Assumptions about feeders:
+
+\begin{itemize}
+\tightlist
+\item
+  arborescence
+\item
+  step-down transformer is not considered
+\item
+  three-phase four-wire cable
+\item
+  one phase star connection
+\end{itemize}
+
+A case with 70 buses is primarily used here:
+
 \includegraphics{Pictures/case70true.png}
 
 \begin{itemize}
@@ -209,13 +217,7 @@ channels are zero and voltages equalt o rated voltages in corresponding phases.
 \item
   located in Belgium
 \item
-  one step-down transformer between bus 1 and bus 2 (not considered)
-\item
   bus 1 is omitted
-\item
-  three-phase four-wire cables
-\item
-  one phase star connection
 \item
   Houses associated with buses 3, 7, 10, 13, 16, 20, 23, 26, 30, 33, 36, 39,
   43, 46, 49, 52, 55, 58, 62, 65, 69 are connected through phase A.
@@ -247,6 +249,16 @@ channels are zero and voltages equalt o rated voltages in corresponding phases.
   2-D Euclidean Distance as Weight
 \end{itemize}
 
+\textbf{complete graph for a set of nodes}
+
+\begin{itemize}
+\tightlist
+\item
+  all edges are potential edges
+\item
+  some are impossible to exist
+\end{itemize}
+
 \textbf{arborescence}
 
 \begin{itemize}
@@ -273,9 +285,9 @@ channels are zero and voltages equalt o rated voltages in corresponding phases.
 Symbols and definitions of sets:
 
 \[
-\begin{array}{cl}
+\begin{array}{ll}
     \hline
-    \text{symbol} & \text{definition} \\
+    \textbf{symbol} & \textbf{definition} \\
     \hline
     \mathcal{E}
     & \text{all the potential edges (edges in the complete graph)} \\
@@ -290,10 +302,9 @@ Symbols and definitions of sets:
 Symbols, definitions, types and sets of variables:
 
 \[
-\begin{array}{clcc}
+\begin{array}{llll}
   \hline
-  \text{symbol} & \text{definition}
-  & \text{type} & \text{set} \\
+  \textbf{symbol} & \textbf{definition} & \textbf{type} & \textbf{set} \\
   \hline
   x_{i j} & \text{if edge from i to j is in the solution}
   & \{0, 1\} & \mathcal{E} \\
@@ -304,10 +315,9 @@ Symbols, definitions, types and sets of variables:
 Symbols, definitions, sets of constants:
 
 \[
-\begin{array}{clc}
+\begin{array}{lll}
   \hline
-  \text{symbol} & \text{definition}
-  & \text{set} \\
+  \textbf{symbol} & \textbf{definition} & \textbf{set} \\
   \hline
   d_{i, j} & \text{weight of directed edge from i to j based on distance}
   & \mathcal{E} \\
@@ -315,7 +325,7 @@ Symbols, definitions, sets of constants:
 \end{array}
 \]
 
-Two terms in the objective function and three sets of constraints:
+The formulation is:
 
 \[
 \begin{aligned}
@@ -335,16 +345,32 @@ Two terms in the objective function and three sets of constraints:
 \end{aligned}
 \]
 
+Two terms in the objective function:
+
+\[
+\begin{array}{lll}
+  \hline
+  \textbf{term} & \textbf{definition} & \textbf{coefficient} \\
+  \hline
+  (1 - \alpha) \sum_{(i, j) \in \mathcal{E}} d_{i j} x_{i j}
+  & \text{weight of candidate arborescence}
+  & 1 - \alpha \\
+  \alpha \mathcal{H}
+  \left(\{x_{i j} \forall (i, j) \in \mathcal{E} \}, \mathcal{C} \right)
+  & \text{assessment of candidate arborescence}
+  & \alpha \\
+  \hline
+\end{array}
+\]
+
+Three sets of constraints:
+
 \begin{itemize}
 \tightlist
 \item
-  A nonlinear function \(\mathcal{H}\) to assess candidate topologies.
+  First two sets ensure arborescence.
 \item
-  A parameter \(\alpha\).
-\item
-  First two sets of constraints ensure arborescencc.
-\item
-  Last set of constraints ensure impossible potential edges are removed.
+  Last set removes impossible potential edges.
 \end{itemize}
 
   \bibliography{bibliography.bib}

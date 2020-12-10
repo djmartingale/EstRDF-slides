@@ -113,9 +113,9 @@
 <h1><span class="header-section-number">7</span> IP Formulation</h1>
 <p>Symbols and definitions of sets:</p>
 <p><span class="math display">\[
-\begin{array}{cl}
+\begin{array}{ll}
     \hline
-    \text{symbol} &amp; \text{definition} \\
+    \textbf{symbol} &amp; \textbf{definition} \\
     \hline
     \mathcal{E}
     &amp; \text{all the potential edges (edges in the complete graph)} \\
@@ -128,10 +128,9 @@
 \]</span></p>
 <p>Symbols, definitions, types and sets of variables:</p>
 <p><span class="math display">\[
-\begin{array}{clcc}
+\begin{array}{llll}
   \hline
-  \text{symbol} &amp; \text{definition}
-  &amp; \text{type} &amp; \text{set} \\
+  \textbf{symbol} &amp; \textbf{definition} &amp; \textbf{type} &amp; \textbf{set} \\
   \hline
   x_{i j} &amp; \text{if edge from i to j is in the solution}
   &amp; \{0, 1\} &amp; \mathcal{E} \\
@@ -140,17 +139,16 @@
 \]</span></p>
 <p>Symbols, definitions, sets of constants:</p>
 <p><span class="math display">\[
-\begin{array}{clc}
+\begin{array}{lll}
   \hline
-  \text{symbol} &amp; \text{definition}
-  &amp; \text{set} \\
+  \textbf{symbol} &amp; \textbf{definition} &amp; \textbf{set} \\
   \hline
   d_{i, j} &amp; \text{weight of directed edge from i to j based on distance}
   &amp; \mathcal{E} \\
   \hline
 \end{array}
 \]</span></p>
-<p>Two terms in the objective function and three sets of constraints:</p>
+<p>The formulation is:</p>
 <p><span class="math display">\[
 \begin{aligned}
   \min_{x_{i j} \forall (i, j) \in \mathcal{E}} \quad
@@ -168,11 +166,26 @@
     \quad \text{(remove impossible potential edges)}
 \end{aligned}
 \]</span></p>
+<p>Two terms in the objective function:</p>
+<p><span class="math display">\[
+\begin{array}{lll}
+  \hline
+  \textbf{term} &amp; \textbf{definition} &amp; \textbf{coefficient} \\
+  \hline
+  (1 - \alpha) \sum_{(i, j) \in \mathcal{E}} d_{i j} x_{i j}
+  &amp; \text{weight of candidate arborescence}
+  &amp; 1 - \alpha \\
+  \alpha \mathcal{H}
+  \left(\{x_{i j} \forall (i, j) \in \mathcal{E} \}, \mathcal{C} \right)
+  &amp; \text{assessment of candidate arborescence}
+  &amp; \alpha \\
+  \hline
+\end{array}
+\]</span></p>
+<p>Three sets of constraints:</p>
 <ul>
-<li>A nonlinear function <span class="math inline">\(\mathcal{H}\)</span> to assess candidate topologies.</li>
-<li>A parameter <span class="math inline">\(\alpha\)</span>.</li>
-<li>First two sets of constraints ensure arborescencc.</li>
-<li>Last set of constraints ensure impossible potential edges are removed.</li>
+<li>First two sets ensure arborescence.</li>
+<li>Last set removes impossible potential edges.</li>
 </ul>
 
 </div>
