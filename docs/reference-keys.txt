@@ -1,9 +1,9 @@
 introduction
 bus-edge
-two-special-concepts-for-power-flow
+two-special-concepts
 channel
 snapshot
 RDF
 power-flow
 directed-graph
-formulation-using-integer-programming
+ip-formulation
