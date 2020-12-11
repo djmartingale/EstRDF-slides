@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5 DC Power Flow | Topology Inference for Radial Distribution Feeder based on Power Flow</title>
+  <title>5.3 Assessment of Candidate | Topology Inference for Radial Distribution Feeder based on Power Flow</title>
   <meta name="description" content="Slides for defense of my master project." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5 DC Power Flow | Topology Inference for Radial Distribution Feeder based on Power Flow" />
+  <meta property="og:title" content="5.3 Assessment of Candidate | Topology Inference for Radial Distribution Feeder based on Power Flow" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="edxu96/EstRDF-slides" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5 DC Power Flow | Topology Inference for Radial Distribution Feeder based on Power Flow" />
+  <meta name="twitter:title" content="5.3 Assessment of Candidate | Topology Inference for Radial Distribution Feeder based on Power Flow" />
   
   <meta name="twitter:description" content="Slides for defense of my master project." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="fixed-point-method.html"/>
-<link rel="next" href="linearised-power-flow.html"/>
+<link rel="prev" href="BRM.html"/>
+<link rel="next" href="VSM.html"/>
 <script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -137,13 +137,40 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="dc-power-flow" class="section level1" number="5">
-<h1><span class="header-section-number">5</span> DC Power Flow</h1>
-<p>Three ways to calculated BRM:</p>
+<div id="assessment" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Assessment of Candidate</h2>
+<p>Based on linearised power flow, <span class="math inline">\(\boldsymbol{V} = \boldsymbol{V}_\text{zero} + \frac{1}{V_\text{rate}} \boldsymbol{R} \boldsymbol{P}\)</span>:
+<span class="math display">\[ \begin{aligned}
+    \boldsymbol{P}_\text{assess} =
+    V_\text{rate} \boldsymbol{R}^{\top}
+    \left( \boldsymbol{V} - \boldsymbol{V}_\text{zero} \right)
+\end{aligned} \]</span>
+which is referred to as <strong>pseudo linearised power flow</strong>.</p>
+<p>The inversed BRM for case-70 looks like:</p>
+<p><img src="Pictures/figHeatmapBrmInv.png" style="display: block; margin: auto;" /></p>
 <ul>
-<li>Real part of entries in BIM.</li>
-<li>Using EPI and ERDB.</li>
-<li>Lowest common ancestor problem.</li>
+<li>Voltage magnitude at any channel can have a huge impact.</li>
+<li>Full observability over voltage magnitudes for now.</li>
+<li>The pattern can be used in future work.</li>
+</ul>
+<p>The second term in the objective function is:
+<span class="math display">\[ \begin{aligned}
+  \mathcal{H}(\boldsymbol{R}) =
+  \left[
+    (\boldsymbol{P}_\text{assess} - \boldsymbol{P})
+    \otimes \boldsymbol{O}
+  \right]^\top
+  \cdot \left[
+    (\boldsymbol{P}_\text{assess} - \boldsymbol{P})
+    \otimes \boldsymbol{O}
+  \right]
+  / |\mathcal{O}|
+\end{aligned} \]</span>
+where</p>
+<ul>
+<li><span class="math inline">\(\mathcal{O}\)</span>: set of observed channels</li>
+<li><span class="math inline">\(\boldsymbol{O}\)</span>: binary vector indicating which observed active channels</li>
+<li>Entries for unobserved active channel are ignored.</li>
 </ul>
 </div>
             </section>
@@ -151,8 +178,8 @@
           </div>
         </div>
       </div>
-<a href="fixed-point-method.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="linearised-power-flow.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="BRM.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="VSM.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

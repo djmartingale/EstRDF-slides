@@ -209,6 +209,8 @@ Essential for power flow calculation.
 \hypertarget{channel}{%
 \subsection{Channel}\label{channel}}
 
+observed active channels
+
 \hypertarget{snapshot}{%
 \subsection{Snapshot}\label{snapshot}}
 
@@ -480,6 +482,9 @@ neighbourhood & generate candidate & rank spanning arborescence\\
 \hypertarget{AC}{%
 \chapter{AC Power Flow}\label{AC}}
 
+Discussion is based on one-line model. Can be generalised for multi-phase
+model.
+
 \begin{itemize}
 \tightlist
 \item
@@ -510,6 +515,9 @@ where:
 \item
   \textbf{edge impedance diagonal block matrix (EIDB)},
   \(\boldsymbol{\bar{Z}}_\text{edge}\): voltage drop to voltage
+\item
+  \textbf{bus resistance matrix (BRM)}, \(\boldsymbol{R}\): real part of entries in
+  BIM
 \end{itemize}
 
 Five steps to build BIM:
@@ -596,6 +604,18 @@ until \(\epsilon\) is smaller than a pre-defined threshold.
 \hypertarget{dc-power-flow}{%
 \chapter{DC Power Flow}\label{dc-power-flow}}
 
+Three ways to calculated BRM:
+
+\begin{itemize}
+\tightlist
+\item
+  Real part of entries in BIM.
+\item
+  Using EPI and ERDB.
+\item
+  Lowest common ancestor problem.
+\end{itemize}
+
 \hypertarget{linearised-power-flow}{%
 \section{Linearised Power Flow}\label{linearised-power-flow}}
 
@@ -609,8 +629,8 @@ Voltage magnitude can be calculated using BRM and real power injections:
       + \frac{1}{V_\text{rate}} \boldsymbol{R} \boldsymbol{P}
 \end{aligned} \]
 
-\hypertarget{bus-resistance-matrix}{%
-\section{Bus Resistance Matrix}\label{bus-resistance-matrix}}
+\hypertarget{BRM}{%
+\section{Bus Resistance Matrix}\label{BRM}}
 
 \begin{itemize}
 \tightlist
@@ -626,8 +646,90 @@ Voltage magnitude can be calculated using BRM and real power injections:
 
 \begin{center}\includegraphics{Pictures/figHeatmapBRM} \end{center}
 
-\hypertarget{voltage-sensitivity-matrix}{%
-\section{Voltage Sensitivity Matrix}\label{voltage-sensitivity-matrix}}
+\hypertarget{LCA}{%
+\subsection*{Lowest Common Ancestor Problem}\label{LCA}}
+\addcontentsline{toc}{subsection}{Lowest Common Ancestor Problem}
+
+Entry \((i, j)\) is the sum of edge resistances in the common path to the root of
+bus \(i\) and \(j\). That is sum of edge resistances in the path from the root to
+the lowest common ancestor (LCA) of bus \(i\) and \(j\):
+\[
+R_{i, j}=\sum_{k \in U_{i} \cap U_{j}} R_{\text {edge }, k}
+\]
+where \(U_{i}\) is set of edges on path from the root to bus \(i\).
+
+\begin{itemize}
+\tightlist
+\item
+  BRM can be calcualted efficiently using LCA for all pairs of buses.
+\item
+  The pattern can be used in future work.
+\end{itemize}
+
+For example,
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Pictures/figCaseSix} \end{center}
+
+\begin{itemize}
+\tightlist
+\item
+  LCA of b3 and b5 is b2. Entry for b3, b5 is \(R_\text{e1} + R_\text{e2}\)
+\item
+  LCA of b4 and b5 is still b2. Entry for b4, b5 is still \(R_\text{e1} + R_\text{e2}\).
+\end{itemize}
+
+\hypertarget{assessment}{%
+\section{Assessment of Candidate}\label{assessment}}
+
+Based on linearised power flow, \(\boldsymbol{V} = \boldsymbol{V}_\text{zero} + \frac{1}{V_\text{rate}} \boldsymbol{R} \boldsymbol{P}\):
+\[ \begin{aligned}
+    \boldsymbol{P}_\text{assess} =
+    V_\text{rate} \boldsymbol{R}^{\top}
+    \left( \boldsymbol{V} - \boldsymbol{V}_\text{zero} \right)
+\end{aligned} \]
+which is referred to as \textbf{pseudo linearised power flow}.
+
+The inversed BRM for case-70 looks like:
+
+\begin{center}\includegraphics{Pictures/figHeatmapBrmInv} \end{center}
+
+\begin{itemize}
+\tightlist
+\item
+  Voltage magnitude at any channel can have a huge impact.
+\item
+  Full observability over voltage magnitudes for now.
+\item
+  The pattern can be used in future work.
+\end{itemize}
+
+The second term in the objective function is:
+\[ \begin{aligned}
+  \mathcal{H}(\boldsymbol{R}) =
+  \left[
+    (\boldsymbol{P}_\text{assess} - \boldsymbol{P})
+    \otimes \boldsymbol{O}
+  \right]^\top
+  \cdot \left[
+    (\boldsymbol{P}_\text{assess} - \boldsymbol{P})
+    \otimes \boldsymbol{O}
+  \right]
+  / |\mathcal{O}|
+\end{aligned} \]
+where
+
+\begin{itemize}
+\tightlist
+\item
+  \(\mathcal{O}\): set of observed channels
+\item
+  \(\boldsymbol{O}\): binary vector indicating which observed active channels
+\item
+  Entries for unobserved active channel are ignored.
+\end{itemize}
+
+\hypertarget{VSM}{%
+\section{Voltage Sensitivity Matrix}\label{VSM}}
 
 \begin{center}\includegraphics{Pictures/figHeatmapVSM} \end{center}
 
@@ -664,9 +766,11 @@ All in all, there are four steps in the proposed framework for topology inferenc
 \begin{itemize}
 \tightlist
 \item
-  number of spanning arborescences
+  Number of spanning arborescences.
 \item
-  matrices with full rank
+  Matrices with full rank.
+\item
+  Error in linearised power flow calculation. How to use VSM.
 \end{itemize}
 
   \bibliography{bibliography.bib}

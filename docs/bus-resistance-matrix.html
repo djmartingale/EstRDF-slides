@@ -103,7 +103,11 @@
 <li class="chapter" data-level="5" data-path="dc-power-flow.html"><a href="dc-power-flow.html"><i class="fa fa-check"></i><b>5</b> DC Power Flow</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="linearised-power-flow.html"><a href="linearised-power-flow.html"><i class="fa fa-check"></i><b>5.1</b> Linearised Power Flow</a></li>
-<li class="chapter" data-level="5.2" data-path="bus-resistance-matrix.html"><a href="bus-resistance-matrix.html"><i class="fa fa-check"></i><b>5.2</b> Bus Resistance Matrix</a></li>
+<li class="chapter" data-level="5.2" data-path="bus-resistance-matrix.html"><a href="bus-resistance-matrix.html"><i class="fa fa-check"></i><b>5.2</b> Bus Resistance Matrix</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="bus-resistance-matrix.html"><a href="bus-resistance-matrix.html#lowest-common-ancestor-problem"><i class="fa fa-check"></i><b>5.2.1</b> Lowest Common Ancestor Problem</a></li>
+<li class="chapter" data-level="5.2.2" data-path="bus-resistance-matrix.html"><a href="bus-resistance-matrix.html#three-ways-to-calculated-brm"><i class="fa fa-check"></i><b>5.2.2</b> Three Ways to Calculated BRM</a></li>
+</ul></li>
 <li class="chapter" data-level="5.3" data-path="voltage-sensitivity-matrix.html"><a href="voltage-sensitivity-matrix.html"><i class="fa fa-check"></i><b>5.3</b> Voltage Sensitivity Matrix</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="result-and-discussion.html"><a href="result-and-discussion.html"><i class="fa fa-check"></i><b>6</b> Result and Discussion</a>
@@ -142,6 +146,31 @@
 <li>207 rows and 207 columns.</li>
 </ul>
 <p><img src="Pictures/figHeatmapBRM.png" style="display: block; margin: auto;" /></p>
+<p>There is an analytical expression for BRM.</p>
+<div id="lowest-common-ancestor-problem" class="section level3" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> Lowest Common Ancestor Problem</h3>
+<p>Entry <span class="math inline">\((i, j)\)</span> is the sum of edge resistances in the common path to the root of
+bus <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>. That is sum of edge resistances in the path from the root to
+the lowest common ancestor (LCA) of bus <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>:
+<span class="math display">\[
+R_{i, j}=\sum_{k \in U_{i} \cap U_{j}} R_{\text {edge }, k}
+\]</span>
+where <span class="math inline">\(U_{i}\)</span> is set of edges on path from the root to bus <span class="math inline">\(i\)</span>.</p>
+<p>For example:</p>
+<p><img src="Pictures/figCaseSix.png" style="display: block; margin: auto;" /></p>
+<ul>
+<li>LCA of b3 and b5 is b2. Entry for b3, b5 is <span class="math inline">\(R_\text{e1} + R_\text{e2}\)</span></li>
+<li>LCA of b4 and b5 is still b2. Entry for b4, b5 is still <span class="math inline">\(R_\text{e1} + R_\text{e2}\)</span>.</li>
+</ul>
+</div>
+<div id="three-ways-to-calculated-brm" class="section level3" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> Three Ways to Calculated BRM</h3>
+<ul>
+<li>Real part of entries in BIM.</li>
+<li>Using EPI and ERDB</li>
+<li>Lowest common ancestor problem.</li>
+</ul>
+</div>
 </div>
             </section>
 

@@ -15,8 +15,9 @@ direct-impedance-method
 fixed-point-method
 dc-power-flow
 linearised-power-flow
-bus-resistance-matrix
-voltage-sensitivity-matrix
+BRM
+assessment
+VSM
 result-and-discussion
 flowchart
 conclusion
