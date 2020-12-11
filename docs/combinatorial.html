@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>References | Topology Inference for Radial Distribution Feeder based on Power Flow</title>
+  <title>3.3 Combinatorial Optimisation | Topology Inference for Radial Distribution Feeder based on Power Flow</title>
   <meta name="description" content="Slides for defense of my master project." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="References | Topology Inference for Radial Distribution Feeder based on Power Flow" />
+  <meta property="og:title" content="3.3 Combinatorial Optimisation | Topology Inference for Radial Distribution Feeder based on Power Flow" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="edxu96/EstRDF-slides" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="References | Topology Inference for Radial Distribution Feeder based on Power Flow" />
+  <meta name="twitter:title" content="3.3 Combinatorial Optimisation | Topology Inference for Radial Distribution Feeder based on Power Flow" />
   
   <meta name="twitter:description" content="Slides for defense of my master project." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="issues.html"/>
-
+<link rel="prev" href="ip-formulation.html"/>
+<link rel="next" href="AC.html"/>
 <script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -133,17 +133,86 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="references" class="section level1 unnumbered" number="">
-<h1>References</h1>
+<div id="combinatorial" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Combinatorial Optimisation</h2>
+<p>At least two possible values for <span class="math inline">\(\alpha\)</span>:</p>
+<p><span class="math display">\[
+\begin{array}{llll}
+  \hline
+  \textbf{value} &amp; \textbf{term lefted} &amp; \textbf{to find}
+  &amp; \textbf{disadvantage} \\
+  \hline
+  1
+  &amp; \mathcal{H}
+  \left(\{x_{i j} \forall (i, j) \in \mathcal{E} \}, \mathcal{C} \right)
+  &amp; \text{ground truth}
+  &amp; \text{NP-hard and non-linear} \\
+  0
+  &amp; \sum_{(i, j) \in \mathcal{E}} d_{i j} x_{i j}
+  &amp; \text{topology with min total cable length}
+  &amp; \text{cannot find ground truth} \\
+  \hline
+\end{array}
+\]</span></p>
+<p>Such two situations can be visualised:</p>
+<p><img src="Pictures/figFeasibleRegion.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>In this project, <strong>local search heuristic algorithm</strong> is proposed to to move
+from <span class="math inline">\(\bigotimes\)</span> to <span class="math inline">\(\bigoplus\)</span>:</p>
+<table class="table table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+function
+</th>
+<th style="text-align:left;">
+what it does
+</th>
+<th style="text-align:left;">
+in this project
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+objective
+</td>
+<td style="text-align:left;">
+assess candidate
+</td>
+<td style="text-align:left;">
+pseudo linearised power flow
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+neighbourhood
+</td>
+<td style="text-align:left;">
+generate candidate
+</td>
+<td style="text-align:left;">
+rank spanning arborescence
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The starting point is found by minimum spanning arborescence</li>
+<li>Every candidate is reachable from the starting point.</li>
+<li>Ground truth should be found before long.</li>
+<li>Not in parallel.</li>
+</ul>
 
 </div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="issues.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="ip-formulation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="AC.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -174,7 +243,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/edxu96/EstRDF-slides/edit/master/06-references.Rmd",
+"link": "https://github.com/edxu96/EstRDF-slides/edit/master/02-formulation.Rmd",
 "text": "Edit"
 },
 "history": {

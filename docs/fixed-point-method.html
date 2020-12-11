@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>References | Topology Inference for Radial Distribution Feeder based on Power Flow</title>
+  <title>4.3 Fixed Point Method | Topology Inference for Radial Distribution Feeder based on Power Flow</title>
   <meta name="description" content="Slides for defense of my master project." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="References | Topology Inference for Radial Distribution Feeder based on Power Flow" />
+  <meta property="og:title" content="4.3 Fixed Point Method | Topology Inference for Radial Distribution Feeder based on Power Flow" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="edxu96/EstRDF-slides" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="References | Topology Inference for Radial Distribution Feeder based on Power Flow" />
+  <meta name="twitter:title" content="4.3 Fixed Point Method | Topology Inference for Radial Distribution Feeder based on Power Flow" />
   
   <meta name="twitter:description" content="Slides for defense of my master project." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="issues.html"/>
-
+<link rel="prev" href="direct-impedance-method.html"/>
+<link rel="next" href="dc-power-flow.html"/>
 <script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -133,17 +133,31 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="references" class="section level1 unnumbered" number="">
-<h1>References</h1>
+<div id="fixed-point-method" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Fixed Point Method</h2>
+<p>To calculate power flow in one snapshot, given power injections, the following
+procedure is repeated:
+<span class="math display">\[ \begin{aligned}
+    \boldsymbol{\bar{I}} &amp;= \boldsymbol{\underline{P}}
+      \otimes \boldsymbol{\underline{V}}_\text{previous} \\
+    \boldsymbol{\bar{V}}
+    &amp;= \boldsymbol{\bar{Z}} \boldsymbol{\bar{I}}
+      + \boldsymbol{\bar{V}}_\text{zero} \\
+    \epsilon
+    &amp;= \left( \boldsymbol{\bar{V}} - \boldsymbol{\bar{V}} \right)^\top
+      \left( \boldsymbol{\bar{V}} - \boldsymbol{\bar{V}} \right)
+\end{aligned} \]</span>
+until <span class="math inline">\(\epsilon\)</span> is smaller than a pre-defined threshold.</p>
 
 </div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="issues.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="direct-impedance-method.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="dc-power-flow.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -174,7 +188,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/edxu96/EstRDF-slides/edit/master/06-references.Rmd",
+"link": "https://github.com/edxu96/EstRDF-slides/edit/master/03-AC.Rmd",
 "text": "Edit"
 },
 "history": {

@@ -36,8 +36,8 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-  pdftitle={Topology Inference for RDF},
-  pdfauthor={Jie Xu},
+  pdftitle={Topology Inference for Radial Distribution Feeder based on Power Flow},
+  pdfauthor={Jie Xu (s181238)},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
@@ -92,9 +92,9 @@
 \usepackage[]{natbib}
 \bibliographystyle{apalike}
 
-\title{Topology Inference for RDF}
-\author{Jie Xu}
-\date{2020-12-10}
+\title{Topology Inference for Radial Distribution Feeder based on Power Flow}
+\author{Jie Xu (s181238)}
+\date{2020-12-11}
 
 \begin{document}
 \maketitle
@@ -106,10 +106,45 @@
 \hypertarget{introduction}{%
 \chapter{Introduction}\label{introduction}}
 
-This website hosts slides for defence of my master thesis.
+This website hosts slides for defence of my master graduation project in the
+Department of Electrical Engineering at Technical University of Denmark. How
+households are connected to distribution network is always unknown. A framework
+to infer such connections by utilising all kinds of information is proposed in
+this project.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+A simple flowchart for the project is:
+
+\includegraphics{Pictures/figFlowchartSimple.png}
+
+Available information and measurement:
+
+\begin{itemize}
+\tightlist
+\item
+  geographical information about buses
+\item
+  voltage magnitudes of all the phases of all the buses
+\item
+  some real power injection profiles
+\end{itemize}
+
+Two batches of computer programs:
+
+\begin{itemize}
+\tightlist
+\item
+  alternating current power flow calculation its linearised version
+\item
+  three algorithms to handle directed graphs
+\end{itemize}
+
+\hypertarget{radial-distribution-feeder}{%
+\chapter{Radial Distribution Feeder}\label{radial-distribution-feeder}}
 
 \hypertarget{bus-edge}{%
-\chapter{Bus and Edge}\label{bus-edge}}
+\section{Bus and Edge}\label{bus-edge}}
 
 There are roughly two types of electrical devices in power grids.
 
@@ -167,15 +202,15 @@ cables:
 \end{itemize}
 
 \hypertarget{two-special-concepts}{%
-\chapter{Two Special Concepts}\label{two-special-concepts}}
+\section{Two Special Concepts}\label{two-special-concepts}}
 
 Essential for power flow calculation.
 
 \hypertarget{channel}{%
-\section{Channel}\label{channel}}
+\subsection{Channel}\label{channel}}
 
 \hypertarget{snapshot}{%
-\section{Snapshot}\label{snapshot}}
+\subsection{Snapshot}\label{snapshot}}
 
 \textbf{Snapshot} is a concept to include power injections and voltages at one time
 index
@@ -191,8 +226,14 @@ index
 \textbf{Zero‐load snapshot} is the snapshot where power injections at all the
 channels are zero and voltages equalt o rated voltages in corresponding phases.
 
-\hypertarget{RDF}{%
-\chapter{Radial Distribution Feeder}\label{RDF}}
+\begin{itemize}
+\tightlist
+\item
+  \(\boldsymbol{\bar{V}}_\text{zero}\): voltages in zero‐load snapshot
+\end{itemize}
+
+\hypertarget{case}{%
+\section{Case with 70 Buses}\label{case}}
 
 Assumptions about feeders:
 
@@ -226,11 +267,11 @@ A case with 70 buses is primarily used here:
   44, 47, 50, 53, 56, 59, 63, 66, 70 are connected through phase B.
 \end{itemize}
 
-\hypertarget{power-flow}{%
-\chapter{Power Flow}\label{power-flow}}
+\hypertarget{problem-formulation}{%
+\chapter{Problem Formulation}\label{problem-formulation}}
 
 \hypertarget{directed-graph}{%
-\chapter{Directed Graph}\label{directed-graph}}
+\section{Directed Graph}\label{directed-graph}}
 
 \textbf{weighted directed graph}
 \(G = (\mathcal{N}, \mathcal{E}, \sigma, \tau, \omega)\)
@@ -257,9 +298,11 @@ A case with 70 buses is primarily used here:
   all edges are potential edges
 \item
   some are impossible to exist
+\item
+  association network inference cannot be used
 \end{itemize}
 
-\textbf{arborescence}
+\textbf{spanning arborescence}
 
 \begin{itemize}
 \tightlist
@@ -267,6 +310,8 @@ A case with 70 buses is primarily used here:
   subgraph of a directed graph
 \item
   root
+\item
+  include every node (bus, in our case)
 \end{itemize}
 
 \textbf{feasible region}
@@ -274,13 +319,16 @@ A case with 70 buses is primarily used here:
 \begin{itemize}
 \tightlist
 \item
-  all the arborescences of a directed graph
+  Composed of all the spanning arborescences of the directed graph.
 \item
-  to count number of arborescences
+  Number of spanning arborescences is finite, making it a \protect\hyperlink{combinatorial}{combinatorial
+  optimisation problem}.
+\item
+  To count number of spanning arborescences.
 \end{itemize}
 
 \hypertarget{ip-formulation}{%
-\chapter{IP Formulation}\label{ip-formulation}}
+\section{IP Formulation}\label{ip-formulation}}
 
 Symbols and definitions of sets:
 
@@ -325,7 +373,7 @@ Symbols, definitions, sets of constants:
 \end{array}
 \]
 
-The formulation is:
+The \textbf{integer programming formulation} is:
 
 \[
 \begin{aligned}
@@ -371,6 +419,254 @@ Three sets of constraints:
   First two sets ensure arborescence.
 \item
   Last set removes impossible potential edges.
+\end{itemize}
+
+\hypertarget{combinatorial}{%
+\section{Combinatorial Optimisation}\label{combinatorial}}
+
+At least two possible values for \(\alpha\):
+
+\[
+\begin{array}{llll}
+  \hline
+  \textbf{value} & \textbf{term lefted} & \textbf{to find}
+  & \textbf{disadvantage} \\
+  \hline
+  1
+  & \mathcal{H}
+  \left(\{x_{i j} \forall (i, j) \in \mathcal{E} \}, \mathcal{C} \right)
+  & \text{ground truth}
+  & \text{NP-hard and non-linear} \\
+  0
+  & \sum_{(i, j) \in \mathcal{E}} d_{i j} x_{i j}
+  & \text{topology with min total cable length}
+  & \text{cannot find ground truth} \\
+  \hline
+\end{array}
+\]
+
+Such two situations can be visualised:
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Pictures/figFeasibleRegion} \end{center}
+
+In this project, \textbf{local search heuristic algorithm} is proposed to to move
+from \(\bigotimes\) to \(\bigoplus\):
+
+\begin{table}[H]
+\centering
+\begin{tabular}[t]{l|l|l}
+\hline
+function & what it does & in this project\\
+\hline
+objective & assess candidate & pseudo linearised power flow\\
+\hline
+neighbourhood & generate candidate & rank spanning arborescence\\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{itemize}
+\tightlist
+\item
+  The starting point is found by minimum spanning arborescence
+\item
+  Every candidate is reachable from the starting point.
+\item
+  Ground truth should be found before long.
+\item
+  Not in parallel.
+\end{itemize}
+
+\hypertarget{AC}{%
+\chapter{AC Power Flow}\label{AC}}
+
+\begin{itemize}
+\tightlist
+\item
+  Model RDF with one bus impedance matrix.
+\item
+  Model power flow using direct impedance method.
+\item
+  Calculate power flow using fixed point method.
+\end{itemize}
+
+\hypertarget{BIM}{%
+\section{Bus Impedance Matrix}\label{BIM}}
+
+\textbf{Bus impedance matrix (BIM)}, \(\boldsymbol{\bar{Z}}\), is defined as:
+\[ \begin{aligned}
+  \boldsymbol{\bar{Z}}
+    &= \boldsymbol{K}^{\top} \boldsymbol{\bar{Z}}_\text{edge}
+    \boldsymbol{K} \\
+    &= \boldsymbol{R} + j \boldsymbol{X}
+\end{aligned} \]
+where:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{edge path incidence matrix (EPI)}, \(\boldsymbol{K}\): current injection to
+  current flow
+\item
+  \textbf{edge impedance diagonal block matrix (EIDB)},
+  \(\boldsymbol{\bar{Z}}_\text{edge}\): voltage drop to voltage
+\end{itemize}
+
+Five steps to build BIM:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Define a unit impedance matrix.
+\item
+  Calculate edge impedance matrices for cables.
+\item
+  Build EIDB.
+\item
+  Obtain EPI based on topology.
+\item
+  Calculate BIM using EIDB and EPI.
+\end{enumerate}
+
+\hypertarget{direct-impedance-method}{%
+\section{Direct Impedance Method}\label{direct-impedance-method}}
+
+Most proper model for power flow:
+\[ \begin{aligned}
+    \left[\begin{array}{c}
+    \boldsymbol{\bar{I}}_\text{root} \\
+    \boldsymbol{\bar{I}}
+    \end{array}\right] &= \left[\begin{array}{cc}
+    \boldsymbol{\bar{Y}}_{\text{RR}} & \boldsymbol{\bar{Y}}_{\text{NR}}^{T} \\
+    \boldsymbol{\bar{Y}}_{\text{NR}} & \boldsymbol{\bar{Y}}
+    \end{array}\right]
+    \left[\begin{array}{c}
+    \boldsymbol{\bar{V}}_\text{rate} \\
+    \boldsymbol{\bar{V}}
+    \end{array}\right]
+    \nonumber
+\end{aligned} \]
+where:
+
+\begin{itemize}
+\tightlist
+\item
+  admittance matrices: \(\boldsymbol{\bar{Y}}\),
+  \(\boldsymbol{\bar{Y}}_\text{NR}\), and \(\boldsymbol{\bar{Y}}_\text{RR}\)
+\item
+  current injection: \(\boldsymbol{\bar{I}}\), \(\boldsymbol{\bar{I}}_\text{root}\)
+\end{itemize}
+
+To get rid of variables that we are not interested in:
+\[ \begin{aligned}
+  \boldsymbol{\bar{I}}
+  &= \boldsymbol{\bar{Y}} \boldsymbol{\bar{V}}
+  + \boldsymbol{\bar{Y}}_\text{NR} \boldsymbol{\bar{V}}_\text{rate}
+  \nonumber
+\end{aligned} \]
+
+To use BIM:
+\[ \begin{aligned}
+    \boldsymbol{\bar{V}}
+    &= \boldsymbol{\bar{Y}}^{-1} \boldsymbol{\bar{I}}
+      - \boldsymbol{\bar{Y}}^{-1} \boldsymbol{\bar{Y}}_\text{NR}
+      \boldsymbol{\bar{V}}_\text{rate} \\
+    &= \boldsymbol{\bar{Z}} \boldsymbol{\bar{I}}
+      + \boldsymbol{\bar{V}}_\text{zero}
+\end{aligned} \]
+
+\hypertarget{fixed-point-method}{%
+\section{Fixed Point Method}\label{fixed-point-method}}
+
+To calculate power flow in one snapshot, given power injections, the following
+procedure is repeated:
+\[ \begin{aligned}
+    \boldsymbol{\bar{I}} &= \boldsymbol{\underline{P}}
+      \otimes \boldsymbol{\underline{V}}_\text{previous} \\
+    \boldsymbol{\bar{V}}
+    &= \boldsymbol{\bar{Z}} \boldsymbol{\bar{I}}
+      + \boldsymbol{\bar{V}}_\text{zero} \\
+    \epsilon
+    &= \left( \boldsymbol{\bar{V}} - \boldsymbol{\bar{V}} \right)^\top
+      \left( \boldsymbol{\bar{V}} - \boldsymbol{\bar{V}} \right)
+\end{aligned} \]
+until \(\epsilon\) is smaller than a pre-defined threshold.
+
+\hypertarget{dc-power-flow}{%
+\chapter{DC Power Flow}\label{dc-power-flow}}
+
+\hypertarget{linearised-power-flow}{%
+\section{Linearised Power Flow}\label{linearised-power-flow}}
+
+Voltage magnitude can be calculated using BRM and real power injections:
+\[ \begin{aligned}
+  \boldsymbol{V} &= \boldsymbol{V}_\text{zero} + \frac{1}{V_\text{rate}}
+    \left(
+      \boldsymbol{K}^{\top} \boldsymbol{R}_\text{edge} \boldsymbol{K}
+    \right) \boldsymbol{P} \\
+  {} &= \boldsymbol{V}_\text{zero}
+      + \frac{1}{V_\text{rate}} \boldsymbol{R} \boldsymbol{P}
+\end{aligned} \]
+
+\hypertarget{bus-resistance-matrix}{%
+\section{Bus Resistance Matrix}\label{bus-resistance-matrix}}
+
+\begin{itemize}
+\tightlist
+\item
+  Step-down transformer is ignored, so bus 1 is not included.
+\item
+  Bus 2 is the root.
+\item
+  There are 69 PQ buses, and there are 207 channels.
+\item
+  207 rows and 207 columns.
+\end{itemize}
+
+\begin{center}\includegraphics{Pictures/figHeatmapBRM} \end{center}
+
+\hypertarget{voltage-sensitivity-matrix}{%
+\section{Voltage Sensitivity Matrix}\label{voltage-sensitivity-matrix}}
+
+\begin{center}\includegraphics{Pictures/figHeatmapVSM} \end{center}
+
+\hypertarget{result-and-discussion}{%
+\chapter{Result and Discussion}\label{result-and-discussion}}
+
+\hypertarget{flowchart}{%
+\section{Flowchart}\label{flowchart}}
+
+\includegraphics{Pictures/figFlowchartRotate.png}
+
+\hypertarget{conclusion}{%
+\section{Conclusion}\label{conclusion}}
+
+All in all, there are four steps in the proposed framework for topology inference:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Shrink feasible region (reduce the number of SAs) by removing overlapping
+  edges.
+\item
+  Measure the size of feasible region by counting number of SAs.
+\item
+  Get candidates sequentially by ranking SAs according to total cable lengths.
+\item
+  Assess candidates based on available measurements.
+\end{enumerate}
+
+\hypertarget{issues}{%
+\section{Issues}\label{issues}}
+
+\begin{itemize}
+\tightlist
+\item
+  number of spanning arborescences
+\item
+  matrices with full rank
 \end{itemize}
 
   \bibliography{bibliography.bib}
