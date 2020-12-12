@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 AC Power Flow | Topology Inference for Radial Distribution Feeder based on Power Flow</title>
+  <title>5.1 Linearised Voltage Drop | Topology Inference for Radial Distribution Feeder based on Power Flow</title>
   <meta name="description" content="Slides for defense of my master project." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 AC Power Flow | Topology Inference for Radial Distribution Feeder based on Power Flow" />
+  <meta property="og:title" content="5.1 Linearised Voltage Drop | Topology Inference for Radial Distribution Feeder based on Power Flow" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="edxu96/EstRDF-slides" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 AC Power Flow | Topology Inference for Radial Distribution Feeder based on Power Flow" />
+  <meta name="twitter:title" content="5.1 Linearised Voltage Drop | Topology Inference for Radial Distribution Feeder based on Power Flow" />
   
   <meta name="twitter:description" content="Slides for defense of my master project." />
   
@@ -24,15 +24,15 @@
 <meta name="author" content="Jie Xu (s181238)" />
 
 
-<meta name="date" content="2020-12-11" />
+<meta name="date" content="2020-12-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="combinatorial.html"/>
-<link rel="next" href="BIM.html"/>
+<link rel="prev" href="linearised-power-flow.html"/>
+<link rel="next" href="linearised-voltage.html"/>
 <script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -83,38 +83,47 @@
 <li class="chapter" data-level="2.1" data-path="bus-edge.html"><a href="bus-edge.html"><i class="fa fa-check"></i><b>2.1</b> Bus and Edge</a></li>
 <li class="chapter" data-level="2.2" data-path="two-special-concepts.html"><a href="two-special-concepts.html"><i class="fa fa-check"></i><b>2.2</b> Two Special Concepts</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="two-special-concepts.html"><a href="two-special-concepts.html#channel"><i class="fa fa-check"></i><b>2.2.1</b> Channel</a></li>
-<li class="chapter" data-level="2.2.2" data-path="two-special-concepts.html"><a href="two-special-concepts.html#snapshot"><i class="fa fa-check"></i><b>2.2.2</b> Snapshot</a></li>
+<li class="chapter" data-level="" data-path="two-special-concepts.html"><a href="two-special-concepts.html#channel"><i class="fa fa-check"></i>Channel</a></li>
+<li class="chapter" data-level="" data-path="two-special-concepts.html"><a href="two-special-concepts.html#snapshot"><i class="fa fa-check"></i>Snapshot</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="case.html"><a href="case.html"><i class="fa fa-check"></i><b>2.3</b> Case with 70 Buses</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="problem-formulation.html"><a href="problem-formulation.html"><i class="fa fa-check"></i><b>3</b> Problem Formulation</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="directed-graph.html"><a href="directed-graph.html"><i class="fa fa-check"></i><b>3.1</b> Directed Graph</a></li>
-<li class="chapter" data-level="3.2" data-path="ip-formulation.html"><a href="ip-formulation.html"><i class="fa fa-check"></i><b>3.2</b> IP Formulation</a></li>
-<li class="chapter" data-level="3.3" data-path="combinatorial.html"><a href="combinatorial.html"><i class="fa fa-check"></i><b>3.3</b> Combinatorial Optimisation</a></li>
+<li class="chapter" data-level="3.2" data-path="overlapping.html"><a href="overlapping.html"><i class="fa fa-check"></i><b>3.2</b> Remove Overlapping Edge</a></li>
+<li class="chapter" data-level="3.3" data-path="ip-formulation.html"><a href="ip-formulation.html"><i class="fa fa-check"></i><b>3.3</b> IP Formulation</a></li>
+<li class="chapter" data-level="3.4" data-path="combinatorial.html"><a href="combinatorial.html"><i class="fa fa-check"></i><b>3.4</b> Combinatorial Optimisation</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="AC.html"><a href="AC.html"><i class="fa fa-check"></i><b>4</b> AC Power Flow</a>
+<li class="chapter" data-level="4" data-path="direct-impedance-method.html"><a href="direct-impedance-method.html"><i class="fa fa-check"></i><b>4</b> Direct Impedance Method</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="BIM.html"><a href="BIM.html"><i class="fa fa-check"></i><b>4.1</b> Bus Impedance Matrix</a></li>
-<li class="chapter" data-level="4.2" data-path="direct-impedance-method.html"><a href="direct-impedance-method.html"><i class="fa fa-check"></i><b>4.2</b> Direct Impedance Method</a></li>
-<li class="chapter" data-level="4.3" data-path="fixed-point-method.html"><a href="fixed-point-method.html"><i class="fa fa-check"></i><b>4.3</b> Fixed Point Method</a></li>
+<li class="chapter" data-level="4.2" data-path="fixed-point-method.html"><a href="fixed-point-method.html"><i class="fa fa-check"></i><b>4.2</b> Fixed Point Method</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="dc-power-flow.html"><a href="dc-power-flow.html"><i class="fa fa-check"></i><b>5</b> DC Power Flow</a>
+<li class="chapter" data-level="5" data-path="linearised-power-flow.html"><a href="linearised-power-flow.html"><i class="fa fa-check"></i><b>5</b> Linearised Power Flow</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="linearised-power-flow.html"><a href="linearised-power-flow.html"><i class="fa fa-check"></i><b>5.1</b> Linearised Power Flow</a></li>
-<li class="chapter" data-level="5.2" data-path="BRM.html"><a href="BRM.html"><i class="fa fa-check"></i><b>5.2</b> Bus Resistance Matrix</a>
+<li class="chapter" data-level="5.1" data-path="linearVoltageDrop.html"><a href="linearVoltageDrop.html"><i class="fa fa-check"></i><b>5.1</b> Linearised Voltage Drop</a></li>
+<li class="chapter" data-level="5.2" data-path="linearised-voltage.html"><a href="linearised-voltage.html"><i class="fa fa-check"></i><b>5.2</b> Linearised Voltage</a></li>
+<li class="chapter" data-level="5.3" data-path="BRM.html"><a href="BRM.html"><i class="fa fa-check"></i><b>5.3</b> Bus Resistance Matrix</a>
 <ul>
 <li class="chapter" data-level="" data-path="BRM.html"><a href="BRM.html#LCA"><i class="fa fa-check"></i>Lowest Common Ancestor Problem</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="assessment.html"><a href="assessment.html"><i class="fa fa-check"></i><b>5.3</b> Assessment of Candidate</a></li>
-<li class="chapter" data-level="5.4" data-path="VSM.html"><a href="VSM.html"><i class="fa fa-check"></i><b>5.4</b> Voltage Sensitivity Matrix</a></li>
+<li class="chapter" data-level="5.4" data-path="pseudo-linearised-power-flow.html"><a href="pseudo-linearised-power-flow.html"><i class="fa fa-check"></i><b>5.4</b> Pseudo Linearised Power Flow</a></li>
+<li class="chapter" data-level="5.5" data-path="assessment.html"><a href="assessment.html"><i class="fa fa-check"></i><b>5.5</b> Assessment of Candidate</a>
+<ul>
+<li class="chapter" data-level="" data-path="assessment.html"><a href="assessment.html#error-from-linearisation"><i class="fa fa-check"></i>Error from Linearisation</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="VSM.html"><a href="VSM.html"><i class="fa fa-check"></i><b>5.6</b> Voltage Sensitivity Matrix</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="result-and-discussion.html"><a href="result-and-discussion.html"><i class="fa fa-check"></i><b>6</b> Result and Discussion</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="flowchart.html"><a href="flowchart.html"><i class="fa fa-check"></i><b>6.1</b> Flowchart</a></li>
-<li class="chapter" data-level="6.2" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>6.2</b> Conclusion</a></li>
-<li class="chapter" data-level="6.3" data-path="issues.html"><a href="issues.html"><i class="fa fa-check"></i><b>6.3</b> Issues</a></li>
+<li class="chapter" data-level="6.1" data-path="result-for-case-70.html"><a href="result-for-case-70.html"><i class="fa fa-check"></i><b>6.1</b> Result for Case-70</a></li>
+<li class="chapter" data-level="6.2" data-path="project-flowchart.html"><a href="project-flowchart.html"><i class="fa fa-check"></i><b>6.2</b> Project Flowchart</a></li>
+<li class="chapter" data-level="6.3" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>6.3</b> Summary</a>
+<ul>
+<li class="chapter" data-level="" data-path="summary.html"><a href="summary.html#issues"><i class="fa fa-check"></i>Issues</a></li>
+<li class="chapter" data-level="" data-path="summary.html"><a href="summary.html#future-work"><i class="fa fa-check"></i>Future Work</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -137,14 +146,43 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="AC" class="section level1" number="4">
-<h1><span class="header-section-number">4</span> AC Power Flow</h1>
-<p>Discussion is based on one-line model. Can be generalised for multi-phase
-model.</p>
+<div id="linearVoltageDrop" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Linearised Voltage Drop</h2>
+<p>With power flow at source of edge <span class="math inline">\(k\)</span>, <span class="math inline">\(\bar{S}_{\text{source}, k}\)</span>:
+<span class="math display">\[
+\bar{I}_{\text{edge}, k}
+  = \frac{\underline{S}_{\text{source}, k}}{\underline{V}_i} \\
+\]</span></p>
+<p>Voltage drop:
+<span class="math display">\[
+\begin{aligned}
+  \bar{V}_{\text{edge}, k}
+  &amp;= \bar{I}_{\text{edge}, k} \bar{Z}_{\text{edge}, k} \\
+  &amp;= \frac{
+    \underline{S}_{\text{source}, k} \bar{Z}_{\text{edge}, k}
+  }{\underline{V}_i} \\
+  &amp;= \frac{
+    \left(P_{\text{source}, k} - j Q_{\text{source}, k} \right)
+    \left(R_{\text{edge}, k} + j X_{\text{edge}, k} \right)
+  }{\underline{V}_i} \\
+  &amp;= \frac{
+    R_{\text{edge}, k} P_{\text{source}, k}
+    + X_{\text{edge}, k} Q_{\text{source}, k}
+  }{\underline{V}_i}
+  + j \frac{
+    X_{\text{edge}, k} P_{\text{source}, k}
+    - R_{\text{edge}, k} Q_{\text{source}, k}
+  }{\underline{V}_i}
+\end{aligned}
+\]</span></p>
+<p>Then:
+<span class="math display">\[
+V_{\text{edge}, k} =
+  \frac{R_{\text{edge}, k}}{V_\text{rate}} P_{\text{source}, k}
+\]</span></p>
 <ul>
-<li>Model RDF with one bus impedance matrix.</li>
-<li>Model power flow using direct impedance method.</li>
-<li>Calculate power flow using fixed point method.</li>
+<li>Ignore imaginary part.</li>
+<li>Replace <span class="math inline">\(\underline{V}_i\)</span> with <span class="math inline">\(V_\text{rate}\)</span>.</li>
 </ul>
 </div>
             </section>
@@ -152,8 +190,8 @@ model.</p>
           </div>
         </div>
       </div>
-<a href="combinatorial.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="BIM.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="linearised-power-flow.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="linearised-voltage.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -184,7 +222,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/edxu96/EstRDF-slides/edit/master/03-AC.Rmd",
+"link": "https://github.com/edxu96/EstRDF-slides/edit/master/04-DC.Rmd",
 "text": "Edit"
 },
 "history": {
