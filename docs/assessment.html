@@ -24,7 +24,7 @@
 <meta name="author" content="Jie Xu (s181238)" />
 
 
-<meta name="date" content="2020-12-12" />
+<meta name="date" content="2020-12-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="pseudo-linearised-power-flow.html"/>
-<link rel="next" href="VSM.html"/>
+<link rel="next" href="error.html"/>
 <script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -77,7 +77,11 @@
 <li><a href="./">EstRDF-slides</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#problem-setting"><i class="fa fa-check"></i>Problem Setting</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#flowchart"><i class="fa fa-check"></i>Flowchart</a></li>
+</ul></li>
 <li class="chapter" data-level="2" data-path="radial-distribution-feeder.html"><a href="radial-distribution-feeder.html"><i class="fa fa-check"></i><b>2</b> Radial Distribution Feeder</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="bus-edge.html"><a href="bus-edge.html"><i class="fa fa-check"></i><b>2.1</b> Bus and Edge</a></li>
@@ -95,10 +99,14 @@
 <li class="chapter" data-level="3.3" data-path="ip-formulation.html"><a href="ip-formulation.html"><i class="fa fa-check"></i><b>3.3</b> IP Formulation</a></li>
 <li class="chapter" data-level="3.4" data-path="combinatorial.html"><a href="combinatorial.html"><i class="fa fa-check"></i><b>3.4</b> Combinatorial Optimisation</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="direct-impedance-method.html"><a href="direct-impedance-method.html"><i class="fa fa-check"></i><b>4</b> Direct Impedance Method</a>
+<li class="chapter" data-level="4" data-path="ac-power-flow.html"><a href="ac-power-flow.html"><i class="fa fa-check"></i><b>4</b> AC Power Flow</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="BIM.html"><a href="BIM.html"><i class="fa fa-check"></i><b>4.1</b> Bus Impedance Matrix</a></li>
-<li class="chapter" data-level="4.2" data-path="fixed-point-method.html"><a href="fixed-point-method.html"><i class="fa fa-check"></i><b>4.2</b> Fixed Point Method</a></li>
+<li class="chapter" data-level="4.1" data-path="two-matrices.html"><a href="two-matrices.html"><i class="fa fa-check"></i><b>4.1</b> Two Matrices</a></li>
+<li class="chapter" data-level="4.2" data-path="BIM.html"><a href="BIM.html"><i class="fa fa-check"></i><b>4.2</b> Bus Impedance Matrix</a></li>
+<li class="chapter" data-level="4.3" data-path="direct-impedance-method.html"><a href="direct-impedance-method.html"><i class="fa fa-check"></i><b>4.3</b> Direct Impedance Method</a>
+<ul>
+<li class="chapter" data-level="" data-path="direct-impedance-method.html"><a href="direct-impedance-method.html#fixed-point-method"><i class="fa fa-check"></i>Fixed Point Method</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="linearised-power-flow.html"><a href="linearised-power-flow.html"><i class="fa fa-check"></i><b>5</b> Linearised Power Flow</a>
 <ul>
@@ -109,17 +117,13 @@
 <li class="chapter" data-level="" data-path="BRM.html"><a href="BRM.html#LCA"><i class="fa fa-check"></i>Lowest Common Ancestor Problem</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="pseudo-linearised-power-flow.html"><a href="pseudo-linearised-power-flow.html"><i class="fa fa-check"></i><b>5.4</b> Pseudo Linearised Power Flow</a></li>
-<li class="chapter" data-level="5.5" data-path="assessment.html"><a href="assessment.html"><i class="fa fa-check"></i><b>5.5</b> Assessment of Candidate</a>
-<ul>
-<li class="chapter" data-level="" data-path="assessment.html"><a href="assessment.html#error-from-linearisation"><i class="fa fa-check"></i>Error from Linearisation</a></li>
-</ul></li>
-<li class="chapter" data-level="5.6" data-path="VSM.html"><a href="VSM.html"><i class="fa fa-check"></i><b>5.6</b> Voltage Sensitivity Matrix</a></li>
+<li class="chapter" data-level="5.5" data-path="assessment.html"><a href="assessment.html"><i class="fa fa-check"></i><b>5.5</b> Assessment of Candidate</a></li>
+<li class="chapter" data-level="5.6" data-path="error.html"><a href="error.html"><i class="fa fa-check"></i><b>5.6</b> Error from Linearisation</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="result-and-discussion.html"><a href="result-and-discussion.html"><i class="fa fa-check"></i><b>6</b> Result and Discussion</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="result-for-case-70.html"><a href="result-for-case-70.html"><i class="fa fa-check"></i><b>6.1</b> Result for Case-70</a></li>
-<li class="chapter" data-level="6.2" data-path="project-flowchart.html"><a href="project-flowchart.html"><i class="fa fa-check"></i><b>6.2</b> Project Flowchart</a></li>
-<li class="chapter" data-level="6.3" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>6.3</b> Summary</a>
+<li class="chapter" data-level="6.2" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>6.2</b> Summary</a>
 <ul>
 <li class="chapter" data-level="" data-path="summary.html"><a href="summary.html#issues"><i class="fa fa-check"></i>Issues</a></li>
 <li class="chapter" data-level="" data-path="summary.html"><a href="summary.html#future-work"><i class="fa fa-check"></i>Future Work</a></li>
@@ -148,6 +152,7 @@
             <section class="normal" id="section-">
 <div id="assessment" class="section level2" number="5.5">
 <h2><span class="header-section-number">5.5</span> Assessment of Candidate</h2>
+<p>Calculate <span class="math inline">\(\boldsymbol{P}_\text{assess}\)</span> using voltage magnitudes.</p>
 <p>The second term in the objective function is:
 <span class="math display">\[ \begin{aligned}
   \mathcal{H}(\boldsymbol{R}) =
@@ -163,28 +168,10 @@
 \end{aligned} \]</span>
 where:</p>
 <ul>
-<li><span class="math inline">\(\mathcal{O}\)</span>: set of observed active channels</li>
+<li><span class="math inline">\(\mathcal{O}\)</span>: set of observed active channels and inactive channels</li>
 <li><span class="math inline">\(\boldsymbol{O}\)</span>: binary vector indicating observed active channels</li>
-<li>Entries for unobserved active channel are ignored.</li>
+<li>Entries for unobserved active channels are ignored.</li>
 </ul>
-<div id="error-from-linearisation" class="section level3 unnumbered" number="">
-<h3>Error from Linearisation</h3>
-<p>Box plot for assessment results of case-70 with respect to different number of
-observed active channels, based on ground truth and 50 snapshots<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
-<p><img src="Pictures/figErrorObsBRM.png" style="display: block; margin: auto;" /></p>
-<ul>
-<li>Error is aleady reduced to 1.7 ~ 2.2.</li>
-<li>Rated voltage magnitudes will increase the error dramatically.</li>
-<li>Full observability over voltage magnitudes for now.</li>
-</ul>
-</div>
-</div>
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>during
-00:00:00 and 00:00:50 on Dec 2, 2020 from Sonnen data set.<a href="assessment.html#fnref1" class="footnote-back">↩︎</a></p></li>
-</ol>
 </div>
             </section>
 
@@ -192,7 +179,7 @@ observed active channels, based on ground truth and 50 snapshots<a href="#fn1" c
         </div>
       </div>
 <a href="pseudo-linearised-power-flow.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="VSM.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="error.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

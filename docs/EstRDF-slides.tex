@@ -94,7 +94,7 @@
 
 \title{Topology Inference for Radial Distribution Feeder based on Power Flow}
 \author{Jie Xu (s181238)}
-\date{2020-12-12}
+\date{2020-12-13}
 
 \begin{document}
 \maketitle
@@ -112,11 +112,9 @@ households are connected to distribution network is always unknown. A framework
 to infer such connections by utilising all kinds of information is proposed in
 this project.
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-A simple flowchart for the project is:
-
-\includegraphics{Pictures/figFlowchartSimple.png}
+\hypertarget{problem-setting}{%
+\subsection*{Problem Setting}\label{problem-setting}}
+\addcontentsline{toc}{subsection}{Problem Setting}
 
 Available information and measurement:
 
@@ -130,12 +128,28 @@ Available information and measurement:
   some real power injection profiles
 \end{itemize}
 
+Association network inference:
+
+\begin{itemize}
+\tightlist
+\item
+  Correlation between buses.
+\item
+  \(|\mathcal{E}| = |\mathcal{N}| - 1\)
+\end{itemize}
+
+\hypertarget{flowchart}{%
+\subsection*{Flowchart}\label{flowchart}}
+\addcontentsline{toc}{subsection}{Flowchart}
+
+\includegraphics{Pictures/figFlowchart3.png}
+
 Two batches of computer programs:
 
 \begin{itemize}
 \tightlist
 \item
-  alternating current power flow calculation its linearised version
+  power flow
 \item
   three algorithms to handle directed graphs
 \end{itemize}
@@ -164,9 +178,11 @@ There are roughly two types of electrical devices in power grids.
 \hline
 type & definition & examples\\
 \hline
-delivery element & transport power from one place to another & cable, transformer, capacitor\\
+edge & transport power from one place to another & cable, transformer, capacitor\\
 \hline
 conversion element & convert power from or to another form & solar panel, battery\\
+\hline
+bus & where two delivery elements joint or end of a delivery element & slack bus, PQ bus, PV bus\\
 \hline
 \end{tabular}
 \end{table}
@@ -176,40 +192,32 @@ conversion element & convert power from or to another form & solar panel, batter
 \item
   Ignore conversion elements. Not necessary in power flow calculation.
 \item
-  Delivery element will be called \textbf{edge}.
+  Cable.
+\item
+  One slack bus -\textgreater{} \textbf{root}.
 \end{itemize}
 
-Another concept, \textbf{bus}, represent the place where two different delivery
-elements joint or end of a delivery element, but there is no physical entity
-corresponding to a bus. There are three common types of buses:
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\begin{table}[H]
-\centering
-\begin{tabular}[t]{l|l}
-\hline
-type & know quantities\\
-\hline
-slack bus & voltage magnitude and phase angle\\
-\hline
-PQ bus & real power injection and reactive power injection\\
-\hline
-PV bus & real power injection and voltage magnitude\\
-\hline
-\end{tabular}
-\end{table}
+Impedance of cable is proportional to its length.
 
-It is sufficient to model most of RDFs with PQ buses and one kind of edges,
-cables:
-
-\begin{itemize}
-\tightlist
-\item
-  One slack bus in RDF, corresponding to the \textbf{root}.
-\item
-  Root not in any matrix.
-\item
-  Ignore other delivery elements.
-\end{itemize}
+Unit impedance matrix for case-70:
+\[ \begin{aligned}
+  \boldsymbol{\bar{Z}}_{a b c}
+  =
+  \left[\begin{array}{lll}
+    0.000412+1.558e^{-4} j
+    & 0.000206+7.791e^{-5} j
+    & 0.000206+7.791e^{-5} j \\
+    0.000206+7.791e^{-5} j
+    & 0.000412+1.558e^{-4} j
+    & 0.000206+7.791e^{-5} j \\
+    0.000206+7.791e^{-5} j
+    & 0.000206+7.791e^{-5} j
+    & 0.000412+1.558e^{-4}j
+  \end{array}\right]
+  \nonumber
+\end{aligned} \]
 
 \hypertarget{two-special-concepts}{%
 \section{Two Special Concepts}\label{two-special-concepts}}
@@ -225,8 +233,8 @@ Essential for power flow calculation.
 \item
   \textbf{channel}: refer to one phase in some bus
 \item
-  \textbf{active channel}: there are non-zero injections (some conversion element is
-  connected in this channel)
+  \textbf{active channel}: there are non-zero injections (connected to some
+  conversion element)
 \item
   \textbf{observed active channel}: such non-zero injections are known
 \end{itemize}
@@ -243,7 +251,7 @@ index
 \begin{itemize}
 \tightlist
 \item
-  input: real power injections at all channels of PQ buses
+  input: real power injections
 \item
   output: voltages, current flow, power flow
 \item
@@ -257,6 +265,8 @@ channels are zero and voltages equalt o rated voltages in corresponding phases.
 \tightlist
 \item
   \(\boldsymbol{\bar{V}}_\text{zero}\): voltages in zero‐load snapshot
+\item
+  \(V_\text{rate}\): rated voltage magnitude, 230 V
 \end{itemize}
 
 \hypertarget{case}{%
@@ -267,7 +277,7 @@ Assumptions about feeders:
 \begin{itemize}
 \tightlist
 \item
-  spanning arborescence
+  one path to any bus
 \item
   step-down transformer is not considered
 \item
@@ -289,11 +299,9 @@ A case with 70 buses is primarily used here:
 \item
   bus 1 is omitted
 \item
-  Houses associated with buses 3, 7, 10, 13, 16, 20, 23, 26, 30, 33, 36, 39,
-  43, 46, 49, 52, 55, 58, 62, 65, 69 are connected through phase A.
+  70 buses
 \item
-  Houses associated with buses 5, 8, 11, 14, 18, 21, 24, 27, 31, 34, 37, 40,
-  44, 47, 50, 53, 56, 59, 63, 66, 70 are connected through phase B.
+  207 channels
 \end{itemize}
 
 \hypertarget{problem-formulation}{%
@@ -331,7 +339,7 @@ A case with 70 buses is primarily used here:
   some are impossible to exist
 \end{itemize}
 
-\textbf{spanning arborescence}
+\textbf{spanning arborescence (SA)}
 
 \begin{itemize}
 \tightlist
@@ -340,7 +348,7 @@ A case with 70 buses is primarily used here:
 \item
   root
 \item
-  include every node (bus, in our case)
+  include every bus
 \end{itemize}
 
 \textbf{feasible region}
@@ -348,12 +356,12 @@ A case with 70 buses is primarily used here:
 \begin{itemize}
 \tightlist
 \item
-  Composed of all the spanning arborescences of the directed graph.
+  All the SAs.
 \item
-  Number of spanning arborescences is finite, making it a \protect\hyperlink{combinatorial}{combinatorial
+  Number of SA is finite, making it a \protect\hyperlink{combinatorial}{combinatorial
   optimisation problem}.
 \item
-  To count number of spanning arborescences.
+  Count number of SA.
 \end{itemize}
 
 \hypertarget{overlapping}{%
@@ -385,13 +393,15 @@ However:
 \item
   446 possible potential edges
 \item
-  over 1045 spanning arborescences
+  over \(10^{45}\) spanning arborescences
 \end{itemize}
+
+\protect\hyperlink{summary}{-\textgreater{} summary}
 
 \hypertarget{ip-formulation}{%
 \section{IP Formulation}\label{ip-formulation}}
 
-Symbols and definitions of sets:
+Sets:
 
 \[
 \begin{array}{ll}
@@ -408,7 +418,7 @@ Symbols and definitions of sets:
 \end{array}
 \]
 
-Symbols, definitions, types and sets of variables:
+Variables:
 
 \[
 \begin{array}{llll}
@@ -421,7 +431,7 @@ Symbols, definitions, types and sets of variables:
 \end{array}
 \]
 
-Symbols, definitions, sets of constants:
+Constants:
 
 \[
 \begin{array}{lll}
@@ -434,7 +444,7 @@ Symbols, definitions, sets of constants:
 \end{array}
 \]
 
-The \textbf{integer programming formulation} is:
+\textbf{Integer programming formulation}:
 
 \[
 \begin{aligned}
@@ -510,8 +520,8 @@ Such two situations can be visualised:
 
 \begin{center}\includegraphics[width=0.7\linewidth]{Pictures/figFeasibleRegion} \end{center}
 
-In this project, \textbf{local search heuristic algorithm} is proposed to to move
-from \(\bigotimes\) to \(\bigoplus\):
+A \textbf{local search heuristic algorithm} is proposed to to move from \(\bigotimes\)
+to \(\bigoplus\):
 
 \begin{table}[H]
 \centering
@@ -538,8 +548,8 @@ neighbourhood & generate candidate & rank spanning arborescence\\
   Not in parallel.
 \end{itemize}
 
-\hypertarget{direct-impedance-method}{%
-\chapter{Direct Impedance Method}\label{direct-impedance-method}}
+\hypertarget{ac-power-flow}{%
+\chapter{AC Power Flow}\label{ac-power-flow}}
 
 Discussion is based on one-line model. Can be generalised for multi-phase
 model.
@@ -552,8 +562,8 @@ model.
   Calculate power flow using fixed point method.
 \end{itemize}
 
-\hypertarget{BIM}{%
-\section{Bus Impedance Matrix}\label{BIM}}
+\hypertarget{two-matrices}{%
+\section{Two Matrices}\label{two-matrices}}
 
 Current injection to flow:
 \[
@@ -573,6 +583,87 @@ Voltage drop to nodal voltage:
 
 where \textbf{edge impedance diagonal block matrix (EIDB)},
 \(\boldsymbol{\bar{Z}}_\text{edge}\).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Pictures/figCaseSix} \end{center}
+
+\[ \begin{aligned}
+    \left[\begin{array}{l}
+    \bar{I}_{\text{edge}, 1} \\
+    \bar{I}_{\text{edge}, 2} \\
+    \bar{I}_{\text{edge}, 3} \\
+    \bar{I}_{\text{edge}, 4} \\
+    \bar{I}_{\text{edge}, 5}
+    \end{array}\right]
+    = - \left[\begin{array}{lllll}
+    1 & 1 & 1 & 1 & 1 \\
+    0 & 1 & 1 & 1 & 1 \\
+    0 & 0 & 1 & 1 & 0 \\
+    0 & 0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 0 & 1
+    \end{array}\right]
+    \left[\begin{array}{l}
+    \bar{I}_{1} \\
+    \bar{I}_{2} \\
+    \bar{I}_{3} \\
+    \bar{I}_{4} \\
+    \bar{I}_{5}
+    \end{array}\right]
+\end{aligned} \]
+
+\[ \begin{aligned}
+  &
+  \left[\begin{array}{c}
+    \bar{V}_{1} \\
+    \bar{V}_{2} \\
+    \bar{V}_{3} \\
+    \bar{V}_{4} \\
+    \bar{V}_{5}
+  \end{array}\right]
+  -
+  \left[\begin{array}{c}
+    \bar{V}_\text{rate} \\
+    \bar{V}_\text{rate} \\
+    \bar{V}_\text{rate} \\
+    \bar{V}_\text{rate} \\
+    \bar{V}_\text{rate}
+  \end{array}\right]
+  =
+  - \left[\begin{array}{ccccc}
+    1 & 1 & 1 & 1 & 1 \\ 
+    0 & 1 & 1 & 1 & 1 \\ 
+    0 & 0 & 1 & 1 & 0 \\ 
+    0 & 0 & 0 & 1 & 0 \\ 
+    0 & 0 & 0 & 0 & 1
+  \end{array} \right]^{\top}
+  \left[\begin{array}{ccccc}
+    Z_{\text{edge}, 1} & 0 & 0 & 0 & 0 \\
+    0 & Z_{\text{edge}, 2} & 0 & 0 & 0 \\
+    0 & 0 & Z_{\text{edge}, 3} & 0 & 0 \\
+    0 & 0 & 0 & Z_{\text{edge}, 4} & 0 \\
+    0 & 0 & 0 & 0 & Z_{\text{edge}, 5}
+  \end{array}\right]
+  \left[\begin{array}{l}
+    \bar{I}_{\text{edge}, 1} \\
+    \bar{I}_{\text{edge}, 2} \\
+    \bar{I}_{\text{edge}, 3} \\
+    \bar{I}_{\text{edge}, 4} \\
+    \bar{I}_{\text{edge}, 5}
+  \end{array} \right]
+\end{aligned} \]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Alternating current power flow:
+\[
+  \bar{\boldsymbol{V}} = \bar{\boldsymbol{V}}_{\text{zero}}
+    + \left( \boldsymbol{K}^{\top} \boldsymbol{\bar{Z}}_\text{edge}
+    \boldsymbol{K} \right) \bar{\boldsymbol{I}}
+\]
+
+\hypertarget{BIM}{%
+\section{Bus Impedance Matrix}\label{BIM}}
 
 Alternating current power flow:
 \[
@@ -594,6 +685,9 @@ Alternating current power flow:
 where \textbf{bus resistance matrix (BRM)}, \(\boldsymbol{R}\): real part of entries
 in BIM.
 
+\hypertarget{direct-impedance-method}{%
+\section{Direct Impedance Method}\label{direct-impedance-method}}
+
 Five steps to build BIM:
 
 \begin{enumerate}
@@ -612,7 +706,8 @@ Five steps to build BIM:
 \end{enumerate}
 
 \hypertarget{fixed-point-method}{%
-\section{Fixed Point Method}\label{fixed-point-method}}
+\subsection*{Fixed Point Method}\label{fixed-point-method}}
+\addcontentsline{toc}{subsection}{Fixed Point Method}
 
 To calculate power flow in one snapshot, given power injections, the following
 procedure is repeated:
@@ -703,7 +798,7 @@ Voltage drop to nodal voltage:
 Power injection to flow:
 \[
 \boldsymbol{P}_\text{source}
-  = \boldsymbol{K}
+  = - \boldsymbol{K}
   \left(\boldsymbol{P} - \boldsymbol{P}_\text{loss} \right)
 \]
 
@@ -775,6 +870,10 @@ For example,
   LCA of b4 and b5 is still b2. Entry for b4, b5 is still \(R_\text{e1} + R_\text{e2}\).
 \end{itemize}
 
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\protect\hyperlink{summary}{-\textgreater{} summary}
+
 \hypertarget{pseudo-linearised-power-flow}{%
 \section{Pseudo Linearised Power Flow}\label{pseudo-linearised-power-flow}}
 
@@ -801,6 +900,8 @@ The inversed BRM for case-70 looks like:
 \hypertarget{assessment}{%
 \section{Assessment of Candidate}\label{assessment}}
 
+Calculate \(\boldsymbol{P}_\text{assess}\) using voltage magnitudes.
+
 The second term in the objective function is:
 \[ \begin{aligned}
   \mathcal{H}(\boldsymbol{R}) =
@@ -819,20 +920,26 @@ where:
 \begin{itemize}
 \tightlist
 \item
-  \(\mathcal{O}\): set of observed active channels
+  \(\mathcal{O}\): set of observed active channels and inactive channels
 \item
   \(\boldsymbol{O}\): binary vector indicating observed active channels
 \item
-  Entries for unobserved active channel are ignored.
+  Entries for unobserved active channels are ignored.
 \end{itemize}
 
-\hypertarget{error-from-linearisation}{%
-\subsection*{Error from Linearisation}\label{error-from-linearisation}}
-\addcontentsline{toc}{subsection}{Error from Linearisation}
+\hypertarget{error}{%
+\section{Error from Linearisation}\label{error}}
 
-Box plot for assessment results of case-70 with respect to different number of
-observed active channels, based on ground truth and 50 snapshots\footnote{during
-  00:00:00 and 00:00:50 on Dec 2, 2020 from Sonnen data set.}.
+Box plot:
+
+\begin{itemize}
+\tightlist
+\item
+  with respect to different number of observed active channels
+\item
+  based on ground truth and 50 snapshots\footnote{during 00:00:00 and 00:00:50 on Dec
+    2, 2020 from Sonnen data set.}
+\end{itemize}
 
 \begin{center}\includegraphics{Pictures/figErrorObsBRM} \end{center}
 
@@ -846,8 +953,7 @@ observed active channels, based on ground truth and 50 snapshots\footnote{during
   Full observability over voltage magnitudes for now.
 \end{itemize}
 
-\hypertarget{VSM}{%
-\section{Voltage Sensitivity Matrix}\label{VSM}}
+\protect\hyperlink{summary}{-\textgreater{} summary}
 
 \hypertarget{result-and-discussion}{%
 \chapter{Result and Discussion}\label{result-and-discussion}}
@@ -855,19 +961,38 @@ observed active channels, based on ground truth and 50 snapshots\footnote{during
 \hypertarget{result-for-case-70}{%
 \section{Result for Case-70}\label{result-for-case-70}}
 
-\includegraphics{Pictures/distances_288.png}
+Rank SA:
 
-\includegraphics{Pictures/errors_288.png}
+\begin{center}\includegraphics{Pictures/distances_288} \end{center}
 
-\hypertarget{project-flowchart}{%
-\section{Project Flowchart}\label{project-flowchart}}
+Assessment results:
 
-\includegraphics{Pictures/figFlowchartRotate.png}
+\begin{center}\includegraphics{Pictures/errors_288} \end{center}
 
 \hypertarget{summary}{%
 \section{Summary}\label{summary}}
 
-All in all, there are four steps in the proposed framework for topology inference:
+\begin{itemize}
+\tightlist
+\item
+  Topology inference -\textgreater{} combinatorial optimisation problem.
+\item
+  A framework is proposed.
+\item
+  Core: local search heuristic algorithm.
+\end{itemize}
+
+Advantages:
+
+\begin{itemize}
+\tightlist
+\item
+  Robust to partial observability.
+\item
+  Integrate all kinds of information in weight and direction.
+\end{itemize}
+
+Four steps:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -896,8 +1021,8 @@ All in all, there are four steps in the proposed framework for topology inferenc
   Full observability over voltage magnitudes. (\protect\hyperlink{BRM}{matrices with full
   rank})
 \item
-  Error in linearised power flow calculation. (\protect\hyperlink{VSM}{voltage sensitivity
-  matrix})
+  Error in linearised power flow calculation. (\protect\hyperlink{error}{error from
+  linearisation})
 \end{enumerate}
 
 \hypertarget{future-work}{%
