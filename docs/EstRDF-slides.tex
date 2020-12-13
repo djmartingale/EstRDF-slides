@@ -144,6 +144,8 @@ Association network inference:
 
 \includegraphics{Pictures/figFlowchart3.png}
 
+\textbf{Ground truth} is not known, but used to simulate available measurement.
+
 Two batches of computer programs:
 
 \begin{itemize}
@@ -182,7 +184,7 @@ edge & transport power from one place to another & cable, transformer, capacitor
 \hline
 conversion element & convert power from or to another form & solar panel, battery\\
 \hline
-bus & where two delivery elements joint or end of a delivery element & slack bus, PQ bus, PV bus\\
+bus & where two edges joint or end of an edge & slack bus, PQ bus, PV bus\\
 \hline
 \end{tabular}
 \end{table}
@@ -323,10 +325,6 @@ A case with 70 buses is primarily used here:
   incidence functions: source \(\sigma\), target \(\tau\)
 \item
   (edge) weighting function, \(\omega: E \rightarrow \mathbb{R}\).
-\item
-  2-D Euclidean distance as weight
-\item
-  \emph{association network inference cannot be used}
 \end{itemize}
 
 \textbf{complete graph for a set of nodes}
@@ -337,6 +335,12 @@ A case with 70 buses is primarily used here:
   all edges are \textbf{potential edges}
 \item
   some are impossible to exist
+\item
+  possible to derive their lengths
+\item
+  2-D Euclidean distance as weight
+\item
+  \emph{association network inference cannot be used}
 \end{itemize}
 
 \textbf{spanning arborescence (SA)}
@@ -902,7 +906,7 @@ The inversed BRM for case-70 looks like:
 
 Calculate \(\boldsymbol{P}_\text{assess}\) using voltage magnitudes.
 
-The second term in the objective function is:
+The second term in the objective function (mean squared error):
 \[ \begin{aligned}
   \mathcal{H}(\boldsymbol{R}) =
   \left[
@@ -965,7 +969,14 @@ Rank SA:
 
 \begin{center}\includegraphics{Pictures/distances_288} \end{center}
 
-Assessment results:
+Assessment (mean squared error):
+
+\begin{itemize}
+\tightlist
+\item
+  based on 50 snapshots\footnote{during 00:00:00 and 00:00:50 on Dec 2, 2020 from
+    Sonnen data set.}
+\end{itemize}
 
 \begin{center}\includegraphics{Pictures/errors_288} \end{center}
 
