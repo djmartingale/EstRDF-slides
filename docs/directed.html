@@ -120,7 +120,7 @@
 <li class="chapter" data-level="5.5" data-path="assessment.html"><a href="assessment.html"><i class="fa fa-check"></i><b>5.5</b> Assessment of Candidate</a></li>
 <li class="chapter" data-level="5.6" data-path="error.html"><a href="error.html"><i class="fa fa-check"></i><b>5.6</b> Error from Linearisation</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="result-and-discussion.html"><a href="result-and-discussion.html"><i class="fa fa-check"></i><b>6</b> Result and Discussion</a>
+<li class="chapter" data-level="6" data-path="result-and-summary.html"><a href="result-and-summary.html"><i class="fa fa-check"></i><b>6</b> Result and Summary</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="result.html"><a href="result.html"><i class="fa fa-check"></i><b>6.1</b> Result for Case-70</a></li>
 <li class="chapter" data-level="6.2" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>6.2</b> Summary</a>
@@ -153,33 +153,22 @@
 <div id="directed" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Directed Graph</h2>
 <blockquote>
-<p>All the information can be stored in a weighted directed graph.</p>
+<p>All the information can be stored in a complete directed graph.</p>
 </blockquote>
-<p><strong>weighted directed graph</strong>
-<span class="math inline">\(G = (\mathcal{N}, \mathcal{E}, \sigma, \tau, \omega)\)</span></p>
-<ul>
-<li>set of nodes: <span class="math inline">\(\mathcal{N}\)</span></li>
-<li>set of edges: <span class="math inline">\(\mathcal{E}\)</span></li>
-<li>incidence functions: source <span class="math inline">\(\sigma\)</span>, target <span class="math inline">\(\tau\)</span></li>
-<li>(edge) weighting function, <span class="math inline">\(\omega: \mathcal{E} \rightarrow \mathbb{R}\)</span>.</li>
-</ul>
-<p><strong>complete graph for a set of nodes</strong></p>
+<p><strong>complete (directed) graph for a set of buses</strong></p>
+<blockquote>
+<p>All edges are <strong>potential edges</strong>, and they must have weights. In association
+network inference, it is impossible when some entity attributes are missing.</p>
+</blockquote>
 <ul>
 <li>all edges are <strong>potential edges</strong></li>
-<li>some are impossible to exist</li>
-<li>possible to derive their lengths</li>
+<li>select a set of edges -&gt; SA -&gt; candidate</li>
+<li><strong>impossible potential edge</strong></li>
 <li>2-D Euclidean distance as weight</li>
-<li><em>association network inference cannot be used</em></li>
-</ul>
-<p><strong>spanning arborescence (SA)</strong></p>
-<ul>
-<li>subgraph of a directed graph</li>
-<li>root</li>
-<li>include every bus</li>
 </ul>
 <p><strong>feasible region</strong></p>
 <ul>
-<li>All the SAs.</li>
+<li>All the candidates (SAs).</li>
 <li>Number of SA is finite, making it a <a href="combinatorial.html#combinatorial">combinatorial
 optimisation problem</a>.</li>
 <li>Count number of SA.</li>

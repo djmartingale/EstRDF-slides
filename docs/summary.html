@@ -120,7 +120,7 @@
 <li class="chapter" data-level="5.5" data-path="assessment.html"><a href="assessment.html"><i class="fa fa-check"></i><b>5.5</b> Assessment of Candidate</a></li>
 <li class="chapter" data-level="5.6" data-path="error.html"><a href="error.html"><i class="fa fa-check"></i><b>5.6</b> Error from Linearisation</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="result-and-discussion.html"><a href="result-and-discussion.html"><i class="fa fa-check"></i><b>6</b> Result and Discussion</a>
+<li class="chapter" data-level="6" data-path="result-and-summary.html"><a href="result-and-summary.html"><i class="fa fa-check"></i><b>6</b> Result and Summary</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="result.html"><a href="result.html"><i class="fa fa-check"></i><b>6.1</b> Result for Case-70</a></li>
 <li class="chapter" data-level="6.2" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>6.2</b> Summary</a>
@@ -152,15 +152,15 @@
             <section class="normal" id="section-">
 <div id="summary" class="section level2" number="6.2">
 <h2><span class="header-section-number">6.2</span> Summary</h2>
+<blockquote>
+<p>The project is summarised here. We turn topology inference into a
+combinatorial optimisation problem. A new framework is proposed, and its core
+is a local search heuristic algorithm.</p>
+</blockquote>
 <ul>
 <li>Topology inference -&gt; combinatorial optimisation problem.</li>
-<li>A framework is proposed.</li>
+<li>A new framework is proposed.</li>
 <li>Core: local search heuristic algorithm.</li>
-</ul>
-<p>Advantages:</p>
-<ul>
-<li>Robust to partial observability.</li>
-<li>Integrate all kinds of information in weight and direction.</li>
 </ul>
 <p>Four steps:</p>
 <ol style="list-style-type: decimal">
@@ -169,10 +169,25 @@
 <li>Get candidates sequentially by ranking SAs according to total cable lengths.</li>
 <li>Assess candidates based on available measurements.</li>
 </ol>
+<p>Advantages:</p>
+<blockquote>
+<p>There are two advantages. It is robust to partial observability over power
+injections, and is capable to integrate all kinds of information in weights
+and directions.</p>
+</blockquote>
+<ul>
+<li>Robust to partial observability.</li>
+<li>Integrate all kinds of information in weights and directions.</li>
+</ul>
 <div id="issues" class="section level3 unnumbered" number="">
 <h3>Issues</h3>
+<blockquote>
+<p>There are three issues that I want to discuss in detail here. Firstly, there
+are too many SAs, so we have to reduce the number, for example, by removing
+overlapping edges.</p>
+</blockquote>
 <ol style="list-style-type: decimal">
-<li>Too many spanning arborescences. (<a href="overlapping.html#overlapping">remove overlapping edges</a>)</li>
+<li>Too many SAs. (<a href="overlapping.html#overlapping">remove overlapping edges</a>)</li>
 <li>Full observability over voltage magnitudes. (<a href="BRM.html#BRM">matrices with full
 rank</a>)</li>
 <li>Error in linearised power flow calculation. (<a href="error.html#error">error from

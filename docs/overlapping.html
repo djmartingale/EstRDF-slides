@@ -120,7 +120,7 @@
 <li class="chapter" data-level="5.5" data-path="assessment.html"><a href="assessment.html"><i class="fa fa-check"></i><b>5.5</b> Assessment of Candidate</a></li>
 <li class="chapter" data-level="5.6" data-path="error.html"><a href="error.html"><i class="fa fa-check"></i><b>5.6</b> Error from Linearisation</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="result-and-discussion.html"><a href="result-and-discussion.html"><i class="fa fa-check"></i><b>6</b> Result and Discussion</a>
+<li class="chapter" data-level="6" data-path="result-and-summary.html"><a href="result-and-summary.html"><i class="fa fa-check"></i><b>6</b> Result and Summary</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="result.html"><a href="result.html"><i class="fa fa-check"></i><b>6.1</b> Result for Case-70</a></li>
 <li class="chapter" data-level="6.2" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>6.2</b> Summary</a>
@@ -152,6 +152,9 @@
             <section class="normal" id="section-">
 <div id="overlapping" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Remove Overlapping Edge</h2>
+<blockquote>
+<p>A potential edge can overlap some bus on its way from source to target.</p>
+</blockquote>
 <p>For example, in case-70:</p>
 <p><span class="math display">\[
 \begin{array}{lllll}
@@ -167,11 +170,17 @@
   \hline
 \end{array}
 \]</span></p>
-<p><img src="Pictures/overlapGeth.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="Pictures/overlapGeth.png" width="60%" style="display: block; margin: auto;" /></p>
 <p>However:</p>
+<blockquote>
+<p>After all overlapping edges are removed (or saying detected as impoosible to
+exist), there are still 446 possible potential edges and over <span class="math inline">\(10^{45}\)</span> SAs.
+This is the only technique used in this project. When more information is
+available, more advanced techniques can be applied.</p>
+</blockquote>
 <ul>
 <li>446 possible potential edges</li>
-<li>over <span class="math inline">\(10^{45}\)</span> spanning arborescences</li>
+<li>over <span class="math inline">\(10^{45}\)</span> SAs</li>
 </ul>
 <p><a href="summary.html#summary">-&gt; summary</a></p>
 </div>

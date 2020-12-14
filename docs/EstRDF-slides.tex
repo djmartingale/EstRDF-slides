@@ -259,35 +259,6 @@ bus in distribution network and is referred to as root here.
   One slack bus -\textgreater{} \textbf{root}.
 \end{itemize}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-Impedance of cable is proportional to its length.
-
-Unit impedance matrix for case-70:
-\[ \begin{aligned}
-  \boldsymbol{\bar{Z}}_{a b c}
-  =
-  \left[\begin{array}{lll}
-    0.000412+1.558e^{-4} j
-    & 0.000206+7.791e^{-5} j
-    & 0.000206+7.791e^{-5} j \\
-    0.000206+7.791e^{-5} j
-    & 0.000412+1.558e^{-4} j
-    & 0.000206+7.791e^{-5} j \\
-    0.000206+7.791e^{-5} j
-    & 0.000206+7.791e^{-5} j
-    & 0.000412+1.558e^{-4}j
-  \end{array}\right]
-  \nonumber
-\end{aligned} \]
-
-\begin{quote}
-It is assumed that there is only one type of cable in case-70, and its
-impedance matrix for one-meter-long cable is known. Diagonal values are the
-same, and two times of off-diagonal values. So it is sufficient to store this
-matrix with one number for resistance and one number for reactance.
-\end{quote}
-
 \hypertarget{concepts}{%
 \section{Two Special Concepts}\label{concepts}}
 
@@ -328,7 +299,7 @@ That is, it is known that there is no power injection at those channels.
 \begin{itemize}
 \tightlist
 \item
-  Duration is 1 s in this project.
+  duration: 1 s
 \end{itemize}
 
 \textbf{Zero‐load snapshot} : when power injections at all the channels are zero
@@ -357,7 +328,7 @@ Assumptions about feeders:
 \begin{itemize}
 \tightlist
 \item
-  one path to any bus (tree)
+  spanning arborescence (SA)
 \item
   one step-down transformer
 \item
@@ -415,50 +386,26 @@ There is an issue here that I will discuss after a summary in the end.
 \section{Directed Graph}\label{directed}}
 
 \begin{quote}
-All the information can be stored in a weighted directed graph.
+All the information can be stored in a complete directed graph.
 \end{quote}
 
-\textbf{weighted directed graph}
-\(G = (\mathcal{N}, \mathcal{E}, \sigma, \tau, \omega)\)
+\textbf{complete (directed) graph for a set of buses}
 
-\begin{itemize}
-\tightlist
-\item
-  set of nodes: \(\mathcal{N}\)
-\item
-  set of edges: \(\mathcal{E}\)
-\item
-  incidence functions: source \(\sigma\), target \(\tau\)
-\item
-  (edge) weighting function, \(\omega: \mathcal{E} \rightarrow \mathbb{R}\).
-\end{itemize}
-
-\textbf{complete graph for a set of nodes}
+\begin{quote}
+All edges are \textbf{potential edges}, and they must have weights. In association
+network inference, it is impossible when some entity attributes are missing.
+\end{quote}
 
 \begin{itemize}
 \tightlist
 \item
   all edges are \textbf{potential edges}
 \item
-  some are impossible to exist
+  select a set of edges -\textgreater{} SA -\textgreater{} candidate
 \item
-  possible to derive their lengths
+  \textbf{impossible potential edge}
 \item
   2-D Euclidean distance as weight
-\item
-  \emph{association network inference cannot be used}
-\end{itemize}
-
-\textbf{spanning arborescence (SA)}
-
-\begin{itemize}
-\tightlist
-\item
-  subgraph of a directed graph
-\item
-  root
-\item
-  include every bus
 \end{itemize}
 
 \textbf{feasible region}
@@ -466,7 +413,7 @@ All the information can be stored in a weighted directed graph.
 \begin{itemize}
 \tightlist
 \item
-  All the SAs.
+  All the candidates (SAs).
 \item
   Number of SA is finite, making it a \protect\hyperlink{combinatorial}{combinatorial
   optimisation problem}.
@@ -476,6 +423,10 @@ All the information can be stored in a weighted directed graph.
 
 \hypertarget{overlapping}{%
 \section{Remove Overlapping Edge}\label{overlapping}}
+
+\begin{quote}
+A potential edge can overlap some bus on its way from source to target.
+\end{quote}
 
 For example, in case-70:
 
@@ -494,16 +445,23 @@ For example, in case-70:
 \end{array}
 \]
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Pictures/overlapGeth} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{Pictures/overlapGeth} \end{center}
 
 However:
+
+\begin{quote}
+After all overlapping edges are removed (or saying detected as impoosible to
+exist), there are still 446 possible potential edges and over \(10^{45}\) SAs.
+This is the only technique used in this project. When more information is
+available, more advanced techniques can be applied.
+\end{quote}
 
 \begin{itemize}
 \tightlist
 \item
   446 possible potential edges
 \item
-  over \(10^{45}\) spanning arborescences
+  over \(10^{45}\) SAs
 \end{itemize}
 
 \protect\hyperlink{summary}{-\textgreater{} summary}
@@ -519,11 +477,11 @@ Sets:
   \textbf{symbol} & \textbf{definition} \\
   \hline
   \mathcal{E}
-  & \text{all the potential edges (edges in the complete graph)} \\
+  & \text{all the potential edges} \\
   \mathcal{C}
-  & \text{available measurements of voltages and power injections} \\
+  & \text{available measurements} \\
   \mathcal{E}_\text{impossible}
-  & \text{potential edges that are impossible to exist} \\
+  & \text{impossible potential edges} \\
   \hline
 \end{array}
 \]
@@ -535,8 +493,8 @@ Variables:
   \hline
   \textbf{symbol} & \textbf{definition} & \textbf{type} & \textbf{set} \\
   \hline
-  x_{i j} & \text{if edge from i to j is in the solution}
-  & \{0, 1\} & \mathcal{E} \\
+  x_{i j} & \text{whether to choose edge from i to j}
+  & \text{binary} & \mathcal{E} \\
   \hline
 \end{array}
 \]
@@ -548,7 +506,7 @@ Constants:
   \hline
   \textbf{symbol} & \textbf{definition} & \textbf{set} \\
   \hline
-  d_{i, j} & \text{Euclidean distance from i to j}
+  d_{i, j} & \text{Euclidean distance}
   & \mathcal{E} \\
   \hline
 \end{array}
@@ -582,11 +540,11 @@ Two terms in the objective function:
   \textbf{term} & \textbf{definition} & \textbf{coefficient} \\
   \hline
   (1 - \alpha) \sum_{(i, j) \in \mathcal{E}} d_{i j} x_{i j}
-  & \text{weight of candidate arborescence}
+  & \text{total weight of candidate}
   & 1 - \alpha \\
   \alpha \mathcal{H}
   \left(\{x_{i j} \forall (i, j) \in \mathcal{E} \}, \mathcal{C} \right)
-  & \text{assessment of candidate arborescence}
+  & \text{assessment of candidate}
   & \alpha \\
   \hline
 \end{array}
@@ -630,18 +588,17 @@ Such two situations can be visualised:
 
 \begin{center}\includegraphics[width=0.7\linewidth]{Pictures/figFeasibleRegion} \end{center}
 
-Combinatorial optimisation problem.
-
-A \textbf{local search heuristic algorithm} is proposed to to move from \(\bigotimes\)
-to \(\bigoplus\). \citep{michiels2007theoretical}
+For this combinatorial optimisation problem, a \textbf{local search heuristic
+algorithm} is proposed to to move from \(\bigotimes\) to \(\bigoplus\).
+\citep{michiels2007theoretical}
 
 \begin{quote}
 All the algorithms in this category have two parts, an objective funciton to
 assess candidates and an neighbourhood function to generate candidates
 systematically. Here, pseudo linearised power flow will be used as the
-objective function and resuted mean squared error is to be minimised. It will
-be discussed later. An algorithm to rank spanning arborescences according to
-their total cable lengths is implemented.
+objective function and resulted mean squared error is to be minimised. It
+will be discussed later. An algorithm to rank spanning arborescences
+according to their total cable lengths is implemented.
 \end{quote}
 
 \begin{table}[H]
@@ -657,22 +614,18 @@ neighbourhood & generate candidate & rank spanning arborescence\\
 \end{tabular}
 \end{table}
 
+\begin{quote}
+Because power grids are to be built with less cost, the total cable length
+of ground truth should not be too long, so we can find it before long,
+\end{quote}
+
 \begin{itemize}
 \tightlist
-\item
-  Starting point -\textgreater{} minimum spanning arborescence
-\item
-  Every candidate is reachable.
 \item
   Ground truth should be found before long.
 \item
   Not in parallel.
 \end{itemize}
-
-\begin{quote}
-Because power grids are to be built with less cost, the total cable length
-of ground truth should not be too long, so we can find it before long,
-\end{quote}
 
 \hypertarget{ac-power-flow}{%
 \chapter{AC Power Flow}\label{ac-power-flow}}
@@ -716,6 +669,10 @@ where \textbf{edge impedance diagonal block matrix (EIDB)},
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \begin{center}\includegraphics[width=0.7\linewidth]{Pictures/figCaseSix} \end{center}
+
+\begin{quote}
+Each row indicates whether power injection from some bus will pass the edge.
+\end{quote}
 
 \[ \begin{aligned}
     \left[\begin{array}{l}
@@ -840,8 +797,7 @@ Five steps to build BIM:
 \subsection*{Fixed Point Method}\label{fixed-point-method}}
 \addcontentsline{toc}{subsection}{Fixed Point Method}
 
-To calculate power flow in one snapshot, given power injections, the following
-procedure is repeated:
+The following procedure is repeated:
 \[ \begin{aligned}
     \boldsymbol{\bar{I}} &= \boldsymbol{\underline{P}}
       \otimes \boldsymbol{\underline{V}}_\text{previous} \\
@@ -877,6 +833,11 @@ Then:
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
+\begin{quote}
+Besides, there are three parts that I will discussed in detail after the
+summary.
+\end{quote}
+
 \begin{itemize}
 \tightlist
 \item
@@ -890,13 +851,8 @@ Then:
 \hypertarget{linearVoltageDrop}{%
 \section{Linearised Voltage Drop}\label{linearVoltageDrop}}
 
-With power flow at source of edge \(k\), \(\bar{S}_{\text{source}, k}\):
-\[
-\bar{I}_{\text{edge}, k}
-  = \frac{\underline{S}_{\text{source}, k}}{\underline{V}_i} \\
-\]
-
-Voltage drop:
+With power flow at source of edge \(k\), \(\bar{S}_{\text{source}, k}\), voltage
+drop:
 \[
 \begin{aligned}
   \bar{V}_{\text{edge}, k}
@@ -930,11 +886,20 @@ V_{\text{edge}, k} =
 \item
   Ignore imaginary part.
 \item
-  Replace \(\underline{V}_i\) with \(V_\text{rate}\).
+  Use \(V_\text{rate}\).
 \end{itemize}
 
 \hypertarget{linearVoltage}{%
 \section{Linearised Voltage}\label{linearVoltage}}
+
+Similar to AC power flow:
+
+Power injection to flow:
+\[
+\boldsymbol{P}_\text{source}
+  = - \boldsymbol{K}
+  \left(\boldsymbol{P} - \boldsymbol{P}_\text{loss} \right)
+\]
 
 Voltage drop to nodal voltage:
 \[
@@ -944,16 +909,9 @@ Voltage drop to nodal voltage:
   \boldsymbol{R}_\text{edge} \boldsymbol{P}_\text{source}
 \]
 
-Power injection to flow:
-\[
-\boldsymbol{P}_\text{source}
-  = - \boldsymbol{K}
-  \left(\boldsymbol{P} - \boldsymbol{P}_\text{loss} \right)
-\]
-
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-Voltage magnitude can be calculated using BRM and real power injections:
+Voltage magnitudes can be calculated using BRM and real power injections:
 \[ \begin{aligned}
   \boldsymbol{V} &= \boldsymbol{V}_\text{zero} + \frac{1}{V_\text{rate}}
     \left(
@@ -966,12 +924,14 @@ Voltage magnitude can be calculated using BRM and real power injections:
 \begin{itemize}
 \tightlist
 \item
-  To \protect\hyperlink{assessment}{assess candidate} by calculating power injection using
+  To \protect\hyperlink{assessment}{assess candidate} by calculating power injections using
   voltage magnitudes.
 \end{itemize}
 
 \hypertarget{BRM}{%
 \section{Bus Resistance Matrix}\label{BRM}}
+
+BRM of case-70:
 
 \begin{itemize}
 \tightlist
@@ -988,8 +948,7 @@ Voltage magnitude can be calculated using BRM and real power injections:
 \begin{center}\includegraphics{Pictures/figHeatmapBRM} \end{center}
 
 \begin{quote}
-There is some pattern that can be explained by the analytical expression for
-entries in BRM.
+There is some pattern that can be explained by the analytical expression.
 \end{quote}
 
 \hypertarget{LCA}{%
@@ -1142,8 +1101,8 @@ observability of voltage magnitudes are still required for now.
 
 \protect\hyperlink{summary}{-\textgreater{} summary}
 
-\hypertarget{result-and-discussion}{%
-\chapter{Result and Discussion}\label{result-and-discussion}}
+\hypertarget{result-and-summary}{%
+\chapter{Result and Summary}\label{result-and-summary}}
 
 \begin{itemize}
 \tightlist
@@ -1155,6 +1114,14 @@ observability of voltage magnitudes are still required for now.
 
 \hypertarget{result}{%
 \section{Result for Case-70}\label{result}}
+
+\includegraphics{Pictures/case70true.png}
+
+\begin{quote}
+Here we only show how result might look like. Because there are only 75 new
+possible potential edges here. There is an issue that will be discussed
+later.
+\end{quote}
 
 \begin{itemize}
 \tightlist
@@ -1168,13 +1135,12 @@ observability of voltage magnitudes are still required for now.
 
 \begin{center}\includegraphics[width=0.55\linewidth]{Pictures/case70} \end{center}
 
-Rank SAs according to total cable lengths:
+Rank candidates according to total cable lengths:
 
 \begin{center}\includegraphics{Pictures/distances_288} \end{center}
 
 \begin{quote}
-Total cable length increases all the time. That is, we rank spanning
-arborescences according to their total cable lengths.
+It increases all the time.
 \end{quote}
 
 Assessment based on 50 snapshots\footnote{during 00:00:00 and 00:00:50 on Dec 2, 2020
@@ -1182,27 +1148,27 @@ Assessment based on 50 snapshots\footnote{during 00:00:00 and 00:00:50 on Dec 2,
 
 \begin{center}\includegraphics{Pictures/errors_288} \end{center}
 
+\begin{quote}
+The red cross point, with minimum mean squared error, is ground truth.
+\end{quote}
+
 \hypertarget{summary}{%
 \section{Summary}\label{summary}}
+
+\begin{quote}
+The project is summarised here. We turn topology inference into a
+combinatorial optimisation problem. A new framework is proposed, and its core
+is a local search heuristic algorithm.
+\end{quote}
 
 \begin{itemize}
 \tightlist
 \item
   Topology inference -\textgreater{} combinatorial optimisation problem.
 \item
-  A framework is proposed.
+  A new framework is proposed.
 \item
   Core: local search heuristic algorithm.
-\end{itemize}
-
-Advantages:
-
-\begin{itemize}
-\tightlist
-\item
-  Robust to partial observability.
-\item
-  Integrate all kinds of information in weight and direction.
 \end{itemize}
 
 Four steps:
@@ -1220,15 +1186,37 @@ Four steps:
   Assess candidates based on available measurements.
 \end{enumerate}
 
+Advantages:
+
+\begin{quote}
+There are two advantages. It is robust to partial observability over power
+injections, and is capable to integrate all kinds of information in weights
+and directions.
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  Robust to partial observability.
+\item
+  Integrate all kinds of information in weights and directions.
+\end{itemize}
+
 \hypertarget{issues}{%
 \subsection*{Issues}\label{issues}}
 \addcontentsline{toc}{subsection}{Issues}
+
+\begin{quote}
+There are three issues that I want to discuss in detail here. Firstly, there
+are too many SAs, so we have to reduce the number, for example, by removing
+overlapping edges.
+\end{quote}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Too many spanning arborescences. (\protect\hyperlink{overlapping}{remove overlapping edges})
+  Too many SAs. (\protect\hyperlink{overlapping}{remove overlapping edges})
 \item
   Full observability over voltage magnitudes. (\protect\hyperlink{BRM}{matrices with full
   rank})

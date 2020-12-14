@@ -19,6 +19,6 @@ BRM
 brmInv
 assessment
 error
-result-and-discussion
+result-and-summary
 result
 summary

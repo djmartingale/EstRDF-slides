@@ -120,7 +120,7 @@
 <li class="chapter" data-level="5.5" data-path="assessment.html"><a href="assessment.html"><i class="fa fa-check"></i><b>5.5</b> Assessment of Candidate</a></li>
 <li class="chapter" data-level="5.6" data-path="error.html"><a href="error.html"><i class="fa fa-check"></i><b>5.6</b> Error from Linearisation</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="result-and-discussion.html"><a href="result-and-discussion.html"><i class="fa fa-check"></i><b>6</b> Result and Discussion</a>
+<li class="chapter" data-level="6" data-path="result-and-summary.html"><a href="result-and-summary.html"><i class="fa fa-check"></i><b>6</b> Result and Summary</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="result.html"><a href="result.html"><i class="fa fa-check"></i><b>6.1</b> Result for Case-70</a></li>
 <li class="chapter" data-level="6.2" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>6.2</b> Summary</a>
@@ -152,6 +152,13 @@
             <section class="normal" id="section-">
 <div id="linearVoltage" class="section level2" number="5.2">
 <h2><span class="header-section-number">5.2</span> Linearised Voltage</h2>
+<p>Similar to AC power flow:</p>
+<p>Power injection to flow:
+<span class="math display">\[
+\boldsymbol{P}_\text{source}
+  = - \boldsymbol{K}
+  \left(\boldsymbol{P} - \boldsymbol{P}_\text{loss} \right)
+\]</span></p>
 <p>Voltage drop to nodal voltage:
 <span class="math display">\[
 \boldsymbol{V}
@@ -159,14 +166,8 @@
   - \frac{1}{V_\text{rate}} \boldsymbol{K}^{\top}
   \boldsymbol{R}_\text{edge} \boldsymbol{P}_\text{source}
 \]</span></p>
-<p>Power injection to flow:
-<span class="math display">\[
-\boldsymbol{P}_\text{source}
-  = - \boldsymbol{K}
-  \left(\boldsymbol{P} - \boldsymbol{P}_\text{loss} \right)
-\]</span></p>
 <hr />
-<p>Voltage magnitude can be calculated using BRM and real power injections:
+<p>Voltage magnitudes can be calculated using BRM and real power injections:
 <span class="math display">\[ \begin{aligned}
   \boldsymbol{V} &amp;= \boldsymbol{V}_\text{zero} + \frac{1}{V_\text{rate}}
     \left(
@@ -176,7 +177,7 @@
       + \frac{1}{V_\text{rate}} \boldsymbol{R} \boldsymbol{P}
 \end{aligned} \]</span></p>
 <ul>
-<li>To <a href="assessment.html#assessment">assess candidate</a> by calculating power injection using
+<li>To <a href="assessment.html#assessment">assess candidate</a> by calculating power injections using
 voltage magnitudes.</li>
 </ul>
 </div>

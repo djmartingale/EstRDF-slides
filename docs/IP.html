@@ -120,7 +120,7 @@
 <li class="chapter" data-level="5.5" data-path="assessment.html"><a href="assessment.html"><i class="fa fa-check"></i><b>5.5</b> Assessment of Candidate</a></li>
 <li class="chapter" data-level="5.6" data-path="error.html"><a href="error.html"><i class="fa fa-check"></i><b>5.6</b> Error from Linearisation</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="result-and-discussion.html"><a href="result-and-discussion.html"><i class="fa fa-check"></i><b>6</b> Result and Discussion</a>
+<li class="chapter" data-level="6" data-path="result-and-summary.html"><a href="result-and-summary.html"><i class="fa fa-check"></i><b>6</b> Result and Summary</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="result.html"><a href="result.html"><i class="fa fa-check"></i><b>6.1</b> Result for Case-70</a></li>
 <li class="chapter" data-level="6.2" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>6.2</b> Summary</a>
@@ -159,11 +159,11 @@
   \textbf{symbol} &amp; \textbf{definition} \\
   \hline
   \mathcal{E}
-  &amp; \text{all the potential edges (edges in the complete graph)} \\
+  &amp; \text{all the potential edges} \\
   \mathcal{C}
-  &amp; \text{available measurements of voltages and power injections} \\
+  &amp; \text{available measurements} \\
   \mathcal{E}_\text{impossible}
-  &amp; \text{potential edges that are impossible to exist} \\
+  &amp; \text{impossible potential edges} \\
   \hline
 \end{array}
 \]</span></p>
@@ -173,8 +173,8 @@
   \hline
   \textbf{symbol} &amp; \textbf{definition} &amp; \textbf{type} &amp; \textbf{set} \\
   \hline
-  x_{i j} &amp; \text{if edge from i to j is in the solution}
-  &amp; \{0, 1\} &amp; \mathcal{E} \\
+  x_{i j} &amp; \text{whether to choose edge from i to j}
+  &amp; \text{binary} &amp; \mathcal{E} \\
   \hline
 \end{array}
 \]</span></p>
@@ -184,7 +184,7 @@
   \hline
   \textbf{symbol} &amp; \textbf{definition} &amp; \textbf{set} \\
   \hline
-  d_{i, j} &amp; \text{Euclidean distance from i to j}
+  d_{i, j} &amp; \text{Euclidean distance}
   &amp; \mathcal{E} \\
   \hline
 \end{array}
@@ -214,11 +214,11 @@
   \textbf{term} &amp; \textbf{definition} &amp; \textbf{coefficient} \\
   \hline
   (1 - \alpha) \sum_{(i, j) \in \mathcal{E}} d_{i j} x_{i j}
-  &amp; \text{weight of candidate arborescence}
+  &amp; \text{total weight of candidate}
   &amp; 1 - \alpha \\
   \alpha \mathcal{H}
   \left(\{x_{i j} \forall (i, j) \in \mathcal{E} \}, \mathcal{C} \right)
-  &amp; \text{assessment of candidate arborescence}
+  &amp; \text{assessment of candidate}
   &amp; \alpha \\
   \hline
 \end{array}

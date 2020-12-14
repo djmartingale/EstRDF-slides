@@ -120,7 +120,7 @@
 <li class="chapter" data-level="5.5" data-path="assessment.html"><a href="assessment.html"><i class="fa fa-check"></i><b>5.5</b> Assessment of Candidate</a></li>
 <li class="chapter" data-level="5.6" data-path="error.html"><a href="error.html"><i class="fa fa-check"></i><b>5.6</b> Error from Linearisation</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="result-and-discussion.html"><a href="result-and-discussion.html"><i class="fa fa-check"></i><b>6</b> Result and Discussion</a>
+<li class="chapter" data-level="6" data-path="result-and-summary.html"><a href="result-and-summary.html"><i class="fa fa-check"></i><b>6</b> Result and Summary</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="result.html"><a href="result.html"><i class="fa fa-check"></i><b>6.1</b> Result for Case-70</a></li>
 <li class="chapter" data-level="6.2" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>6.2</b> Summary</a>
@@ -215,31 +215,6 @@ bus in distribution network and is referred to as root here.</p>
 <li>Cable.</li>
 <li>One slack bus -&gt; <strong>root</strong>.</li>
 </ul>
-<hr />
-<p>Impedance of cable is proportional to its length.</p>
-<p>Unit impedance matrix for case-70:
-<span class="math display">\[ \begin{aligned}
-  \boldsymbol{\bar{Z}}_{a b c}
-  =
-  \left[\begin{array}{lll}
-    0.000412+1.558e^{-4} j
-    &amp; 0.000206+7.791e^{-5} j
-    &amp; 0.000206+7.791e^{-5} j \\
-    0.000206+7.791e^{-5} j
-    &amp; 0.000412+1.558e^{-4} j
-    &amp; 0.000206+7.791e^{-5} j \\
-    0.000206+7.791e^{-5} j
-    &amp; 0.000206+7.791e^{-5} j
-    &amp; 0.000412+1.558e^{-4}j
-  \end{array}\right]
-  \nonumber
-\end{aligned} \]</span></p>
-<blockquote>
-<p>It is assumed that there is only one type of cable in case-70, and its
-impedance matrix for one-meter-long cable is known. Diagonal values are the
-same, and two times of off-diagonal values. So it is sufficient to store this
-matrix with one number for resistance and one number for reactance.</p>
-</blockquote>
 </div>
             </section>
 

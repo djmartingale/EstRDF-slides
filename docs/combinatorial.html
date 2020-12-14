@@ -120,7 +120,7 @@
 <li class="chapter" data-level="5.5" data-path="assessment.html"><a href="assessment.html"><i class="fa fa-check"></i><b>5.5</b> Assessment of Candidate</a></li>
 <li class="chapter" data-level="5.6" data-path="error.html"><a href="error.html"><i class="fa fa-check"></i><b>5.6</b> Error from Linearisation</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="result-and-discussion.html"><a href="result-and-discussion.html"><i class="fa fa-check"></i><b>6</b> Result and Discussion</a>
+<li class="chapter" data-level="6" data-path="result-and-summary.html"><a href="result-and-summary.html"><i class="fa fa-check"></i><b>6</b> Result and Summary</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="result.html"><a href="result.html"><i class="fa fa-check"></i><b>6.1</b> Result for Case-70</a></li>
 <li class="chapter" data-level="6.2" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>6.2</b> Summary</a>
@@ -173,16 +173,16 @@
 \]</span></p>
 <p>Such two situations can be visualised:</p>
 <p><img src="Pictures/figFeasibleRegion.png" width="70%" style="display: block; margin: auto;" /></p>
-<p>Combinatorial optimisation problem.</p>
-<p>A <strong>local search heuristic algorithm</strong> is proposed to to move from <span class="math inline">\(\bigotimes\)</span>
-to <span class="math inline">\(\bigoplus\)</span>. <span class="citation">(Michiels, Aarts, and Korst <a href="#ref-michiels2007theoretical" role="doc-biblioref">2007</a>)</span></p>
+<p>For this combinatorial optimisation problem, a <strong>local search heuristic
+algorithm</strong> is proposed to to move from <span class="math inline">\(\bigotimes\)</span> to <span class="math inline">\(\bigoplus\)</span>.
+<span class="citation">(Michiels, Aarts, and Korst <a href="#ref-michiels2007theoretical" role="doc-biblioref">2007</a>)</span></p>
 <blockquote>
 <p>All the algorithms in this category have two parts, an objective funciton to
 assess candidates and an neighbourhood function to generate candidates
 systematically. Here, pseudo linearised power flow will be used as the
-objective function and resuted mean squared error is to be minimised. It will
-be discussed later. An algorithm to rank spanning arborescences according to
-their total cable lengths is implemented.</p>
+objective function and resulted mean squared error is to be minimised. It
+will be discussed later. An algorithm to rank spanning arborescences
+according to their total cable lengths is implemented.</p>
 </blockquote>
 <table class="table table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
@@ -223,16 +223,14 @@ rank spanning arborescence
 </tr>
 </tbody>
 </table>
-<ul>
-<li>Starting point -&gt; minimum spanning arborescence</li>
-<li>Every candidate is reachable.</li>
-<li>Ground truth should be found before long.</li>
-<li>Not in parallel.</li>
-</ul>
 <blockquote>
 <p>Because power grids are to be built with less cost, the total cable length
 of ground truth should not be too long, so we can find it before long,</p>
 </blockquote>
+<ul>
+<li>Ground truth should be found before long.</li>
+<li>Not in parallel.</li>
+</ul>
 
 </div>
 <!-- </div> -->
