@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5.3 Bus Resistance Matrix | Topology Inference for Radial Distribution Feeder based on Power Flow</title>
+  <title>5.1 Bus Resistance Matrix | Topology Inference for Radial Distribution Feeder based on Power Flow</title>
   <meta name="description" content="Slides for defense of my master project." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5.3 Bus Resistance Matrix | Topology Inference for Radial Distribution Feeder based on Power Flow" />
+  <meta property="og:title" content="5.1 Bus Resistance Matrix | Topology Inference for Radial Distribution Feeder based on Power Flow" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="edxu96/EstRDF-slides" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5.3 Bus Resistance Matrix | Topology Inference for Radial Distribution Feeder based on Power Flow" />
+  <meta name="twitter:title" content="5.1 Bus Resistance Matrix | Topology Inference for Radial Distribution Feeder based on Power Flow" />
   
   <meta name="twitter:description" content="Slides for defense of my master project." />
   
@@ -31,7 +31,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="linearVoltage.html"/>
+<link rel="prev" href="linearised-power-flow.html"/>
 <link rel="next" href="brmInv.html"/>
 <script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -110,15 +110,13 @@
 </ul></li>
 <li class="chapter" data-level="5" data-path="linearised-power-flow.html"><a href="linearised-power-flow.html"><i class="fa fa-check"></i><b>5</b> Linearised Power Flow</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="linearVoltageDrop.html"><a href="linearVoltageDrop.html"><i class="fa fa-check"></i><b>5.1</b> Linearised Voltage Drop</a></li>
-<li class="chapter" data-level="5.2" data-path="linearVoltage.html"><a href="linearVoltage.html"><i class="fa fa-check"></i><b>5.2</b> Linearised Voltage</a></li>
-<li class="chapter" data-level="5.3" data-path="BRM.html"><a href="BRM.html"><i class="fa fa-check"></i><b>5.3</b> Bus Resistance Matrix</a>
+<li class="chapter" data-level="5.1" data-path="BRM.html"><a href="BRM.html"><i class="fa fa-check"></i><b>5.1</b> Bus Resistance Matrix</a>
 <ul>
 <li class="chapter" data-level="" data-path="BRM.html"><a href="BRM.html#LCA"><i class="fa fa-check"></i>Lowest Common Ancestor Problem</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="brmInv.html"><a href="brmInv.html"><i class="fa fa-check"></i><b>5.4</b> Pseudo Linearised Power Flow</a></li>
-<li class="chapter" data-level="5.5" data-path="assessment.html"><a href="assessment.html"><i class="fa fa-check"></i><b>5.5</b> Assessment of Candidate</a></li>
-<li class="chapter" data-level="5.6" data-path="error.html"><a href="error.html"><i class="fa fa-check"></i><b>5.6</b> Error from Linearisation</a></li>
+<li class="chapter" data-level="5.2" data-path="brmInv.html"><a href="brmInv.html"><i class="fa fa-check"></i><b>5.2</b> Pseudo Linearised Power Flow</a></li>
+<li class="chapter" data-level="5.3" data-path="assessment.html"><a href="assessment.html"><i class="fa fa-check"></i><b>5.3</b> Assessment of Candidate</a></li>
+<li class="chapter" data-level="5.4" data-path="error.html"><a href="error.html"><i class="fa fa-check"></i><b>5.4</b> Error from Linearisation</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="result-and-summary.html"><a href="result-and-summary.html"><i class="fa fa-check"></i><b>6</b> Result and Summary</a>
 <ul>
@@ -150,11 +148,11 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="BRM" class="section level2" number="5.3">
-<h2><span class="header-section-number">5.3</span> Bus Resistance Matrix</h2>
+<div id="BRM" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Bus Resistance Matrix</h2>
 <p>BRM of case-70:</p>
 <ul>
-<li>Bus 2 -&gt; root</li>
+<li>bus 2 -&gt; root</li>
 <li>69 PQ buses</li>
 <li>207 channels</li>
 <li>207 rows and 207 columns</li>
@@ -165,23 +163,20 @@
 </blockquote>
 <div id="LCA" class="section level3 unnumbered" number="">
 <h3>Lowest Common Ancestor Problem</h3>
-<p>Entry <span class="math inline">\((i, j)\)</span> -&gt; sum of edge resistances in their common path to root:
+<p>Entry <span class="math inline">\((i, j)\)</span> -&gt; sum of edge resistances in the path from root to their lowest
+common ancestor (LCA):
 <span class="math display">\[
 R_{i, j}=\sum_{k \in U_{i} \cap U_{j}} R_{\text {edge }, k}
 \]</span>
 where <span class="math inline">\(U_{i}\)</span> is set of edges on the path from root to bus <span class="math inline">\(i\)</span>.</p>
 <blockquote>
-<p>Entry <span class="math inline">\((i, j)\)</span> is the sum of edge resistances in the path from root to their
-lowest common ancestor (LCA) of bus <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>.</p>
+<p>BRM can be calcualted efficiently using LCA for all pairs of buses. and the
+pattern can be used in future work.</p>
 </blockquote>
 <ul>
 <li>Calcualted efficiently using LCA for all pairs.</li>
 <li>Useful pattern.</li>
 </ul>
-<blockquote>
-<p>BRM can be calcualted efficiently using LCA for all pairs of buses. and the
-pattern can be used in future work.</p>
-</blockquote>
 <p>For example,</p>
 <p><img src="Pictures/figCaseSix.png" width="70%" style="display: block; margin: auto;" /></p>
 <p><span class="math display">\[ \begin{array}{ll}
@@ -201,7 +196,7 @@ pattern can be used in future work.</p>
           </div>
         </div>
       </div>
-<a href="linearVoltage.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="linearised-power-flow.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="brmInv.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

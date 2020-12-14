@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5.6 Error from Linearisation | Topology Inference for Radial Distribution Feeder based on Power Flow</title>
+  <title>5.4 Error from Linearisation | Topology Inference for Radial Distribution Feeder based on Power Flow</title>
   <meta name="description" content="Slides for defense of my master project." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5.6 Error from Linearisation | Topology Inference for Radial Distribution Feeder based on Power Flow" />
+  <meta property="og:title" content="5.4 Error from Linearisation | Topology Inference for Radial Distribution Feeder based on Power Flow" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="edxu96/EstRDF-slides" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5.6 Error from Linearisation | Topology Inference for Radial Distribution Feeder based on Power Flow" />
+  <meta name="twitter:title" content="5.4 Error from Linearisation | Topology Inference for Radial Distribution Feeder based on Power Flow" />
   
   <meta name="twitter:description" content="Slides for defense of my master project." />
   
@@ -110,15 +110,13 @@
 </ul></li>
 <li class="chapter" data-level="5" data-path="linearised-power-flow.html"><a href="linearised-power-flow.html"><i class="fa fa-check"></i><b>5</b> Linearised Power Flow</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="linearVoltageDrop.html"><a href="linearVoltageDrop.html"><i class="fa fa-check"></i><b>5.1</b> Linearised Voltage Drop</a></li>
-<li class="chapter" data-level="5.2" data-path="linearVoltage.html"><a href="linearVoltage.html"><i class="fa fa-check"></i><b>5.2</b> Linearised Voltage</a></li>
-<li class="chapter" data-level="5.3" data-path="BRM.html"><a href="BRM.html"><i class="fa fa-check"></i><b>5.3</b> Bus Resistance Matrix</a>
+<li class="chapter" data-level="5.1" data-path="BRM.html"><a href="BRM.html"><i class="fa fa-check"></i><b>5.1</b> Bus Resistance Matrix</a>
 <ul>
 <li class="chapter" data-level="" data-path="BRM.html"><a href="BRM.html#LCA"><i class="fa fa-check"></i>Lowest Common Ancestor Problem</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="brmInv.html"><a href="brmInv.html"><i class="fa fa-check"></i><b>5.4</b> Pseudo Linearised Power Flow</a></li>
-<li class="chapter" data-level="5.5" data-path="assessment.html"><a href="assessment.html"><i class="fa fa-check"></i><b>5.5</b> Assessment of Candidate</a></li>
-<li class="chapter" data-level="5.6" data-path="error.html"><a href="error.html"><i class="fa fa-check"></i><b>5.6</b> Error from Linearisation</a></li>
+<li class="chapter" data-level="5.2" data-path="brmInv.html"><a href="brmInv.html"><i class="fa fa-check"></i><b>5.2</b> Pseudo Linearised Power Flow</a></li>
+<li class="chapter" data-level="5.3" data-path="assessment.html"><a href="assessment.html"><i class="fa fa-check"></i><b>5.3</b> Assessment of Candidate</a></li>
+<li class="chapter" data-level="5.4" data-path="error.html"><a href="error.html"><i class="fa fa-check"></i><b>5.4</b> Error from Linearisation</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="result-and-summary.html"><a href="result-and-summary.html"><i class="fa fa-check"></i><b>6</b> Result and Summary</a>
 <ul>
@@ -150,22 +148,28 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="error" class="section level2" number="5.6">
-<h2><span class="header-section-number">5.6</span> Error from Linearisation</h2>
+<div id="error" class="section level2" number="5.4">
+<h2><span class="header-section-number">5.4</span> Error from Linearisation</h2>
+<blockquote>
+<p>This is a box plot for assessment of ground truth when there are different
+numbers of active channels. Only 50 snapshots are used.</p>
+</blockquote>
 <p>Box plot:</p>
 <ul>
 <li>with respect to different number of observed active channels</li>
 <li>based on ground truth and 50 snapshots<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></li>
 </ul>
 <p><img src="Pictures/figErrorObsBRM.png" style="display: block; margin: auto;" /></p>
-<ul>
-<li>Error is aleady reduced to 1.7 ~ 2.2.</li>
-<li>Rated voltage magnitudes will increase the error dramatically.</li>
-</ul>
 <blockquote>
-<p>Rated voltage magnitudes will increase the error dramatically, so full
+<p>Error is not 0, which can also be seen in the result before.
+The effect of number of observed active channels is insignificant.
+Rated voltage magnitudes will increase the error dramatically, so full
 observability of voltage magnitudes are still required for now.</p>
 </blockquote>
+<ul>
+<li><del>Number of observed active channels.</del></li>
+<li>Rated voltage magnitudes will increase the error dramatically.</li>
+</ul>
 <p><a href="summary.html#summary">-&gt; summary</a></p>
 
 </div>

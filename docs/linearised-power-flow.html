@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="power-flow.html"/>
-<link rel="next" href="linearVoltageDrop.html"/>
+<link rel="next" href="BRM.html"/>
 <script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -110,15 +110,13 @@
 </ul></li>
 <li class="chapter" data-level="5" data-path="linearised-power-flow.html"><a href="linearised-power-flow.html"><i class="fa fa-check"></i><b>5</b> Linearised Power Flow</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="linearVoltageDrop.html"><a href="linearVoltageDrop.html"><i class="fa fa-check"></i><b>5.1</b> Linearised Voltage Drop</a></li>
-<li class="chapter" data-level="5.2" data-path="linearVoltage.html"><a href="linearVoltage.html"><i class="fa fa-check"></i><b>5.2</b> Linearised Voltage</a></li>
-<li class="chapter" data-level="5.3" data-path="BRM.html"><a href="BRM.html"><i class="fa fa-check"></i><b>5.3</b> Bus Resistance Matrix</a>
+<li class="chapter" data-level="5.1" data-path="BRM.html"><a href="BRM.html"><i class="fa fa-check"></i><b>5.1</b> Bus Resistance Matrix</a>
 <ul>
 <li class="chapter" data-level="" data-path="BRM.html"><a href="BRM.html#LCA"><i class="fa fa-check"></i>Lowest Common Ancestor Problem</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="brmInv.html"><a href="brmInv.html"><i class="fa fa-check"></i><b>5.4</b> Pseudo Linearised Power Flow</a></li>
-<li class="chapter" data-level="5.5" data-path="assessment.html"><a href="assessment.html"><i class="fa fa-check"></i><b>5.5</b> Assessment of Candidate</a></li>
-<li class="chapter" data-level="5.6" data-path="error.html"><a href="error.html"><i class="fa fa-check"></i><b>5.6</b> Error from Linearisation</a></li>
+<li class="chapter" data-level="5.2" data-path="brmInv.html"><a href="brmInv.html"><i class="fa fa-check"></i><b>5.2</b> Pseudo Linearised Power Flow</a></li>
+<li class="chapter" data-level="5.3" data-path="assessment.html"><a href="assessment.html"><i class="fa fa-check"></i><b>5.3</b> Assessment of Candidate</a></li>
+<li class="chapter" data-level="5.4" data-path="error.html"><a href="error.html"><i class="fa fa-check"></i><b>5.4</b> Error from Linearisation</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="result-and-summary.html"><a href="result-and-summary.html"><i class="fa fa-check"></i><b>6</b> Result and Summary</a>
 <ul>
@@ -152,14 +150,16 @@
             <section class="normal" id="section-">
 <div id="linearised-power-flow" class="section level1" number="5">
 <h1><span class="header-section-number">5</span> Linearised Power Flow</h1>
-<p>Two steps:</p>
+<!--
+Two steps:
+
+- linearise voltage drop [-> 5.1](#linearVoltageDrop)
+- ignore power loss [-> 5.2](#linearVoltage)
+
+Then:
+-->
 <ul>
-<li>linearise voltage drop <a href="linearVoltageDrop.html#linearVoltageDrop">-&gt; 5.1</a></li>
-<li>ignore power loss <a href="linearVoltage.html#linearVoltage">-&gt; 5.2</a></li>
-</ul>
-<p>Then:</p>
-<ul>
-<li>assessment of candidate <a href="assessment.html#assessment">-&gt; 5.5</a></li>
+<li>assessment of candidate <a href="assessment.html#assessment">-&gt; 5.3</a></li>
 </ul>
 <hr />
 <blockquote>
@@ -167,10 +167,81 @@
 summary.</p>
 </blockquote>
 <ul>
-<li>bus resistance matrix <a href="BRM.html#BRM">-&gt; 5.3</a></li>
-<li>inversed bus resistance matrix <a href="brmInv.html#brmInv">-&gt; 5.4</a></li>
-<li>error from linearisation <a href="error.html#error">-&gt; 5.6</a></li>
+<li>bus resistance matrix <a href="BRM.html#BRM">-&gt; 5.1</a></li>
+<li>inversed bus resistance matrix <a href="brmInv.html#brmInv">-&gt; 5.2</a></li>
+<li>error from linearisation <a href="error.html#error">-&gt; 5.4</a></li>
 </ul>
+<!--
+
+## Linearised Voltage Drop {#linearVoltageDrop}
+
+With power flow at source of edge $k$, $\bar{S}_{\text{source}, k}$, voltage
+drop:
+$$
+\begin{aligned}
+  \bar{V}_{\text{edge}, k}
+  &= \bar{I}_{\text{edge}, k} \bar{Z}_{\text{edge}, k} \\
+  &= \frac{
+    \underline{S}_{\text{source}, k} \bar{Z}_{\text{edge}, k}
+  }{\underline{V}_i} \\
+  &= \frac{
+    \left(P_{\text{source}, k} - j Q_{\text{source}, k} \right)
+    \left(R_{\text{edge}, k} + j X_{\text{edge}, k} \right)
+  }{\underline{V}_i} \\
+  &= \frac{
+    R_{\text{edge}, k} P_{\text{source}, k}
+    + X_{\text{edge}, k} Q_{\text{source}, k}
+  }{\underline{V}_i}
+  + j \frac{
+    X_{\text{edge}, k} P_{\text{source}, k}
+    - R_{\text{edge}, k} Q_{\text{source}, k}
+  }{\underline{V}_i}
+\end{aligned}
+$$
+
+Then: [@conti2006voltage]
+$$
+V_{\text{edge}, k} =
+  \frac{R_{\text{edge}, k}}{V_\text{rate}} P_{\text{source}, k}
+$$
+
+- Ignore imaginary part.
+- Use $V_\text{rate}$.
+
+## Linearised Voltage {#linearVoltage}
+
+Similar to AC power flow:
+
+Power injection to flow:
+$$
+\boldsymbol{P}_\text{source}
+  = - \boldsymbol{K}
+  \left(\boldsymbol{P} - \boldsymbol{P}_\text{loss} \right)
+$$
+
+Voltage drop to nodal voltage:
+$$
+\boldsymbol{V}
+  = \boldsymbol{V}_\text{zero}
+  - \frac{1}{V_\text{rate}} \boldsymbol{K}^{\top}
+  \boldsymbol{R}_\text{edge} \boldsymbol{P}_\text{source}
+$$
+
+---
+
+Voltage magnitudes can be calculated using BRM and real power injections:
+$$ \begin{aligned}
+  \boldsymbol{V} &= \boldsymbol{V}_\text{zero} + \frac{1}{V_\text{rate}}
+    \left(
+      \boldsymbol{K}^{\top} \boldsymbol{R}_\text{edge} \boldsymbol{K}
+    \right) \boldsymbol{P} \\
+  {} &= \boldsymbol{V}_\text{zero}
+      + \frac{1}{V_\text{rate}} \boldsymbol{R} \boldsymbol{P}
+\end{aligned} $$
+
+[-> assess candidate](#assessment)
+
+-->
 </div>
             </section>
 
@@ -178,7 +249,7 @@ summary.</p>
         </div>
       </div>
 <a href="power-flow.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="linearVoltageDrop.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="BRM.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

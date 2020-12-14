@@ -63,6 +63,9 @@
 \makeatletter
 \def\fps@figure{htbp}
 \makeatother
+\usepackage[normalem]{ulem}
+% Avoid problems with \sout in headers with hyperref
+\pdfstringdefDisableCommands{\renewcommand{\sout}{}}
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -118,12 +121,15 @@ this project.
 
 \begin{quote}
 How households are connected to distribution network is usually unknown.
+There are three kinds of available information that we can rely on to infer
+the topology in this project.
 \end{quote}
 
 Available information for topology inference:
 
 \begin{quote}
-There are three kinds of available information in this project.
+For example, where households are located and barriers between them.
+There is no literature mentioning how to handle geographical information.
 \end{quote}
 
 \begin{itemize}
@@ -137,26 +143,12 @@ There are three kinds of available information in this project.
 \end{itemize}
 
 \begin{quote}
-For example, where they are located and barriers between them.
-There is no literature mentioning how to handle geographical information.
-\end{quote}
-
-Association network inference:
-
-\begin{quote}
 In the literature, a technique called association network inference is
-usually used. Correlation between entities are derived based on some entity
-attributes. The face that number of edges in a mathematical tree is always 1
-less than number of entities makes the problem simpler.
+usually used. Correlations between buses are derived based on some entity
+attributes. Highly correlated buses are connected directly.
 \end{quote}
 
-\begin{itemize}
-\tightlist
-\item
-  Correlation between entities.
-\item
-  \(|\mathcal{E}| = |\mathcal{N}| - 1\)
-\end{itemize}
+Association network inference: correlation between buses
 
 \begin{quote}
 However, there are two reasons why such technique cannot be used here.
@@ -188,7 +180,8 @@ disucssed before. Note that ground truth is not known and we want to find it.
 Programs in the right column are used to make inference about the topology.
 \end{quote}
 
-\textbf{Ground truth} is not known, but used to simulate available measurement.
+\textbf{Ground truth} is to be found in topolgoy inference, but used to simulate
+available measurement first.
 
 Two batches of computer programs:
 
@@ -354,7 +347,7 @@ A case with 70 buses is primarily used here:
 \item
   70 buses
 \item
-  207 channels
+  62 households -\textgreater{} 62 active channels
 \end{itemize}
 
 \hypertarget{problem-formulation}{%
@@ -813,22 +806,10 @@ until \(\epsilon\) is smaller than a pre-defined threshold.
 \hypertarget{linearised-power-flow}{%
 \chapter{Linearised Power Flow}\label{linearised-power-flow}}
 
-Two steps:
-
 \begin{itemize}
 \tightlist
 \item
-  linearise voltage drop \protect\hyperlink{linearVoltageDrop}{-\textgreater{} 5.1}
-\item
-  ignore power loss \protect\hyperlink{linearVoltage}{-\textgreater{} 5.2}
-\end{itemize}
-
-Then:
-
-\begin{itemize}
-\tightlist
-\item
-  assessment of candidate \protect\hyperlink{assessment}{-\textgreater{} 5.5}
+  assessment of candidate \protect\hyperlink{assessment}{-\textgreater{} 5.3}
 \end{itemize}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -841,91 +822,11 @@ summary.
 \begin{itemize}
 \tightlist
 \item
-  bus resistance matrix \protect\hyperlink{BRM}{-\textgreater{} 5.3}
+  bus resistance matrix \protect\hyperlink{BRM}{-\textgreater{} 5.1}
 \item
-  inversed bus resistance matrix \protect\hyperlink{brmInv}{-\textgreater{} 5.4}
+  inversed bus resistance matrix \protect\hyperlink{brmInv}{-\textgreater{} 5.2}
 \item
-  error from linearisation \protect\hyperlink{error}{-\textgreater{} 5.6}
-\end{itemize}
-
-\hypertarget{linearVoltageDrop}{%
-\section{Linearised Voltage Drop}\label{linearVoltageDrop}}
-
-With power flow at source of edge \(k\), \(\bar{S}_{\text{source}, k}\), voltage
-drop:
-\[
-\begin{aligned}
-  \bar{V}_{\text{edge}, k}
-  &= \bar{I}_{\text{edge}, k} \bar{Z}_{\text{edge}, k} \\
-  &= \frac{
-    \underline{S}_{\text{source}, k} \bar{Z}_{\text{edge}, k}
-  }{\underline{V}_i} \\
-  &= \frac{
-    \left(P_{\text{source}, k} - j Q_{\text{source}, k} \right)
-    \left(R_{\text{edge}, k} + j X_{\text{edge}, k} \right)
-  }{\underline{V}_i} \\
-  &= \frac{
-    R_{\text{edge}, k} P_{\text{source}, k}
-    + X_{\text{edge}, k} Q_{\text{source}, k}
-  }{\underline{V}_i}
-  + j \frac{
-    X_{\text{edge}, k} P_{\text{source}, k}
-    - R_{\text{edge}, k} Q_{\text{source}, k}
-  }{\underline{V}_i}
-\end{aligned}
-\]
-
-Then: \citep{conti2006voltage}
-\[
-V_{\text{edge}, k} =
-  \frac{R_{\text{edge}, k}}{V_\text{rate}} P_{\text{source}, k}
-\]
-
-\begin{itemize}
-\tightlist
-\item
-  Ignore imaginary part.
-\item
-  Use \(V_\text{rate}\).
-\end{itemize}
-
-\hypertarget{linearVoltage}{%
-\section{Linearised Voltage}\label{linearVoltage}}
-
-Similar to AC power flow:
-
-Power injection to flow:
-\[
-\boldsymbol{P}_\text{source}
-  = - \boldsymbol{K}
-  \left(\boldsymbol{P} - \boldsymbol{P}_\text{loss} \right)
-\]
-
-Voltage drop to nodal voltage:
-\[
-\boldsymbol{V}
-  = \boldsymbol{V}_\text{zero}
-  - \frac{1}{V_\text{rate}} \boldsymbol{K}^{\top}
-  \boldsymbol{R}_\text{edge} \boldsymbol{P}_\text{source}
-\]
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-Voltage magnitudes can be calculated using BRM and real power injections:
-\[ \begin{aligned}
-  \boldsymbol{V} &= \boldsymbol{V}_\text{zero} + \frac{1}{V_\text{rate}}
-    \left(
-      \boldsymbol{K}^{\top} \boldsymbol{R}_\text{edge} \boldsymbol{K}
-    \right) \boldsymbol{P} \\
-  {} &= \boldsymbol{V}_\text{zero}
-      + \frac{1}{V_\text{rate}} \boldsymbol{R} \boldsymbol{P}
-\end{aligned} \]
-
-\begin{itemize}
-\tightlist
-\item
-  To \protect\hyperlink{assessment}{assess candidate} by calculating power injections using
-  voltage magnitudes.
+  error from linearisation \protect\hyperlink{error}{-\textgreater{} 5.4}
 \end{itemize}
 
 \hypertarget{BRM}{%
@@ -936,7 +837,7 @@ BRM of case-70:
 \begin{itemize}
 \tightlist
 \item
-  Bus 2 -\textgreater{} root
+  bus 2 -\textgreater{} root
 \item
   69 PQ buses
 \item
@@ -955,15 +856,16 @@ There is some pattern that can be explained by the analytical expression.
 \subsection*{Lowest Common Ancestor Problem}\label{LCA}}
 \addcontentsline{toc}{subsection}{Lowest Common Ancestor Problem}
 
-Entry \((i, j)\) -\textgreater{} sum of edge resistances in their common path to root:
+Entry \((i, j)\) -\textgreater{} sum of edge resistances in the path from root to their lowest
+common ancestor (LCA):
 \[
 R_{i, j}=\sum_{k \in U_{i} \cap U_{j}} R_{\text {edge }, k}
 \]
 where \(U_{i}\) is set of edges on the path from root to bus \(i\).
 
 \begin{quote}
-Entry \((i, j)\) is the sum of edge resistances in the path from root to their
-lowest common ancestor (LCA) of bus \(i\) and \(j\).
+BRM can be calcualted efficiently using LCA for all pairs of buses. and the
+pattern can be used in future work.
 \end{quote}
 
 \begin{itemize}
@@ -973,11 +875,6 @@ lowest common ancestor (LCA) of bus \(i\) and \(j\).
 \item
   Useful pattern.
 \end{itemize}
-
-\begin{quote}
-BRM can be calcualted efficiently using LCA for all pairs of buses. and the
-pattern can be used in future work.
-\end{quote}
 
 For example,
 
@@ -1034,6 +931,18 @@ Inversed BRM for the case looks like:
 \hypertarget{assessment}{%
 \section{Assessment of Candidate}\label{assessment}}
 
+Linearised power flow:
+\[ \begin{aligned}
+  \boldsymbol{V} &= \boldsymbol{V}_\text{zero} + \frac{1}{V_\text{rate}}
+    \left(
+      \boldsymbol{K}^{\top} \boldsymbol{R}_\text{edge} \boldsymbol{K}
+    \right) \boldsymbol{P} \\
+  {} &= \boldsymbol{V}_\text{zero}
+      + \frac{1}{V_\text{rate}} \boldsymbol{R} \boldsymbol{P}
+\end{aligned} \]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
 \begin{itemize}
 \tightlist
 \item
@@ -1046,11 +955,11 @@ Inversed BRM for the case looks like:
 \[ \begin{aligned}
   \mathcal{H}(\boldsymbol{R}) =
   \left[
-    (\boldsymbol{P}_\text{assess} - \boldsymbol{P})
+    (\boldsymbol{P}_\text{assess} - \boldsymbol{P}_\text{measure})
     \otimes \boldsymbol{O}
   \right]^\top
   \cdot \left[
-    (\boldsymbol{P}_\text{assess} - \boldsymbol{P})
+    (\boldsymbol{P}_\text{assess} - \boldsymbol{P}_\text{measure})
     \otimes \boldsymbol{O}
   \right]
   / |\mathcal{O}|
@@ -1073,6 +982,11 @@ active channels are ignored.
 \hypertarget{error}{%
 \section{Error from Linearisation}\label{error}}
 
+\begin{quote}
+This is a box plot for assessment of ground truth when there are different
+numbers of active channels. Only 50 snapshots are used.
+\end{quote}
+
 Box plot:
 
 \begin{itemize}
@@ -1086,18 +1000,20 @@ Box plot:
 
 \begin{center}\includegraphics{Pictures/figErrorObsBRM} \end{center}
 
-\begin{itemize}
-\tightlist
-\item
-  Error is aleady reduced to 1.7 \textasciitilde{} 2.2.
-\item
-  Rated voltage magnitudes will increase the error dramatically.
-\end{itemize}
-
 \begin{quote}
+Error is not 0, which can also be seen in the result before.
+The effect of number of observed active channels is insignificant.
 Rated voltage magnitudes will increase the error dramatically, so full
 observability of voltage magnitudes are still required for now.
 \end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  \sout{Number of observed active channels.}
+\item
+  Rated voltage magnitudes will increase the error dramatically.
+\end{itemize}
 
 \protect\hyperlink{summary}{-\textgreater{} summary}
 
@@ -1118,9 +1034,8 @@ observability of voltage magnitudes are still required for now.
 \includegraphics{Pictures/case70true.png}
 
 \begin{quote}
-Here we only show how result might look like. Because there are only 75 new
-possible potential edges here. There is an issue that will be discussed
-later.
+Here we only show how result might look like. Because there is an issue that
+will be discussed later. There are only 75 new possible potential edges here.
 \end{quote}
 
 \begin{itemize}
@@ -1131,6 +1046,8 @@ later.
   144 edges in total
 \item
   288 SAs rooted at ``b2''
+\item
+  full observability
 \end{itemize}
 
 \begin{center}\includegraphics[width=0.55\linewidth]{Pictures/case70} \end{center}
@@ -1207,7 +1124,7 @@ and directions.
 \addcontentsline{toc}{subsection}{Issues}
 
 \begin{quote}
-There are three issues that I want to discuss in detail here. Firstly, there
+There are three issues that I want to discuss in detail. Firstly, there
 are too many SAs, so we have to reduce the number, for example, by removing
 overlapping edges.
 \end{quote}

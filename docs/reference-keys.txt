@@ -13,8 +13,6 @@ matrices
 BIM
 power-flow
 linearised-power-flow
-linearVoltageDrop
-linearVoltage
 BRM
 brmInv
 assessment

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5.5 Assessment of Candidate | Topology Inference for Radial Distribution Feeder based on Power Flow</title>
+  <title>5.3 Assessment of Candidate | Topology Inference for Radial Distribution Feeder based on Power Flow</title>
   <meta name="description" content="Slides for defense of my master project." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5.5 Assessment of Candidate | Topology Inference for Radial Distribution Feeder based on Power Flow" />
+  <meta property="og:title" content="5.3 Assessment of Candidate | Topology Inference for Radial Distribution Feeder based on Power Flow" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="edxu96/EstRDF-slides" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5.5 Assessment of Candidate | Topology Inference for Radial Distribution Feeder based on Power Flow" />
+  <meta name="twitter:title" content="5.3 Assessment of Candidate | Topology Inference for Radial Distribution Feeder based on Power Flow" />
   
   <meta name="twitter:description" content="Slides for defense of my master project." />
   
@@ -110,15 +110,13 @@
 </ul></li>
 <li class="chapter" data-level="5" data-path="linearised-power-flow.html"><a href="linearised-power-flow.html"><i class="fa fa-check"></i><b>5</b> Linearised Power Flow</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="linearVoltageDrop.html"><a href="linearVoltageDrop.html"><i class="fa fa-check"></i><b>5.1</b> Linearised Voltage Drop</a></li>
-<li class="chapter" data-level="5.2" data-path="linearVoltage.html"><a href="linearVoltage.html"><i class="fa fa-check"></i><b>5.2</b> Linearised Voltage</a></li>
-<li class="chapter" data-level="5.3" data-path="BRM.html"><a href="BRM.html"><i class="fa fa-check"></i><b>5.3</b> Bus Resistance Matrix</a>
+<li class="chapter" data-level="5.1" data-path="BRM.html"><a href="BRM.html"><i class="fa fa-check"></i><b>5.1</b> Bus Resistance Matrix</a>
 <ul>
 <li class="chapter" data-level="" data-path="BRM.html"><a href="BRM.html#LCA"><i class="fa fa-check"></i>Lowest Common Ancestor Problem</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="brmInv.html"><a href="brmInv.html"><i class="fa fa-check"></i><b>5.4</b> Pseudo Linearised Power Flow</a></li>
-<li class="chapter" data-level="5.5" data-path="assessment.html"><a href="assessment.html"><i class="fa fa-check"></i><b>5.5</b> Assessment of Candidate</a></li>
-<li class="chapter" data-level="5.6" data-path="error.html"><a href="error.html"><i class="fa fa-check"></i><b>5.6</b> Error from Linearisation</a></li>
+<li class="chapter" data-level="5.2" data-path="brmInv.html"><a href="brmInv.html"><i class="fa fa-check"></i><b>5.2</b> Pseudo Linearised Power Flow</a></li>
+<li class="chapter" data-level="5.3" data-path="assessment.html"><a href="assessment.html"><i class="fa fa-check"></i><b>5.3</b> Assessment of Candidate</a></li>
+<li class="chapter" data-level="5.4" data-path="error.html"><a href="error.html"><i class="fa fa-check"></i><b>5.4</b> Error from Linearisation</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="result-and-summary.html"><a href="result-and-summary.html"><i class="fa fa-check"></i><b>6</b> Result and Summary</a>
 <ul>
@@ -150,8 +148,18 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="assessment" class="section level2" number="5.5">
-<h2><span class="header-section-number">5.5</span> Assessment of Candidate</h2>
+<div id="assessment" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Assessment of Candidate</h2>
+<p>Linearised power flow:
+<span class="math display">\[ \begin{aligned}
+  \boldsymbol{V} &amp;= \boldsymbol{V}_\text{zero} + \frac{1}{V_\text{rate}}
+    \left(
+      \boldsymbol{K}^{\top} \boldsymbol{R}_\text{edge} \boldsymbol{K}
+    \right) \boldsymbol{P} \\
+  {} &amp;= \boldsymbol{V}_\text{zero}
+      + \frac{1}{V_\text{rate}} \boldsymbol{R} \boldsymbol{P}
+\end{aligned} \]</span></p>
+<hr />
 <ul>
 <li>Calculate <span class="math inline">\(\boldsymbol{P}_\text{assess}\)</span> using voltage magnitudes.</li>
 <li>Compare <span class="math inline">\(\boldsymbol{P}_\text{assess}\)</span> with available power measurements.</li>
@@ -160,11 +168,11 @@
 <span class="math display">\[ \begin{aligned}
   \mathcal{H}(\boldsymbol{R}) =
   \left[
-    (\boldsymbol{P}_\text{assess} - \boldsymbol{P})
+    (\boldsymbol{P}_\text{assess} - \boldsymbol{P}_\text{measure})
     \otimes \boldsymbol{O}
   \right]^\top
   \cdot \left[
-    (\boldsymbol{P}_\text{assess} - \boldsymbol{P})
+    (\boldsymbol{P}_\text{assess} - \boldsymbol{P}_\text{measure})
     \otimes \boldsymbol{O}
   \right]
   / |\mathcal{O}|
