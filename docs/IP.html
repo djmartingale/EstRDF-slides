@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.1 Directed Graph | Topology Inference for Radial Distribution Feeder based on Power Flow</title>
+  <title>3.3 Integer Programming | Topology Inference for Radial Distribution Feeder based on Power Flow</title>
   <meta name="description" content="Slides for defense of my master project." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.1 Directed Graph | Topology Inference for Radial Distribution Feeder based on Power Flow" />
+  <meta property="og:title" content="3.3 Integer Programming | Topology Inference for Radial Distribution Feeder based on Power Flow" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="edxu96/EstRDF-slides" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.1 Directed Graph | Topology Inference for Radial Distribution Feeder based on Power Flow" />
+  <meta name="twitter:title" content="3.3 Integer Programming | Topology Inference for Radial Distribution Feeder based on Power Flow" />
   
   <meta name="twitter:description" content="Slides for defense of my master project." />
   
@@ -24,15 +24,15 @@
 <meta name="author" content="Jie Xu (s181238)" />
 
 
-<meta name="date" content="2020-12-13" />
+<meta name="date" content="2020-12-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="problem-formulation.html"/>
-<link rel="next" href="overlapping.html"/>
+<link rel="prev" href="overlapping.html"/>
+<link rel="next" href="combinatorial.html"/>
 <script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -85,44 +85,44 @@
 <li class="chapter" data-level="2" data-path="radial-distribution-feeder.html"><a href="radial-distribution-feeder.html"><i class="fa fa-check"></i><b>2</b> Radial Distribution Feeder</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="bus-edge.html"><a href="bus-edge.html"><i class="fa fa-check"></i><b>2.1</b> Bus and Edge</a></li>
-<li class="chapter" data-level="2.2" data-path="two-special-concepts.html"><a href="two-special-concepts.html"><i class="fa fa-check"></i><b>2.2</b> Two Special Concepts</a>
+<li class="chapter" data-level="2.2" data-path="concepts.html"><a href="concepts.html"><i class="fa fa-check"></i><b>2.2</b> Two Special Concepts</a>
 <ul>
-<li class="chapter" data-level="" data-path="two-special-concepts.html"><a href="two-special-concepts.html#channel"><i class="fa fa-check"></i>Channel</a></li>
-<li class="chapter" data-level="" data-path="two-special-concepts.html"><a href="two-special-concepts.html#snapshot"><i class="fa fa-check"></i>Snapshot</a></li>
+<li class="chapter" data-level="" data-path="concepts.html"><a href="concepts.html#channel"><i class="fa fa-check"></i>Channel</a></li>
+<li class="chapter" data-level="" data-path="concepts.html"><a href="concepts.html#snapshot"><i class="fa fa-check"></i>Snapshot</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="case.html"><a href="case.html"><i class="fa fa-check"></i><b>2.3</b> Case with 70 Buses</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="problem-formulation.html"><a href="problem-formulation.html"><i class="fa fa-check"></i><b>3</b> Problem Formulation</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="directed-graph.html"><a href="directed-graph.html"><i class="fa fa-check"></i><b>3.1</b> Directed Graph</a></li>
+<li class="chapter" data-level="3.1" data-path="directed.html"><a href="directed.html"><i class="fa fa-check"></i><b>3.1</b> Directed Graph</a></li>
 <li class="chapter" data-level="3.2" data-path="overlapping.html"><a href="overlapping.html"><i class="fa fa-check"></i><b>3.2</b> Remove Overlapping Edge</a></li>
-<li class="chapter" data-level="3.3" data-path="ip-formulation.html"><a href="ip-formulation.html"><i class="fa fa-check"></i><b>3.3</b> IP Formulation</a></li>
-<li class="chapter" data-level="3.4" data-path="combinatorial.html"><a href="combinatorial.html"><i class="fa fa-check"></i><b>3.4</b> Combinatorial Optimisation</a></li>
+<li class="chapter" data-level="3.3" data-path="IP.html"><a href="IP.html"><i class="fa fa-check"></i><b>3.3</b> Integer Programming</a></li>
+<li class="chapter" data-level="3.4" data-path="combinatorial.html"><a href="combinatorial.html"><i class="fa fa-check"></i><b>3.4</b> Local Search</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="ac-power-flow.html"><a href="ac-power-flow.html"><i class="fa fa-check"></i><b>4</b> AC Power Flow</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="two-matrices.html"><a href="two-matrices.html"><i class="fa fa-check"></i><b>4.1</b> Two Matrices</a></li>
+<li class="chapter" data-level="4.1" data-path="matrices.html"><a href="matrices.html"><i class="fa fa-check"></i><b>4.1</b> Two Matrices</a></li>
 <li class="chapter" data-level="4.2" data-path="BIM.html"><a href="BIM.html"><i class="fa fa-check"></i><b>4.2</b> Bus Impedance Matrix</a></li>
-<li class="chapter" data-level="4.3" data-path="direct-impedance-method.html"><a href="direct-impedance-method.html"><i class="fa fa-check"></i><b>4.3</b> Direct Impedance Method</a>
+<li class="chapter" data-level="4.3" data-path="power-flow.html"><a href="power-flow.html"><i class="fa fa-check"></i><b>4.3</b> Direct Impedance Method</a>
 <ul>
-<li class="chapter" data-level="" data-path="direct-impedance-method.html"><a href="direct-impedance-method.html#fixed-point-method"><i class="fa fa-check"></i>Fixed Point Method</a></li>
+<li class="chapter" data-level="" data-path="power-flow.html"><a href="power-flow.html#fixed-point-method"><i class="fa fa-check"></i>Fixed Point Method</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="linearised-power-flow.html"><a href="linearised-power-flow.html"><i class="fa fa-check"></i><b>5</b> Linearised Power Flow</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="linearVoltageDrop.html"><a href="linearVoltageDrop.html"><i class="fa fa-check"></i><b>5.1</b> Linearised Voltage Drop</a></li>
-<li class="chapter" data-level="5.2" data-path="linearised-voltage.html"><a href="linearised-voltage.html"><i class="fa fa-check"></i><b>5.2</b> Linearised Voltage</a></li>
+<li class="chapter" data-level="5.2" data-path="linearVoltage.html"><a href="linearVoltage.html"><i class="fa fa-check"></i><b>5.2</b> Linearised Voltage</a></li>
 <li class="chapter" data-level="5.3" data-path="BRM.html"><a href="BRM.html"><i class="fa fa-check"></i><b>5.3</b> Bus Resistance Matrix</a>
 <ul>
 <li class="chapter" data-level="" data-path="BRM.html"><a href="BRM.html#LCA"><i class="fa fa-check"></i>Lowest Common Ancestor Problem</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="pseudo-linearised-power-flow.html"><a href="pseudo-linearised-power-flow.html"><i class="fa fa-check"></i><b>5.4</b> Pseudo Linearised Power Flow</a></li>
+<li class="chapter" data-level="5.4" data-path="brmInv.html"><a href="brmInv.html"><i class="fa fa-check"></i><b>5.4</b> Pseudo Linearised Power Flow</a></li>
 <li class="chapter" data-level="5.5" data-path="assessment.html"><a href="assessment.html"><i class="fa fa-check"></i><b>5.5</b> Assessment of Candidate</a></li>
 <li class="chapter" data-level="5.6" data-path="error.html"><a href="error.html"><i class="fa fa-check"></i><b>5.6</b> Error from Linearisation</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="result-and-discussion.html"><a href="result-and-discussion.html"><i class="fa fa-check"></i><b>6</b> Result and Discussion</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="result-for-case-70.html"><a href="result-for-case-70.html"><i class="fa fa-check"></i><b>6.1</b> Result for Case-70</a></li>
+<li class="chapter" data-level="6.1" data-path="result.html"><a href="result.html"><i class="fa fa-check"></i><b>6.1</b> Result for Case-70</a></li>
 <li class="chapter" data-level="6.2" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>6.2</b> Summary</a>
 <ul>
 <li class="chapter" data-level="" data-path="summary.html"><a href="summary.html#issues"><i class="fa fa-check"></i>Issues</a></li>
@@ -150,45 +150,98 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="directed-graph" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> Directed Graph</h2>
-<p><strong>weighted directed graph</strong>
-<span class="math inline">\(G = (\mathcal{N}, \mathcal{E}, \sigma, \tau, \omega)\)</span></p>
+<div id="IP" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Integer Programming</h2>
+<p>Sets:</p>
+<p><span class="math display">\[
+\begin{array}{ll}
+  \hline
+  \textbf{symbol} &amp; \textbf{definition} \\
+  \hline
+  \mathcal{E}
+  &amp; \text{all the potential edges (edges in the complete graph)} \\
+  \mathcal{C}
+  &amp; \text{available measurements of voltages and power injections} \\
+  \mathcal{E}_\text{impossible}
+  &amp; \text{potential edges that are impossible to exist} \\
+  \hline
+\end{array}
+\]</span></p>
+<p>Variables:</p>
+<p><span class="math display">\[
+\begin{array}{llll}
+  \hline
+  \textbf{symbol} &amp; \textbf{definition} &amp; \textbf{type} &amp; \textbf{set} \\
+  \hline
+  x_{i j} &amp; \text{if edge from i to j is in the solution}
+  &amp; \{0, 1\} &amp; \mathcal{E} \\
+  \hline
+\end{array}
+\]</span></p>
+<p>Constants:</p>
+<p><span class="math display">\[
+\begin{array}{lll}
+  \hline
+  \textbf{symbol} &amp; \textbf{definition} &amp; \textbf{set} \\
+  \hline
+  d_{i, j} &amp; \text{Euclidean distance from i to j}
+  &amp; \mathcal{E} \\
+  \hline
+\end{array}
+\]</span></p>
+<hr />
+<p><span class="math display">\[
+\begin{aligned}
+  \min_{x_{i j} \forall (i, j) \in \mathcal{E}} \quad
+    &amp; (1 - \alpha) \sum_{(i, j) \in \mathcal{E}} d_{i j} x_{i j}
+    + \alpha \mathcal{H}
+    \left(\{x_{i j} \forall (i, j) \in \mathcal{E} \}, \mathcal{C} \right) \\
+  \text{s.t.} \quad &amp; \sum_{(i, j) \in \delta^{-}(j)} x_{i j} = 1
+    \quad \forall j \in V^{\prime}
+    \quad \text{(a directed forest)} \\
+  &amp; \sum_{(i, j) \in \delta^{-}(S)} x_{i j} \geq 1
+    \quad \forall S \subseteq V^{\prime},|S| \geq 2
+    \quad \text{(a connected graph)} \\
+  &amp; x_{i j} = 0
+    \quad \forall (i, j) \in \mathcal{E}_\text{impossible}
+    \quad \text{(remove impossible potential edges)}
+\end{aligned}
+\]</span></p>
+<p>Two terms in the objective function:</p>
+<p><span class="math display">\[
+\begin{array}{lll}
+  \hline
+  \textbf{term} &amp; \textbf{definition} &amp; \textbf{coefficient} \\
+  \hline
+  (1 - \alpha) \sum_{(i, j) \in \mathcal{E}} d_{i j} x_{i j}
+  &amp; \text{weight of candidate arborescence}
+  &amp; 1 - \alpha \\
+  \alpha \mathcal{H}
+  \left(\{x_{i j} \forall (i, j) \in \mathcal{E} \}, \mathcal{C} \right)
+  &amp; \text{assessment of candidate arborescence}
+  &amp; \alpha \\
+  \hline
+\end{array}
+\]</span></p>
+<p>Three sets of constraints:</p>
 <ul>
-<li>set of nodes: <span class="math inline">\(\mathcal{N}\)</span></li>
-<li>set of edges: <span class="math inline">\(\mathcal{E}\)</span></li>
-<li>incidence functions: source <span class="math inline">\(\sigma\)</span>, target <span class="math inline">\(\tau\)</span></li>
-<li>(edge) weighting function, <span class="math inline">\(\omega: E \rightarrow \mathbb{R}\)</span>.</li>
+<li>First two sets ensure arborescence. <span class="citation">(Fischetti and Vigo <a href="#ref-fischetti1997branch" role="doc-biblioref">1997</a>)</span></li>
+<li>Last set removes impossible potential edges.</li>
 </ul>
-<p><strong>complete graph for a set of nodes</strong></p>
-<ul>
-<li>all edges are <strong>potential edges</strong></li>
-<li>some are impossible to exist</li>
-<li>possible to derive their lengths</li>
-<li>2-D Euclidean distance as weight</li>
-<li><em>association network inference cannot be used</em></li>
-</ul>
-<p><strong>spanning arborescence (SA)</strong></p>
-<ul>
-<li>subgraph of a directed graph</li>
-<li>root</li>
-<li>include every bus</li>
-</ul>
-<p><strong>feasible region</strong></p>
-<ul>
-<li>All the SAs.</li>
-<li>Number of SA is finite, making it a <a href="combinatorial.html#combinatorial">combinatorial
-optimisation problem</a>.</li>
-<li>Count number of SA.</li>
-</ul>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-fischetti1997branch">
+<p>Fischetti, Matteo, and Daniele Vigo. 1997. “A Branch-and-Cut Algorithm for the Resource-Constrained Minimum-Weight Arborescence Problem.” <em>Networks: An International Journal</em> 29 (1): 55–67.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="problem-formulation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="overlapping.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="overlapping.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="combinatorial.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

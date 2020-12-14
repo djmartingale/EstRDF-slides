@@ -94,7 +94,7 @@
 
 \title{Topology Inference for Radial Distribution Feeder based on Power Flow}
 \author{Jie Xu (s181238)}
-\date{2020-12-13}
+\date{2020-12-14}
 
 \begin{document}
 \maketitle
@@ -116,7 +116,15 @@ this project.
 \subsection*{Problem Setting}\label{problem-setting}}
 \addcontentsline{toc}{subsection}{Problem Setting}
 
-Available information and measurement:
+\begin{quote}
+How households are connected to distribution network is usually unknown.
+\end{quote}
+
+Available information for topology inference:
+
+\begin{quote}
+There are three kinds of available information in this project.
+\end{quote}
 
 \begin{itemize}
 \tightlist
@@ -128,21 +136,57 @@ Available information and measurement:
   some real power injection profiles
 \end{itemize}
 
+\begin{quote}
+For example, where they are located and barriers between them.
+There is no literature mentioning how to handle geographical information.
+\end{quote}
+
 Association network inference:
+
+\begin{quote}
+In the literature, a technique called association network inference is
+usually used. Correlation between entities are derived based on some entity
+attributes. The face that number of edges in a mathematical tree is always 1
+less than number of entities makes the problem simpler.
+\end{quote}
 
 \begin{itemize}
 \tightlist
 \item
-  Correlation between buses.
+  Correlation between entities.
 \item
   \(|\mathcal{E}| = |\mathcal{N}| - 1\)
 \end{itemize}
+
+\begin{quote}
+However, there are two reasons why such technique cannot be used here.
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  Spurious correlation resulted from correlated profiles.
+\item
+  Missing entity attribute.
+\end{itemize}
+
+\begin{quote}
+The second reason will be discussed in detail later.
+\end{quote}
 
 \hypertarget{flowchart}{%
 \subsection*{Flowchart}\label{flowchart}}
 \addcontentsline{toc}{subsection}{Flowchart}
 
 \includegraphics{Pictures/figFlowchart3.png}
+
+\begin{quote}
+There are three columns. In the left column, ground truth, the true topology,
+is known, and used to simulate available measurement using power flow
+program. Three boxes in the middle represents three kinds of information
+disucssed before. Note that ground truth is not known and we want to find it.
+Programs in the right column are used to make inference about the topology.
+\end{quote}
 
 \textbf{Ground truth} is not known, but used to simulate available measurement.
 
@@ -156,23 +200,33 @@ Two batches of computer programs:
   three algorithms to handle directed graphs
 \end{itemize}
 
+\begin{quote}
+The second batch will not be discussed in detail.
+\end{quote}
+
 \hypertarget{radial-distribution-feeder}{%
 \chapter{Radial Distribution Feeder}\label{radial-distribution-feeder}}
+
+\begin{quote}
+Essential concepts are discussed in following three parts.
+\end{quote}
 
 \begin{itemize}
 \tightlist
 \item
-  bus and edge
+  bus and edge, \protect\hyperlink{bus-edge}{-\textgreater{} 2.1}
 \item
-  two special concepts for power flow
+  two special concepts for power flow, \protect\hyperlink{concepts}{-\textgreater{} 2.2}
 \item
-  case with 70 buses
+  case with 70 buses, \protect\hyperlink{case}{-\textgreater{} 2.3}
 \end{itemize}
 
 \hypertarget{bus-edge}{%
 \section{Bus and Edge}\label{bus-edge}}
 
-There are roughly two types of electrical devices in power grids.
+\begin{quote}
+Power grids can be roughly described here by following three concepts.
+\end{quote}
 
 \begin{table}[H]
 \centering
@@ -188,6 +242,12 @@ bus & where two edges joint or end of an edge & slack bus, PQ bus, PV bus\\
 \hline
 \end{tabular}
 \end{table}
+
+\begin{quote}
+Only one type of edge, cable, is considered. The method applies when there
+are transformers, capacitors, and other devices. Usually, there is one slack
+bus in distribution network and is referred to as root here.
+\end{quote}
 
 \begin{itemize}
 \tightlist
@@ -221,10 +281,22 @@ Unit impedance matrix for case-70:
   \nonumber
 \end{aligned} \]
 
-\hypertarget{two-special-concepts}{%
-\section{Two Special Concepts}\label{two-special-concepts}}
+\begin{quote}
+It is assumed that there is only one type of cable in case-70, and its
+impedance matrix for one-meter-long cable is known. Diagonal values are the
+same, and two times of off-diagonal values. So it is sufficient to store this
+matrix with one number for resistance and one number for reactance.
+\end{quote}
+
+\hypertarget{concepts}{%
+\section{Two Special Concepts}\label{concepts}}
 
 Essential for power flow calculation.
+
+\begin{quote}
+Such two concepts cannot be found in the literature, but are essential for
+power flow when taking multiple phases into account.
+\end{quote}
 
 \hypertarget{channel}{%
 \subsection*{Channel}\label{channel}}
@@ -241,27 +313,29 @@ Essential for power flow calculation.
   \textbf{observed active channel}: such non-zero injections are known
 \end{itemize}
 
-It is assumed that all active channels are known.
+It is assumed that all inactive channels are observed.
+
+\begin{quote}
+That is, it is known that there is no power injection at those channels.
+\end{quote}
 
 \hypertarget{snapshot}{%
 \subsection*{Snapshot}\label{snapshot}}
 \addcontentsline{toc}{subsection}{Snapshot}
 
-\textbf{Snapshot} is a concept to include power injections and voltages at one time
-index
+\textbf{Snapshot}: include power injections and voltages at one time index
 
 \begin{itemize}
 \tightlist
 \item
-  input: real power injections
-\item
-  output: voltages, current flow, power flow
-\item
   Duration is 1 s in this project.
 \end{itemize}
 
-\textbf{Zero‐load snapshot} is the snapshot where power injections at all the
-channels are zero and voltages equalt o rated voltages in corresponding phases.
+\textbf{Zero‐load snapshot} : when power injections at all the channels are zero
+
+\begin{quote}
+Such two symbols will be used later.
+\end{quote}
 
 \begin{itemize}
 \tightlist
@@ -274,14 +348,20 @@ channels are zero and voltages equalt o rated voltages in corresponding phases.
 \hypertarget{case}{%
 \section{Case with 70 Buses}\label{case}}
 
+\begin{quote}
+To make the project manageable:
+\end{quote}
+
 Assumptions about feeders:
 
 \begin{itemize}
 \tightlist
 \item
-  one path to any bus
+  one path to any bus (tree)
 \item
-  step-down transformer is not considered
+  one step-down transformer
+\item
+  rated voltage, 230 V
 \item
   three-phase four-wire cable
 \item
@@ -309,8 +389,34 @@ A case with 70 buses is primarily used here:
 \hypertarget{problem-formulation}{%
 \chapter{Problem Formulation}\label{problem-formulation}}
 
-\hypertarget{directed-graph}{%
-\section{Directed Graph}\label{directed-graph}}
+\begin{itemize}
+\tightlist
+\item
+  information in a directed graph \href{directed}{-\textgreater{} 3.1}
+\item
+  integer programming formulation \protect\hyperlink{IP}{-\textgreater{} 3.3}
+\item
+  local search heuristic algorithm \protect\hyperlink{combinatorial}{-\textgreater{} 3.4}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
+There is an issue here that I will discuss after a summary in the end.
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  remove overlapping edge \protect\hyperlink{overlapping}{-\textgreater{} 3.2}
+\end{itemize}
+
+\hypertarget{directed}{%
+\section{Directed Graph}\label{directed}}
+
+\begin{quote}
+All the information can be stored in a weighted directed graph.
+\end{quote}
 
 \textbf{weighted directed graph}
 \(G = (\mathcal{N}, \mathcal{E}, \sigma, \tau, \omega)\)
@@ -324,7 +430,7 @@ A case with 70 buses is primarily used here:
 \item
   incidence functions: source \(\sigma\), target \(\tau\)
 \item
-  (edge) weighting function, \(\omega: E \rightarrow \mathbb{R}\).
+  (edge) weighting function, \(\omega: \mathcal{E} \rightarrow \mathbb{R}\).
 \end{itemize}
 
 \textbf{complete graph for a set of nodes}
@@ -402,8 +508,8 @@ However:
 
 \protect\hyperlink{summary}{-\textgreater{} summary}
 
-\hypertarget{ip-formulation}{%
-\section{IP Formulation}\label{ip-formulation}}
+\hypertarget{IP}{%
+\section{Integer Programming}\label{IP}}
 
 Sets:
 
@@ -448,7 +554,7 @@ Constants:
 \end{array}
 \]
 
-\textbf{Integer programming formulation}:
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \[
 \begin{aligned}
@@ -491,13 +597,13 @@ Three sets of constraints:
 \begin{itemize}
 \tightlist
 \item
-  First two sets ensure arborescence.
+  First two sets ensure arborescence. \citep{fischetti1997branch}
 \item
   Last set removes impossible potential edges.
 \end{itemize}
 
 \hypertarget{combinatorial}{%
-\section{Combinatorial Optimisation}\label{combinatorial}}
+\section{Local Search}\label{combinatorial}}
 
 At least two possible values for \(\alpha\):
 
@@ -524,8 +630,19 @@ Such two situations can be visualised:
 
 \begin{center}\includegraphics[width=0.7\linewidth]{Pictures/figFeasibleRegion} \end{center}
 
+Combinatorial optimisation problem.
+
 A \textbf{local search heuristic algorithm} is proposed to to move from \(\bigotimes\)
-to \(\bigoplus\):
+to \(\bigoplus\). \citep{michiels2007theoretical}
+
+\begin{quote}
+All the algorithms in this category have two parts, an objective funciton to
+assess candidates and an neighbourhood function to generate candidates
+systematically. Here, pseudo linearised power flow will be used as the
+objective function and resuted mean squared error is to be minimised. It will
+be discussed later. An algorithm to rank spanning arborescences according to
+their total cable lengths is implemented.
+\end{quote}
 
 \begin{table}[H]
 \centering
@@ -543,31 +660,39 @@ neighbourhood & generate candidate & rank spanning arborescence\\
 \begin{itemize}
 \tightlist
 \item
-  The starting point is found by minimum spanning arborescence
+  Starting point -\textgreater{} minimum spanning arborescence
 \item
-  Every candidate is reachable from the starting point.
+  Every candidate is reachable.
 \item
   Ground truth should be found before long.
 \item
   Not in parallel.
 \end{itemize}
 
+\begin{quote}
+Because power grids are to be built with less cost, the total cable length
+of ground truth should not be too long, so we can find it before long,
+\end{quote}
+
 \hypertarget{ac-power-flow}{%
 \chapter{AC Power Flow}\label{ac-power-flow}}
-
-Discussion is based on one-line model. Can be generalised for multi-phase
-model.
 
 \begin{itemize}
 \tightlist
 \item
-  Model RDF with one bus impedance matrix.
+  two essential matrices \protect\hyperlink{matrices}{-\textgreater{} 4.1}
 \item
-  Calculate power flow using fixed point method.
+  bus impedance matrix \protect\hyperlink{BIM}{-\textgreater{} 4.2}
+\item
+  direct impedance method for power flow calculation \protect\hyperlink{power-flow}{-\textgreater{} 4.2}
 \end{itemize}
 
-\hypertarget{two-matrices}{%
-\section{Two Matrices}\label{two-matrices}}
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Can be generalised for multi-phase model. \citep{hsieh2017matrix}
+
+\hypertarget{matrices}{%
+\section{Two Matrices}\label{matrices}}
 
 Current injection to flow:
 \[
@@ -659,7 +784,7 @@ where \textbf{edge impedance diagonal block matrix (EIDB)},
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-Alternating current power flow:
+Alternating current power flow: \citep{conti2006voltage}
 \[
   \bar{\boldsymbol{V}} = \bar{\boldsymbol{V}}_{\text{zero}}
     + \left( \boldsymbol{K}^{\top} \boldsymbol{\bar{Z}}_\text{edge}
@@ -689,8 +814,10 @@ Alternating current power flow:
 where \textbf{bus resistance matrix (BRM)}, \(\boldsymbol{R}\): real part of entries
 in BIM.
 
-\hypertarget{direct-impedance-method}{%
-\section{Direct Impedance Method}\label{direct-impedance-method}}
+\hypertarget{power-flow}{%
+\section{Direct Impedance Method}\label{power-flow}}
+
+Build BIM directly and calculate power flow. \citep{schneider2017analytic}
 
 Five steps to build BIM:
 
@@ -730,16 +857,34 @@ until \(\epsilon\) is smaller than a pre-defined threshold.
 \hypertarget{linearised-power-flow}{%
 \chapter{Linearised Power Flow}\label{linearised-power-flow}}
 
-Three ways to calculated BRM:
+Two steps:
 
 \begin{itemize}
 \tightlist
 \item
-  Real part of entries in BIM.
+  linearise voltage drop \protect\hyperlink{linearVoltageDrop}{-\textgreater{} 5.1}
 \item
-  \protect\hyperlink{linearVoltageDrop}{Using EPI and ERDB}.
+  ignore power loss \protect\hyperlink{linearVoltage}{-\textgreater{} 5.2}
+\end{itemize}
+
+Then:
+
+\begin{itemize}
+\tightlist
 \item
-  Lowest common ancestor problem.
+  assessment of candidate \protect\hyperlink{assessment}{-\textgreater{} 5.5}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{itemize}
+\tightlist
+\item
+  bus resistance matrix \protect\hyperlink{BRM}{-\textgreater{} 5.3}
+\item
+  inversed bus resistance matrix \protect\hyperlink{brmInv}{-\textgreater{} 5.4}
+\item
+  error from linearisation \protect\hyperlink{error}{-\textgreater{} 5.6}
 \end{itemize}
 
 \hypertarget{linearVoltageDrop}{%
@@ -774,7 +919,7 @@ Voltage drop:
 \end{aligned}
 \]
 
-Then:
+Then: \citep{conti2006voltage}
 \[
 V_{\text{edge}, k} =
   \frac{R_{\text{edge}, k}}{V_\text{rate}} P_{\text{source}, k}
@@ -788,8 +933,8 @@ V_{\text{edge}, k} =
   Replace \(\underline{V}_i\) with \(V_\text{rate}\).
 \end{itemize}
 
-\hypertarget{linearised-voltage}{%
-\section{Linearised Voltage}\label{linearised-voltage}}
+\hypertarget{linearVoltage}{%
+\section{Linearised Voltage}\label{linearVoltage}}
 
 Voltage drop to nodal voltage:
 \[
@@ -831,55 +976,69 @@ Voltage magnitude can be calculated using BRM and real power injections:
 \begin{itemize}
 \tightlist
 \item
-  Step-down transformer is ignored, so bus 1 is not included.
+  Bus 2 -\textgreater{} root
 \item
-  Bus 2 is the root.
+  69 PQ buses
 \item
-  There are 69 PQ buses, and there are 207 channels.
+  207 channels
 \item
-  207 rows and 207 columns.
+  207 rows and 207 columns
 \end{itemize}
 
 \begin{center}\includegraphics{Pictures/figHeatmapBRM} \end{center}
+
+\begin{quote}
+There is some pattern that can be explained by the analytical expression for
+entries in BRM.
+\end{quote}
 
 \hypertarget{LCA}{%
 \subsection*{Lowest Common Ancestor Problem}\label{LCA}}
 \addcontentsline{toc}{subsection}{Lowest Common Ancestor Problem}
 
-Entry \((i, j)\) is the sum of edge resistances in the common path to the root of
-bus \(i\) and \(j\). That is sum of edge resistances in the path from the root to
-the lowest common ancestor (LCA) of bus \(i\) and \(j\):
+Entry \((i, j)\) -\textgreater{} sum of edge resistances in their common path to root:
 \[
 R_{i, j}=\sum_{k \in U_{i} \cap U_{j}} R_{\text {edge }, k}
 \]
-where \(U_{i}\) is set of edges on path from the root to bus \(i\).
+where \(U_{i}\) is set of edges on the path from root to bus \(i\).
+
+\begin{quote}
+Entry \((i, j)\) is the sum of edge resistances in the path from root to their
+lowest common ancestor (LCA) of bus \(i\) and \(j\).
+\end{quote}
 
 \begin{itemize}
 \tightlist
 \item
-  BRM can be calcualted efficiently using LCA for all pairs of buses.
+  Calcualted efficiently using LCA for all pairs.
 \item
-  The pattern can be used in future work.
+  Useful pattern.
 \end{itemize}
+
+\begin{quote}
+BRM can be calcualted efficiently using LCA for all pairs of buses. and the
+pattern can be used in future work.
+\end{quote}
 
 For example,
 
 \begin{center}\includegraphics[width=0.7\linewidth]{Pictures/figCaseSix} \end{center}
 
-\begin{itemize}
-\tightlist
-\item
-  LCA of b3 and b5 is b2. Entry for b3, b5 is \(R_\text{e1} + R_\text{e2}\)
-\item
-  LCA of b4 and b5 is still b2. Entry for b4, b5 is still \(R_\text{e1} + R_\text{e2}\).
-\end{itemize}
+\[ \begin{array}{ll}
+  \hline
+  \text{pair of buses} & \text{entry in BRM} \\
+  \hline
+  \text{b3-b5} & R_\text{e1} + R_\text{e2} \\
+  \text{b4-b5} & R_\text{e1} + R_\text{e2} \\
+  \hline
+\end{array} \]
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \protect\hyperlink{summary}{-\textgreater{} summary}
 
-\hypertarget{pseudo-linearised-power-flow}{%
-\section{Pseudo Linearised Power Flow}\label{pseudo-linearised-power-flow}}
+\hypertarget{brmInv}{%
+\section{Pseudo Linearised Power Flow}\label{brmInv}}
 
 Based on linearised power flow, \(\boldsymbol{V} = \boldsymbol{V}_\text{zero} + \frac{1}{V_\text{rate}} \boldsymbol{R} \boldsymbol{P}\):
 \[ \begin{aligned}
@@ -887,26 +1046,44 @@ Based on linearised power flow, \(\boldsymbol{V} = \boldsymbol{V}_\text{zero} + 
     V_\text{rate} \boldsymbol{R}^{\top}
     \left( \boldsymbol{V} - \boldsymbol{V}_\text{zero} \right)
 \end{aligned} \]
-which is referred to as \textbf{pseudo linearised power flow}.
+-\textgreater{} \textbf{pseudo linearised power flow}.
 
-The inversed BRM for case-70 looks like:
+\begin{quote}
+which is referred to as pseudo linearised power flow.
+\end{quote}
+
+Inversed BRM for case-70:
+
+\begin{quote}
+Inversed BRM for the case looks like:
+\end{quote}
 
 \begin{center}\includegraphics{Pictures/figHeatmapBrmInv} \end{center}
 
 \begin{itemize}
 \tightlist
 \item
+  Sparse.
+\item
+  Full rank.
+\item
   Voltage magnitude at any channel can have a huge impact.
 \item
-  The pattern can be used in future work.
+  Useful pattern.
 \end{itemize}
 
 \hypertarget{assessment}{%
 \section{Assessment of Candidate}\label{assessment}}
 
-Calculate \(\boldsymbol{P}_\text{assess}\) using voltage magnitudes.
+\begin{itemize}
+\tightlist
+\item
+  Calculate \(\boldsymbol{P}_\text{assess}\) using voltage magnitudes.
+\item
+  Compare \(\boldsymbol{P}_\text{assess}\) with available power measurements.
+\end{itemize}
 
-The second term in the objective function (mean squared error):
+\textbf{Mean squared error (MSE)}:
 \[ \begin{aligned}
   \mathcal{H}(\boldsymbol{R}) =
   \left[
@@ -924,12 +1101,15 @@ where:
 \begin{itemize}
 \tightlist
 \item
-  \(\mathcal{O}\): set of observed active channels and inactive channels
+  \(\mathcal{O}\): set of observed active channels and inactive channels.
 \item
-  \(\boldsymbol{O}\): binary vector indicating observed active channels
-\item
-  Entries for unobserved active channels are ignored.
+  \(\boldsymbol{O}\): binary vector indicating observed active channels.
 \end{itemize}
+
+\begin{quote}
+It is the second term in the objective function. Entries for unobserved
+active channels are ignored.
+\end{quote}
 
 \hypertarget{error}{%
 \section{Error from Linearisation}\label{error}}
@@ -953,30 +1133,52 @@ Box plot:
   Error is aleady reduced to 1.7 \textasciitilde{} 2.2.
 \item
   Rated voltage magnitudes will increase the error dramatically.
-\item
-  Full observability over voltage magnitudes for now.
 \end{itemize}
+
+\begin{quote}
+Rated voltage magnitudes will increase the error dramatically, so full
+observability of voltage magnitudes are still required for now.
+\end{quote}
 
 \protect\hyperlink{summary}{-\textgreater{} summary}
 
 \hypertarget{result-and-discussion}{%
 \chapter{Result and Discussion}\label{result-and-discussion}}
 
-\hypertarget{result-for-case-70}{%
-\section{Result for Case-70}\label{result-for-case-70}}
+\begin{itemize}
+\tightlist
+\item
+  result for case-70 \protect\hyperlink{result}{-\textgreater{} 6.1}
+\item
+  summary \protect\hyperlink{summary}{-\textgreater{} 6.2}
+\end{itemize}
 
-Rank SA:
-
-\begin{center}\includegraphics{Pictures/distances_288} \end{center}
-
-Assessment (mean squared error):
+\hypertarget{result}{%
+\section{Result for Case-70}\label{result}}
 
 \begin{itemize}
 \tightlist
 \item
-  based on 50 snapshots\footnote{during 00:00:00 and 00:00:50 on Dec 2, 2020 from
-    Sonnen data set.}
+  three new pairs, ``b29‐b44'', ``b68‐b14'', and ``b68‐b15''
+\item
+  144 edges in total
+\item
+  288 SAs rooted at ``b2''
 \end{itemize}
+
+\begin{center}\includegraphics[width=0.55\linewidth]{Pictures/case70} \end{center}
+
+Rank SAs according to total cable lengths:
+
+\begin{center}\includegraphics{Pictures/distances_288} \end{center}
+
+\begin{quote}
+Total cable length increases all the time. That is, we rank spanning
+arborescences according to their total cable lengths.
+\end{quote}
+
+Assessment based on 50 snapshots\footnote{during 00:00:00 and 00:00:50 on Dec 2, 2020
+  from Sonnen data set.}:
 
 \begin{center}\includegraphics{Pictures/errors_288} \end{center}
 
@@ -1009,8 +1211,7 @@ Four steps:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Shrink feasible region (reduce the number of SAs) by removing overlapping
-  edges.
+  Shrink feasible region (reduce number of SAs).
 \item
   Measure the size of feasible region by counting number of SAs.
 \item

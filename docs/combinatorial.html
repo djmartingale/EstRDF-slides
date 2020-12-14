@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.4 Combinatorial Optimisation | Topology Inference for Radial Distribution Feeder based on Power Flow</title>
+  <title>3.4 Local Search | Topology Inference for Radial Distribution Feeder based on Power Flow</title>
   <meta name="description" content="Slides for defense of my master project." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.4 Combinatorial Optimisation | Topology Inference for Radial Distribution Feeder based on Power Flow" />
+  <meta property="og:title" content="3.4 Local Search | Topology Inference for Radial Distribution Feeder based on Power Flow" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="edxu96/EstRDF-slides" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.4 Combinatorial Optimisation | Topology Inference for Radial Distribution Feeder based on Power Flow" />
+  <meta name="twitter:title" content="3.4 Local Search | Topology Inference for Radial Distribution Feeder based on Power Flow" />
   
   <meta name="twitter:description" content="Slides for defense of my master project." />
   
@@ -24,14 +24,14 @@
 <meta name="author" content="Jie Xu (s181238)" />
 
 
-<meta name="date" content="2020-12-13" />
+<meta name="date" content="2020-12-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="ip-formulation.html"/>
+<link rel="prev" href="IP.html"/>
 <link rel="next" href="ac-power-flow.html"/>
 <script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -85,44 +85,44 @@
 <li class="chapter" data-level="2" data-path="radial-distribution-feeder.html"><a href="radial-distribution-feeder.html"><i class="fa fa-check"></i><b>2</b> Radial Distribution Feeder</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="bus-edge.html"><a href="bus-edge.html"><i class="fa fa-check"></i><b>2.1</b> Bus and Edge</a></li>
-<li class="chapter" data-level="2.2" data-path="two-special-concepts.html"><a href="two-special-concepts.html"><i class="fa fa-check"></i><b>2.2</b> Two Special Concepts</a>
+<li class="chapter" data-level="2.2" data-path="concepts.html"><a href="concepts.html"><i class="fa fa-check"></i><b>2.2</b> Two Special Concepts</a>
 <ul>
-<li class="chapter" data-level="" data-path="two-special-concepts.html"><a href="two-special-concepts.html#channel"><i class="fa fa-check"></i>Channel</a></li>
-<li class="chapter" data-level="" data-path="two-special-concepts.html"><a href="two-special-concepts.html#snapshot"><i class="fa fa-check"></i>Snapshot</a></li>
+<li class="chapter" data-level="" data-path="concepts.html"><a href="concepts.html#channel"><i class="fa fa-check"></i>Channel</a></li>
+<li class="chapter" data-level="" data-path="concepts.html"><a href="concepts.html#snapshot"><i class="fa fa-check"></i>Snapshot</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="case.html"><a href="case.html"><i class="fa fa-check"></i><b>2.3</b> Case with 70 Buses</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="problem-formulation.html"><a href="problem-formulation.html"><i class="fa fa-check"></i><b>3</b> Problem Formulation</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="directed-graph.html"><a href="directed-graph.html"><i class="fa fa-check"></i><b>3.1</b> Directed Graph</a></li>
+<li class="chapter" data-level="3.1" data-path="directed.html"><a href="directed.html"><i class="fa fa-check"></i><b>3.1</b> Directed Graph</a></li>
 <li class="chapter" data-level="3.2" data-path="overlapping.html"><a href="overlapping.html"><i class="fa fa-check"></i><b>3.2</b> Remove Overlapping Edge</a></li>
-<li class="chapter" data-level="3.3" data-path="ip-formulation.html"><a href="ip-formulation.html"><i class="fa fa-check"></i><b>3.3</b> IP Formulation</a></li>
-<li class="chapter" data-level="3.4" data-path="combinatorial.html"><a href="combinatorial.html"><i class="fa fa-check"></i><b>3.4</b> Combinatorial Optimisation</a></li>
+<li class="chapter" data-level="3.3" data-path="IP.html"><a href="IP.html"><i class="fa fa-check"></i><b>3.3</b> Integer Programming</a></li>
+<li class="chapter" data-level="3.4" data-path="combinatorial.html"><a href="combinatorial.html"><i class="fa fa-check"></i><b>3.4</b> Local Search</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="ac-power-flow.html"><a href="ac-power-flow.html"><i class="fa fa-check"></i><b>4</b> AC Power Flow</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="two-matrices.html"><a href="two-matrices.html"><i class="fa fa-check"></i><b>4.1</b> Two Matrices</a></li>
+<li class="chapter" data-level="4.1" data-path="matrices.html"><a href="matrices.html"><i class="fa fa-check"></i><b>4.1</b> Two Matrices</a></li>
 <li class="chapter" data-level="4.2" data-path="BIM.html"><a href="BIM.html"><i class="fa fa-check"></i><b>4.2</b> Bus Impedance Matrix</a></li>
-<li class="chapter" data-level="4.3" data-path="direct-impedance-method.html"><a href="direct-impedance-method.html"><i class="fa fa-check"></i><b>4.3</b> Direct Impedance Method</a>
+<li class="chapter" data-level="4.3" data-path="power-flow.html"><a href="power-flow.html"><i class="fa fa-check"></i><b>4.3</b> Direct Impedance Method</a>
 <ul>
-<li class="chapter" data-level="" data-path="direct-impedance-method.html"><a href="direct-impedance-method.html#fixed-point-method"><i class="fa fa-check"></i>Fixed Point Method</a></li>
+<li class="chapter" data-level="" data-path="power-flow.html"><a href="power-flow.html#fixed-point-method"><i class="fa fa-check"></i>Fixed Point Method</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="linearised-power-flow.html"><a href="linearised-power-flow.html"><i class="fa fa-check"></i><b>5</b> Linearised Power Flow</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="linearVoltageDrop.html"><a href="linearVoltageDrop.html"><i class="fa fa-check"></i><b>5.1</b> Linearised Voltage Drop</a></li>
-<li class="chapter" data-level="5.2" data-path="linearised-voltage.html"><a href="linearised-voltage.html"><i class="fa fa-check"></i><b>5.2</b> Linearised Voltage</a></li>
+<li class="chapter" data-level="5.2" data-path="linearVoltage.html"><a href="linearVoltage.html"><i class="fa fa-check"></i><b>5.2</b> Linearised Voltage</a></li>
 <li class="chapter" data-level="5.3" data-path="BRM.html"><a href="BRM.html"><i class="fa fa-check"></i><b>5.3</b> Bus Resistance Matrix</a>
 <ul>
 <li class="chapter" data-level="" data-path="BRM.html"><a href="BRM.html#LCA"><i class="fa fa-check"></i>Lowest Common Ancestor Problem</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="pseudo-linearised-power-flow.html"><a href="pseudo-linearised-power-flow.html"><i class="fa fa-check"></i><b>5.4</b> Pseudo Linearised Power Flow</a></li>
+<li class="chapter" data-level="5.4" data-path="brmInv.html"><a href="brmInv.html"><i class="fa fa-check"></i><b>5.4</b> Pseudo Linearised Power Flow</a></li>
 <li class="chapter" data-level="5.5" data-path="assessment.html"><a href="assessment.html"><i class="fa fa-check"></i><b>5.5</b> Assessment of Candidate</a></li>
 <li class="chapter" data-level="5.6" data-path="error.html"><a href="error.html"><i class="fa fa-check"></i><b>5.6</b> Error from Linearisation</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="result-and-discussion.html"><a href="result-and-discussion.html"><i class="fa fa-check"></i><b>6</b> Result and Discussion</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="result-for-case-70.html"><a href="result-for-case-70.html"><i class="fa fa-check"></i><b>6.1</b> Result for Case-70</a></li>
+<li class="chapter" data-level="6.1" data-path="result.html"><a href="result.html"><i class="fa fa-check"></i><b>6.1</b> Result for Case-70</a></li>
 <li class="chapter" data-level="6.2" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>6.2</b> Summary</a>
 <ul>
 <li class="chapter" data-level="" data-path="summary.html"><a href="summary.html#issues"><i class="fa fa-check"></i>Issues</a></li>
@@ -151,7 +151,7 @@
 
             <section class="normal" id="section-">
 <div id="combinatorial" class="section level2" number="3.4">
-<h2><span class="header-section-number">3.4</span> Combinatorial Optimisation</h2>
+<h2><span class="header-section-number">3.4</span> Local Search</h2>
 <p>At least two possible values for <span class="math inline">\(\alpha\)</span>:</p>
 <p><span class="math display">\[
 \begin{array}{llll}
@@ -173,8 +173,17 @@
 \]</span></p>
 <p>Such two situations can be visualised:</p>
 <p><img src="Pictures/figFeasibleRegion.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>Combinatorial optimisation problem.</p>
 <p>A <strong>local search heuristic algorithm</strong> is proposed to to move from <span class="math inline">\(\bigotimes\)</span>
-to <span class="math inline">\(\bigoplus\)</span>:</p>
+to <span class="math inline">\(\bigoplus\)</span>. <span class="citation">(Michiels, Aarts, and Korst <a href="#ref-michiels2007theoretical" role="doc-biblioref">2007</a>)</span></p>
+<blockquote>
+<p>All the algorithms in this category have two parts, an objective funciton to
+assess candidates and an neighbourhood function to generate candidates
+systematically. Here, pseudo linearised power flow will be used as the
+objective function and resuted mean squared error is to be minimised. It will
+be discussed later. An algorithm to rank spanning arborescences according to
+their total cable lengths is implemented.</p>
+</blockquote>
 <table class="table table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -215,20 +224,30 @@ rank spanning arborescence
 </tbody>
 </table>
 <ul>
-<li>The starting point is found by minimum spanning arborescence</li>
-<li>Every candidate is reachable from the starting point.</li>
+<li>Starting point -&gt; minimum spanning arborescence</li>
+<li>Every candidate is reachable.</li>
 <li>Ground truth should be found before long.</li>
 <li>Not in parallel.</li>
 </ul>
+<blockquote>
+<p>Because power grids are to be built with less cost, the total cable length
+of ground truth should not be too long, so we can find it before long,</p>
+</blockquote>
 
 </div>
 <!-- </div> -->
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-michiels2007theoretical">
+<p>Michiels, Wil, Emile Aarts, and Jan Korst. 2007. <em>Theoretical Aspects of Local Search</em>. Springer Science &amp; Business Media.</p>
+</div>
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="ip-formulation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="IP.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="ac-power-flow.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
