@@ -157,48 +157,21 @@
 <h1><span class="header-section-number">1</span> Introduction</h1>
 <div id="problem-setting" class="section level3 unnumbered" number="">
 <h3>Problem Setting</h3>
-<blockquote>
-<p>How households are connected to distribution network is usually unknown.
-There are three kinds of available information that we can rely on to infer
-the topology in this project.</p>
-</blockquote>
 <p>Available information for topology inference:</p>
-<blockquote>
-<p>For example, where households are located and barriers between them.
-There is no literature mentioning how to handle geographical information.</p>
-</blockquote>
 <ul>
 <li>geographical information about buses</li>
 <li>voltage magnitudes of all the phases of all the buses</li>
 <li>some real power injection profiles</li>
 </ul>
-<blockquote>
-<p>In the literature, a technique called association network inference is
-usually used. Correlations between buses are derived based on measurements
-Highly correlated buses are connected directly.</p>
-</blockquote>
 <p>Association network inference: correlation between buses</p>
-<blockquote>
-<p>However, there are two reasons why such technique cannot be used here.</p>
-</blockquote>
 <ul>
 <li>Spurious correlation resulted from correlated profiles.</li>
 <li>Missing measurement.</li>
 </ul>
-<blockquote>
-<p>The second reason will be discussed in detail later.</p>
-</blockquote>
 </div>
 <div id="flowchart" class="section level3 unnumbered" number="">
 <h3>Flowchart</h3>
 <p><img src="Pictures/figFlowchart3.png" /><!-- --></p>
-<blockquote>
-<p>There are three columns. In the left column, ground truth, the true topology,
-is known, and used to simulate available measurement using power flow
-program. Three boxes in the middle represents three kinds of information
-disucssed before. Note that ground truth is not known and we want to find it.
-Programs in the right column are used to make inference about the topology.</p>
-</blockquote>
 <p><strong>Ground truth</strong> is to be found in topolgoy inference, but used to simulate
 available measurement first.</p>
 <p>Two batches of computer programs:</p>
@@ -206,9 +179,6 @@ available measurement first.</p>
 <li>power flow</li>
 <li>three algorithms to handle directed graphs</li>
 </ul>
-<blockquote>
-<p>The second batch will not be discussed in detail.</p>
-</blockquote>
 
 </div>
 </div>

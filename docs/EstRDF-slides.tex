@@ -113,18 +113,7 @@
 \subsection*{Problem Setting}\label{problem-setting}}
 \addcontentsline{toc}{subsection}{Problem Setting}
 
-\begin{quote}
-How households are connected to distribution network is usually unknown.
-There are three kinds of available information that we can rely on to infer
-the topology in this project.
-\end{quote}
-
 Available information for topology inference:
-
-\begin{quote}
-For example, where households are located and barriers between them.
-There is no literature mentioning how to handle geographical information.
-\end{quote}
 
 \begin{itemize}
 \tightlist
@@ -136,17 +125,7 @@ There is no literature mentioning how to handle geographical information.
   some real power injection profiles
 \end{itemize}
 
-\begin{quote}
-In the literature, a technique called association network inference is
-usually used. Correlations between buses are derived based on measurements
-Highly correlated buses are connected directly.
-\end{quote}
-
 Association network inference: correlation between buses
-
-\begin{quote}
-However, there are two reasons why such technique cannot be used here.
-\end{quote}
 
 \begin{itemize}
 \tightlist
@@ -156,23 +135,11 @@ However, there are two reasons why such technique cannot be used here.
   Missing measurement.
 \end{itemize}
 
-\begin{quote}
-The second reason will be discussed in detail later.
-\end{quote}
-
 \hypertarget{flowchart}{%
 \subsection*{Flowchart}\label{flowchart}}
 \addcontentsline{toc}{subsection}{Flowchart}
 
 \includegraphics{Pictures/figFlowchart3.png}
-
-\begin{quote}
-There are three columns. In the left column, ground truth, the true topology,
-is known, and used to simulate available measurement using power flow
-program. Three boxes in the middle represents three kinds of information
-disucssed before. Note that ground truth is not known and we want to find it.
-Programs in the right column are used to make inference about the topology.
-\end{quote}
 
 \textbf{Ground truth} is to be found in topolgoy inference, but used to simulate
 available measurement first.
@@ -187,16 +154,8 @@ Two batches of computer programs:
   three algorithms to handle directed graphs
 \end{itemize}
 
-\begin{quote}
-The second batch will not be discussed in detail.
-\end{quote}
-
 \hypertarget{radial-distribution-feeder}{%
 \chapter{Radial Distribution Feeder}\label{radial-distribution-feeder}}
-
-\begin{quote}
-Essential concepts are discussed in following three parts.
-\end{quote}
 
 \begin{itemize}
 \tightlist
@@ -210,10 +169,6 @@ Essential concepts are discussed in following three parts.
 
 \hypertarget{bus-edge}{%
 \section{Bus and Edge}\label{bus-edge}}
-
-\begin{quote}
-Power grids can be roughly described here by following three concepts.
-\end{quote}
 
 \begin{table}[H]
 \centering
@@ -230,12 +185,6 @@ bus & where two edges joint or end of an edge & slack bus, PQ bus, PV bus\\
 \end{tabular}
 \end{table}
 
-\begin{quote}
-Only one type of edge, cable, is considered. The method applies when there
-are transformers, capacitors, and other devices. Usually, there is one slack
-bus in distribution network and is referred to as root here.
-\end{quote}
-
 \begin{itemize}
 \tightlist
 \item
@@ -248,11 +197,6 @@ bus in distribution network and is referred to as root here.
 
 \hypertarget{concepts}{%
 \section{Two Special Concepts}\label{concepts}}
-
-\begin{quote}
-Such two concepts cannot be found in the literature, but are essential for
-power flow when taking multiple phases into account.
-\end{quote}
 
 Essential for power flow calculation.
 
@@ -272,10 +216,6 @@ Essential for power flow calculation.
 
 It is assumed that all inactive channels are observed.
 
-\begin{quote}
-That is, it is known that there is no power injection at those channels.
-\end{quote}
-
 \hypertarget{snapshot}{%
 \subsection*{Snapshot}\label{snapshot}}
 \addcontentsline{toc}{subsection}{Snapshot}
@@ -290,10 +230,6 @@ That is, it is known that there is no power injection at those channels.
 
 \textbf{Zero‐load snapshot} : when power injections at all the channels are zero
 
-\begin{quote}
-Such two symbols will be used later.
-\end{quote}
-
 \begin{itemize}
 \tightlist
 \item
@@ -304,10 +240,6 @@ Such two symbols will be used later.
 
 \hypertarget{case}{%
 \section{Case with 70 Buses}\label{case}}
-
-\begin{quote}
-To make the project manageable:
-\end{quote}
 
 Assumptions about feeders:
 
@@ -356,10 +288,6 @@ A case with 70 buses is primarily used here:
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\begin{quote}
-There is an issue here that I will discuss after a summary in the end.
-\end{quote}
-
 \begin{itemize}
 \tightlist
 \item
@@ -369,17 +297,7 @@ There is an issue here that I will discuss after a summary in the end.
 \hypertarget{directed}{%
 \section{Directed Graph}\label{directed}}
 
-\begin{quote}
-All the information can be stored in a weighted complete directed graph for a
-given set of buses.
-\end{quote}
-
 \textbf{weighted complete (directed) graph for a set of buses}
-
-\begin{quote}
-All edges are \textbf{potential edges}, and they must have weights. In association
-network inference, it is impossible when some entity attributes are missing.
-\end{quote}
 
 \begin{itemize}
 \tightlist
@@ -409,10 +327,6 @@ network inference, it is impossible when some entity attributes are missing.
 \hypertarget{overlapping}{%
 \section{Remove Overlapping Edge}\label{overlapping}}
 
-\begin{quote}
-A potential edge can overlap some bus on its way from source to target.
-\end{quote}
-
 For example, in case-70:
 
 \[
@@ -433,13 +347,6 @@ For example, in case-70:
 \begin{center}\includegraphics[width=0.6\linewidth]{Pictures/overlapGeth} \end{center}
 
 However:
-
-\begin{quote}
-After all overlapping edges are removed (or saying detected as impossible to
-exist), there are still 446 possible potential edges and over \(10^{45}\) SAs.
-This is the only technique used in this project. When more information is
-available, more advanced techniques can be applied.
-\end{quote}
 
 \begin{itemize}
 \tightlist
@@ -537,11 +444,6 @@ Two terms in the objective function:
 
 Three sets of constraints:
 
-\begin{quote}
-Last one makes sure that impossible potential edges do not appear in any
-candidate.
-\end{quote}
-
 \begin{itemize}
 \tightlist
 \item
@@ -582,15 +484,6 @@ For this combinatorial optimisation problem, a \textbf{local search heuristic
 algorithm} is proposed to move from \(\bigotimes\) to \(\bigoplus\).
 \citep{michiels2007theoretical}
 
-\begin{quote}
-All the algorithms in this category have two parts, an objective funciton to
-assess candidates and an neighbourhood function to generate candidates
-systematically. Here, pseudo linearised power flow will be used as the
-objective function and resulted mean squared error is to be minimised. It
-will be discussed later. An algorithm to rank spanning arborescences
-according to their total cable lengths is implemented.
-\end{quote}
-
 \begin{table}[H]
 \centering
 \begin{tabular}[t]{l|l|l}
@@ -603,11 +496,6 @@ neighbourhood & generate candidate & rank spanning arborescence\\
 \hline
 \end{tabular}
 \end{table}
-
-\begin{quote}
-Because power grids are to be built with less cost, cable is kept as short as
-possible, so we can find ground truth before long.
-\end{quote}
 
 \begin{itemize}
 \tightlist
@@ -659,10 +547,6 @@ where \textbf{edge impedance diagonal block matrix (EIDB)},
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \begin{center}\includegraphics[width=0.7\linewidth]{Pictures/figCaseSixRaw} \end{center}
-
-\begin{quote}
-Each row indicates whether power injection from some bus will pass the edge.
-\end{quote}
 
 \[ \begin{aligned}
     \left[\begin{array}{l}
@@ -764,11 +648,6 @@ in BIM.
 \hypertarget{power-flow}{%
 \section{Direct Impedance Method}\label{power-flow}}
 
-\begin{quote}
-Such process is called direct impedance method. BIM is built directly by
-following five steps and used to calculate power flow.
-\end{quote}
-
 Five steps to build BIM:
 
 \begin{enumerate}
@@ -814,11 +693,6 @@ until \(\epsilon\) is smaller than a pre-defined threshold.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\begin{quote}
-Besides, there are three parts that I will discussed in detail after the
-summary.
-\end{quote}
-
 \begin{itemize}
 \tightlist
 \item
@@ -846,10 +720,6 @@ BRM of case-70:
 
 \begin{center}\includegraphics{Pictures/figHeatmapBRM} \end{center}
 
-\begin{quote}
-There is some pattern that can be explained by the analytical expression.
-\end{quote}
-
 \hypertarget{LCA}{%
 \subsection*{Lowest Common Ancestor Problem}\label{LCA}}
 \addcontentsline{toc}{subsection}{Lowest Common Ancestor Problem}
@@ -860,11 +730,6 @@ common ancestor (LCA):
 R_{i, j}=\sum_{k \in U_{i} \cap U_{j}} R_{\text {edge }, k}
 \]
 where \(U_{i}\) is set of edges on the path from root to bus \(i\).
-
-\begin{quote}
-BRM can be calcualted efficiently using LCA for all pairs of buses. and the
-pattern can be used in future work.
-\end{quote}
 
 \begin{itemize}
 \tightlist
@@ -902,15 +767,7 @@ Based on linearised power flow, \(\boldsymbol{V} = \boldsymbol{V}_\text{zero} + 
 \end{aligned} \]
 -\textgreater{} \textbf{pseudo linearised power flow}.
 
-\begin{quote}
-which is referred to as pseudo linearised power flow.
-\end{quote}
-
 Inversed BRM for case-70:
-
-\begin{quote}
-Inversed BRM for the case looks like:
-\end{quote}
 
 \begin{center}\includegraphics{Pictures/figHeatmapBrmInv} \end{center}
 
@@ -968,11 +825,6 @@ Linearised power flow:
 \end{aligned} \]
 where:
 
-\begin{quote}
-It is the second term in the objective function. Entries for unobserved
-active channels are ignored.
-\end{quote}
-
 \begin{itemize}
 \tightlist
 \item
@@ -983,11 +835,6 @@ active channels are ignored.
 
 \hypertarget{error}{%
 \section{Error from Linearisation}\label{error}}
-
-\begin{quote}
-This is a box plot for assessment of ground truth. Each box contains 50 MSE
-values for a given number of observed active channels.
-\end{quote}
 
 Box plot:
 
@@ -1001,13 +848,6 @@ Box plot:
 \end{itemize}
 
 \begin{center}\includegraphics{Pictures/figErrorObsBRM} \end{center}
-
-\begin{quote}
-Error is not 0, which can also be seen in the result before.
-The effect of number of observed active channels is insignificant.
-Rated voltage magnitudes will increase the error dramatically, so full
-observability of voltage magnitudes are still required for now.
-\end{quote}
 
 \begin{itemize}
 \tightlist
@@ -1035,16 +875,6 @@ observability of voltage magnitudes are still required for now.
 
 \includegraphics{Pictures/case70true.png}
 
-\begin{quote}
-Here we only show how result might look like. Because there is an issue that
-will be discussed later. Instead, 75 possible potential edges are manually
-added besides 69 edges in ground truth here. So there are 144 edges in total
-and 288 SAs rooted at bus 2. There are three new pairs, which are
-highlighted. Any connected pair has two edges with opposite directions.
-Full observability over power injections is assumed, and we will talk about
-it later.
-\end{quote}
-
 \begin{itemize}
 \tightlist
 \item
@@ -1063,28 +893,13 @@ Rank candidates according to total cable lengths:
 
 \begin{center}\includegraphics{Pictures/distances_288} \end{center}
 
-\begin{quote}
-It increases all the time.
-\end{quote}
-
 Assessment based on 50 snapshots\footnote{during 00:00:00 and 00:00:50 on Dec 2, 2020
   from Sonnen data set.}:
 
 \begin{center}\includegraphics{Pictures/errors_288} \end{center}
 
-\begin{quote}
-The red cross point, with minimum mean squared error, corresponds to ground
-truth.
-\end{quote}
-
 \hypertarget{summary}{%
 \section{Summary}\label{summary}}
-
-\begin{quote}
-The project is summarised here. We turn topology inference into a
-combinatorial optimisation problem. A new framework is proposed, and its core
-is a local search heuristic algorithm.
-\end{quote}
 
 \begin{itemize}
 \tightlist
@@ -1113,12 +928,6 @@ Four steps:
 
 Advantages:
 
-\begin{quote}
-There are two advantages. It is robust to partial observability over power
-injections, and is capable to integrate all kinds of information in weights
-and directions.
-\end{quote}
-
 \begin{itemize}
 \tightlist
 \item
@@ -1130,12 +939,6 @@ and directions.
 \hypertarget{issues}{%
 \subsection*{Issues}\label{issues}}
 \addcontentsline{toc}{subsection}{Issues}
-
-\begin{quote}
-There are three issues that I want to discuss in detail. Firstly, there are
-too many candidates, so we have to reduce the number, for example, by
-removing overlapping edges.
-\end{quote}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
