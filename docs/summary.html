@@ -24,7 +24,7 @@
 <meta name="author" content="Jie Xu (s181238)" />
 
 
-<meta name="date" content="2020-12-14" />
+<meta name="date" content="2020-12-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -163,8 +163,8 @@ is a local search heuristic algorithm.</p>
 <p>Four steps:</p>
 <ol style="list-style-type: decimal">
 <li>Shrink feasible region (reduce number of SAs).</li>
-<li>Measure the size of feasible region by counting number of SAs.</li>
-<li>Get candidates sequentially by ranking SAs according to total cable lengths.</li>
+<li>Measure the size of feasible region.</li>
+<li>Get candidates sequentially according to total cable lengths.</li>
 <li>Assess candidates based on available measurements.</li>
 </ol>
 <p>Advantages:</p>
@@ -180,12 +180,12 @@ and directions.</p>
 <div id="issues" class="section level3 unnumbered" number="">
 <h3>Issues</h3>
 <blockquote>
-<p>There are three issues that I want to discuss in detail. Firstly, there
-are too many SAs, so we have to reduce the number, for example, by removing
-overlapping edges.</p>
+<p>There are three issues that I want to discuss in detail. Firstly, there are
+too many candidates, so we have to reduce the number, for example, by
+removing overlapping edges.</p>
 </blockquote>
 <ol style="list-style-type: decimal">
-<li>Too many SAs. (<a href="overlapping.html#overlapping">remove overlapping edges</a>)</li>
+<li>Too many candidates. (<a href="overlapping.html#overlapping">remove overlapping edges</a>)</li>
 <li>Full observability over voltage magnitudes. (<a href="BRM.html#BRM">matrices with full
 rank</a>)</li>
 <li>Error in linearised power flow calculation. (<a href="error.html#error">error from

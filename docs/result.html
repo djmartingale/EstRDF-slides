@@ -24,7 +24,7 @@
 <meta name="author" content="Jie Xu (s181238)" />
 
 
-<meta name="date" content="2020-12-14" />
+<meta name="date" content="2020-12-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -153,12 +153,17 @@
 <p><img src="Pictures/case70true.png" /><!-- --></p>
 <blockquote>
 <p>Here we only show how result might look like. Because there is an issue that
-will be discussed later. There are only 75 new possible potential edges here.</p>
+will be discussed later. Instead, 75 possible potential edges are manually
+added besides 69 edges in ground truth here. So there are 144 edges in total
+and 288 SAs rooted at bus 2. There are three new pairs, which are
+highlighted. Any connected pair has two edges with opposite directions.
+Full observability over power injections is assumed, and we will talk about
+it later.</p>
 </blockquote>
 <ul>
 <li>three new pairs, “b29‐b44”, “b68‐b14”, and “b68‐b15”</li>
-<li>144 edges in total</li>
-<li>288 SAs rooted at “b2”</li>
+<li>144 potential edges in total</li>
+<li>288 SAs rooted at bus 2</li>
 <li>full observability</li>
 </ul>
 <p><img src="Pictures/case70.png" width="55%" style="display: block; margin: auto;" /></p>
@@ -170,7 +175,8 @@ will be discussed later. There are only 75 new possible potential edges here.</p
 <p>Assessment based on 50 snapshots<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>:</p>
 <p><img src="Pictures/errors_288.png" style="display: block; margin: auto;" /></p>
 <blockquote>
-<p>The red cross point, with minimum mean squared error, is ground truth.</p>
+<p>The red cross point, with minimum mean squared error, corresponds to ground
+truth.</p>
 </blockquote>
 </div>
 <div class="footnotes">

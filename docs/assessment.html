@@ -24,7 +24,7 @@
 <meta name="author" content="Jie Xu (s181238)" />
 
 
-<meta name="date" content="2020-12-14" />
+<meta name="date" content="2020-12-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -162,7 +162,7 @@
 <hr />
 <ul>
 <li>Calculate <span class="math inline">\(\boldsymbol{P}_\text{assess}\)</span> using voltage magnitudes.</li>
-<li>Compare <span class="math inline">\(\boldsymbol{P}_\text{assess}\)</span> with available power measurements.</li>
+<li>Compare with available measurements.</li>
 </ul>
 <p><strong>Mean squared error (MSE)</strong>:
 <span class="math display">\[ \begin{aligned}
@@ -178,14 +178,14 @@
   / |\mathcal{O}|
 \end{aligned} \]</span>
 where:</p>
-<ul>
-<li><span class="math inline">\(\mathcal{O}\)</span>: set of observed active channels and inactive channels.</li>
-<li><span class="math inline">\(\boldsymbol{O}\)</span>: binary vector indicating observed active channels.</li>
-</ul>
 <blockquote>
 <p>It is the second term in the objective function. Entries for unobserved
 active channels are ignored.</p>
 </blockquote>
+<ul>
+<li><span class="math inline">\(\mathcal{O}\)</span>: set of observed active channels and inactive channels.</li>
+<li><span class="math inline">\(\boldsymbol{O}\)</span>: binary vector indicating observed active channels.</li>
+</ul>
 </div>
             </section>
 

@@ -97,7 +97,7 @@
 
 \title{Topology Inference for Radial Distribution Feeder based on Power Flow}
 \author{Jie Xu (s181238)}
-\date{2020-12-14}
+\date{2020-12-15}
 
 \begin{document}
 \maketitle
@@ -108,12 +108,6 @@
 }
 \hypertarget{introduction}{%
 \chapter{Introduction}\label{introduction}}
-
-This website hosts slides for defence of my master graduation project in the
-Department of Electrical Engineering at Technical University of Denmark. How
-households are connected to distribution network is always unknown. A framework
-to infer such connections by utilising all kinds of information is proposed in
-this project.
 
 \hypertarget{problem-setting}{%
 \subsection*{Problem Setting}\label{problem-setting}}
@@ -245,22 +239,22 @@ bus in distribution network and is referred to as root here.
 \begin{itemize}
 \tightlist
 \item
-  Ignore conversion elements. Not necessary in power flow calculation.
-\item
   Cable.
 \item
   One slack bus -\textgreater{} \textbf{root}.
+\item
+  Ignore conversion elements. Not necessary in power flow calculation.
 \end{itemize}
 
 \hypertarget{concepts}{%
 \section{Two Special Concepts}\label{concepts}}
 
-Essential for power flow calculation.
-
 \begin{quote}
 Such two concepts cannot be found in the literature, but are essential for
 power flow when taking multiple phases into account.
 \end{quote}
+
+Essential for power flow calculation.
 
 \hypertarget{channel}{%
 \subsection*{Channel}\label{channel}}
@@ -271,10 +265,9 @@ power flow when taking multiple phases into account.
 \item
   \textbf{channel}: refer to one phase in some bus
 \item
-  \textbf{active channel}: there are non-zero injections (connected to some
-  conversion element)
+  \textbf{active channel}: connect to household
 \item
-  \textbf{observed active channel}: such non-zero injections are known
+  \textbf{observed active channel}: power is measured
 \end{itemize}
 
 It is assumed that all inactive channels are observed.
@@ -408,10 +401,10 @@ network inference, it is impossible when some entity attributes are missing.
 \item
   All the candidates (SAs).
 \item
-  Number of SA is finite, making it a \protect\hyperlink{combinatorial}{combinatorial
+  Number of SAs is finite, making it a \protect\hyperlink{combinatorial}{combinatorial
   optimisation problem}.
 \item
-  Count number of SA.
+  Count number of SAs.
 \end{itemize}
 
 \hypertarget{overlapping}{%
@@ -545,6 +538,11 @@ Two terms in the objective function:
 
 Three sets of constraints:
 
+\begin{quote}
+Last one makes sure that impossible potential edges do not appear in any
+candidate.
+\end{quote}
+
 \begin{itemize}
 \tightlist
 \item
@@ -609,7 +607,7 @@ neighbourhood & generate candidate & rank spanning arborescence\\
 
 \begin{quote}
 Because power grids are to be built with less cost, the total cable length
-of ground truth should not be too long, so we can find it before long,
+of ground truth is kept as short as possible, so we can find it before long.
 \end{quote}
 
 \begin{itemize}
@@ -640,7 +638,7 @@ Can be generalised for multi-phase model. \citep{hsieh2017matrix}
 \hypertarget{matrices}{%
 \section{Two Matrices}\label{matrices}}
 
-Current injection to flow:
+current injection -\textgreater{} current flow:
 \[
   \bar{\boldsymbol{I}}_{\text{edge}} =
   - \boldsymbol{K} \bar{\boldsymbol{I}}
@@ -648,7 +646,7 @@ Current injection to flow:
 
 where \textbf{edge path incidence matrix (EPI)}, \(\boldsymbol{K}\).
 
-Voltage drop to nodal voltage:
+voltage drop -\textgreater{} voltage:
 \[
   \bar{\boldsymbol{V}} =
   \bar{\boldsymbol{V}}_{\text{zero}}
@@ -767,7 +765,10 @@ in BIM.
 \hypertarget{power-flow}{%
 \section{Direct Impedance Method}\label{power-flow}}
 
-Build BIM directly and calculate power flow. \citep{schneider2017analytic}
+\begin{quote}
+The whole process is called direct impedance method. BIM is built by
+following five steps and used to calculate power flow.
+\end{quote}
 
 Five steps to build BIM:
 
@@ -948,7 +949,7 @@ Linearised power flow:
 \item
   Calculate \(\boldsymbol{P}_\text{assess}\) using voltage magnitudes.
 \item
-  Compare \(\boldsymbol{P}_\text{assess}\) with available power measurements.
+  Compare with available measurements.
 \end{itemize}
 
 \textbf{Mean squared error (MSE)}:
@@ -966,6 +967,11 @@ Linearised power flow:
 \end{aligned} \]
 where:
 
+\begin{quote}
+It is the second term in the objective function. Entries for unobserved
+active channels are ignored.
+\end{quote}
+
 \begin{itemize}
 \tightlist
 \item
@@ -974,17 +980,12 @@ where:
   \(\boldsymbol{O}\): binary vector indicating observed active channels.
 \end{itemize}
 
-\begin{quote}
-It is the second term in the objective function. Entries for unobserved
-active channels are ignored.
-\end{quote}
-
 \hypertarget{error}{%
 \section{Error from Linearisation}\label{error}}
 
 \begin{quote}
-This is a box plot for assessment of ground truth when there are different
-numbers of active channels. Only 50 snapshots are used.
+This is a box plot for assessment of ground truth. Each box contains 50 MSE
+values for a given number of observed active channels.
 \end{quote}
 
 Box plot:
@@ -1035,7 +1036,12 @@ observability of voltage magnitudes are still required for now.
 
 \begin{quote}
 Here we only show how result might look like. Because there is an issue that
-will be discussed later. There are only 75 new possible potential edges here.
+will be discussed later. Instead, 75 possible potential edges are manually
+added besides 69 edges in ground truth here. So there are 144 edges in total
+and 288 SAs rooted at bus 2. There are three new pairs, which are
+highlighted. Any connected pair has two edges with opposite directions.
+Full observability over power injections is assumed, and we will talk about
+it later.
 \end{quote}
 
 \begin{itemize}
@@ -1043,9 +1049,9 @@ will be discussed later. There are only 75 new possible potential edges here.
 \item
   three new pairs, ``b29‐b44'', ``b68‐b14'', and ``b68‐b15''
 \item
-  144 edges in total
+  144 potential edges in total
 \item
-  288 SAs rooted at ``b2''
+  288 SAs rooted at bus 2
 \item
   full observability
 \end{itemize}
@@ -1066,7 +1072,8 @@ Assessment based on 50 snapshots\footnote{during 00:00:00 and 00:00:50 on Dec 2,
 \begin{center}\includegraphics{Pictures/errors_288} \end{center}
 
 \begin{quote}
-The red cross point, with minimum mean squared error, is ground truth.
+The red cross point, with minimum mean squared error, corresponds to ground
+truth.
 \end{quote}
 
 \hypertarget{summary}{%
@@ -1096,9 +1103,9 @@ Four steps:
 \item
   Shrink feasible region (reduce number of SAs).
 \item
-  Measure the size of feasible region by counting number of SAs.
+  Measure the size of feasible region.
 \item
-  Get candidates sequentially by ranking SAs according to total cable lengths.
+  Get candidates sequentially according to total cable lengths.
 \item
   Assess candidates based on available measurements.
 \end{enumerate}
@@ -1124,16 +1131,16 @@ and directions.
 \addcontentsline{toc}{subsection}{Issues}
 
 \begin{quote}
-There are three issues that I want to discuss in detail. Firstly, there
-are too many SAs, so we have to reduce the number, for example, by removing
-overlapping edges.
+There are three issues that I want to discuss in detail. Firstly, there are
+too many candidates, so we have to reduce the number, for example, by
+removing overlapping edges.
 \end{quote}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Too many SAs. (\protect\hyperlink{overlapping}{remove overlapping edges})
+  Too many candidates. (\protect\hyperlink{overlapping}{remove overlapping edges})
 \item
   Full observability over voltage magnitudes. (\protect\hyperlink{BRM}{matrices with full
   rank})
