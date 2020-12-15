@@ -138,8 +138,8 @@ There is no literature mentioning how to handle geographical information.
 
 \begin{quote}
 In the literature, a technique called association network inference is
-usually used. Correlations between buses are derived based on some entity
-attributes. Highly correlated buses are connected directly.
+usually used. Correlations between buses are derived based on measurements
+Highly correlated buses are connected directly.
 \end{quote}
 
 Association network inference: correlation between buses
@@ -153,7 +153,7 @@ However, there are two reasons why such technique cannot be used here.
 \item
   Spurious correlation resulted from correlated profiles.
 \item
-  Missing entity attribute.
+  Missing measurement.
 \end{itemize}
 
 \begin{quote}
@@ -338,8 +338,6 @@ A case with 70 buses is primarily used here:
 \item
   bus 1 is omitted
 \item
-  70 buses
-\item
   62 households -\textgreater{} 62 active channels
 \end{itemize}
 
@@ -372,10 +370,11 @@ There is an issue here that I will discuss after a summary in the end.
 \section{Directed Graph}\label{directed}}
 
 \begin{quote}
-All the information can be stored in a complete directed graph.
+All the information can be stored in a weighted complete directed graph for a
+given set of buses.
 \end{quote}
 
-\textbf{complete (directed) graph for a set of buses}
+\textbf{weighted complete (directed) graph for a set of buses}
 
 \begin{quote}
 All edges are \textbf{potential edges}, and they must have weights. In association
@@ -385,13 +384,13 @@ network inference, it is impossible when some entity attributes are missing.
 \begin{itemize}
 \tightlist
 \item
-  all edges are \textbf{potential edges}
+  any pair of buses -\textgreater{} edge -\textgreater{} \textbf{potential edges} to be selected
 \item
   select a set of edges -\textgreater{} SA -\textgreater{} candidate
 \item
   \textbf{impossible potential edge}
 \item
-  2-D Euclidean distance as weight
+  2-D Euclidean distance -\textgreater{} cable length -\textgreater{} weight
 \end{itemize}
 
 \textbf{feasible region}
@@ -436,7 +435,7 @@ For example, in case-70:
 However:
 
 \begin{quote}
-After all overlapping edges are removed (or saying detected as impoosible to
+After all overlapping edges are removed (or saying detected as impossible to
 exist), there are still 446 possible potential edges and over \(10^{45}\) SAs.
 This is the only technique used in this project. When more information is
 available, more advanced techniques can be applied.
@@ -465,7 +464,7 @@ Sets:
   \mathcal{E}
   & \text{all the potential edges} \\
   \mathcal{C}
-  & \text{available measurements} \\
+  & \text{available snapshots} \\
   \mathcal{E}_\text{impossible}
   & \text{impossible potential edges} \\
   \hline
@@ -526,7 +525,7 @@ Two terms in the objective function:
   \textbf{term} & \textbf{definition} & \textbf{coefficient} \\
   \hline
   (1 - \alpha) \sum_{(i, j) \in \mathcal{E}} d_{i j} x_{i j}
-  & \text{total weight of candidate}
+  & \text{total cable length of candidate}
   & 1 - \alpha \\
   \alpha \mathcal{H}
   \left(\{x_{i j} \forall (i, j) \in \mathcal{E} \}, \mathcal{C} \right)
@@ -546,7 +545,7 @@ candidate.
 \begin{itemize}
 \tightlist
 \item
-  First two sets ensure arborescence. \citep{fischetti1997branch}
+  First two sets ensure SA. \citep{fischetti1997branch}
 \item
   Last set removes impossible potential edges.
 \end{itemize}
@@ -580,7 +579,7 @@ Such two situations can be visualised:
 \begin{center}\includegraphics[width=0.7\linewidth]{Pictures/figFeasibleRegion} \end{center}
 
 For this combinatorial optimisation problem, a \textbf{local search heuristic
-algorithm} is proposed to to move from \(\bigotimes\) to \(\bigoplus\).
+algorithm} is proposed to move from \(\bigotimes\) to \(\bigoplus\).
 \citep{michiels2007theoretical}
 
 \begin{quote}
@@ -606,8 +605,8 @@ neighbourhood & generate candidate & rank spanning arborescence\\
 \end{table}
 
 \begin{quote}
-Because power grids are to be built with less cost, the total cable length
-of ground truth is kept as short as possible, so we can find it before long.
+Because power grids are to be built with less cost, cable is kept as short as
+possible, so we can find ground truth before long.
 \end{quote}
 
 \begin{itemize}
@@ -659,7 +658,7 @@ where \textbf{edge impedance diagonal block matrix (EIDB)},
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Pictures/figCaseSix} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Pictures/figCaseSixRaw} \end{center}
 
 \begin{quote}
 Each row indicates whether power injection from some bus will pass the edge.
@@ -766,7 +765,7 @@ in BIM.
 \section{Direct Impedance Method}\label{power-flow}}
 
 \begin{quote}
-The whole process is called direct impedance method. BIM is built by
+Such process is called direct impedance method. BIM is built directly by
 following five steps and used to calculate power flow.
 \end{quote}
 
@@ -842,9 +841,7 @@ BRM of case-70:
 \item
   69 PQ buses
 \item
-  207 channels
-\item
-  207 rows and 207 columns
+  207 channels -\textgreater{} 207 rows and 207 columns
 \end{itemize}
 
 \begin{center}\includegraphics{Pictures/figHeatmapBRM} \end{center}
@@ -929,6 +926,10 @@ Inversed BRM for the case looks like:
   Useful pattern.
 \end{itemize}
 
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\protect\hyperlink{summary}{-\textgreater{} summary}
+
 \hypertarget{assessment}{%
 \section{Assessment of Candidate}\label{assessment}}
 
@@ -949,7 +950,7 @@ Linearised power flow:
 \item
   Calculate \(\boldsymbol{P}_\text{assess}\) using voltage magnitudes.
 \item
-  Compare with available measurements.
+  Compare with available power measurements.
 \end{itemize}
 
 \textbf{Mean squared error (MSE)}:

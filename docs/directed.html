@@ -151,18 +151,19 @@
 <div id="directed" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Directed Graph</h2>
 <blockquote>
-<p>All the information can be stored in a complete directed graph.</p>
+<p>All the information can be stored in a weighted complete directed graph for a
+given set of buses.</p>
 </blockquote>
-<p><strong>complete (directed) graph for a set of buses</strong></p>
+<p><strong>weighted complete (directed) graph for a set of buses</strong></p>
 <blockquote>
 <p>All edges are <strong>potential edges</strong>, and they must have weights. In association
 network inference, it is impossible when some entity attributes are missing.</p>
 </blockquote>
 <ul>
-<li>all edges are <strong>potential edges</strong></li>
+<li>any pair of buses -&gt; edge -&gt; <strong>potential edges</strong> to be selected</li>
 <li>select a set of edges -&gt; SA -&gt; candidate</li>
 <li><strong>impossible potential edge</strong></li>
-<li>2-D Euclidean distance as weight</li>
+<li>2-D Euclidean distance -&gt; cable length -&gt; weight</li>
 </ul>
 <p><strong>feasible region</strong></p>
 <ul>
